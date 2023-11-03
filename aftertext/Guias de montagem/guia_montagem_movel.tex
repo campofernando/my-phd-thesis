@@ -1,0 +1,80 @@
+% -------------------------------------------------------------------
+\chapter{Guia de montagem do protótipo de monitor móvel CLEAN}\label{apendix: mounting-guide-mobile}
+% -------------------------------------------------------------------
+
+O guia a seguir traz uma descrição mais detalhada da implantação e interligação dos elementos de hardware que compõem o sistema do protótipo móvel, o que pode ser observado na Figura 1.
+
+O equipamento mede poluentes da legislação ambiental brasileira (REF: CONAMA nº 491/2018) que são: monóxido de carbono (CO), dióxido de nitrogênio (NO2), dióxido de enxofre (SO2), ozônio (O3) e sulfeto de hidrogênio (H2S).
+
+Figura 1. Equipamento móvel
+
+O diagrama a seguir apresenta a interação entre os componentes do protótipo do monitor móvel. Toda a montagem e conexões entre esses componentes serão detalhadas neste manual.
+
+Figura 2. Diagrama de interação entre os componentes do protótipo móvel
+
+\section{O equipamento}
+
+A Figura 4 mostra os componentes internos que terão suas próprias instalações e montagens abordadas nas etapas a seguir.
+
+O fluxo de gás dentro da câmara de monitoramento é mostrado na Figura 3. Existe uma barreira fixa que separa a parte de monitoramento dos componentes de Hardware na parte interna do equipamento. Ambas as partes da câmara de monitoramento estão ilustradas na Figura 4.
+
+Figura 3. Representação do fluxo de gás na câmara de monitoramento
+
+Figura 4. Demonstração da parte interna da câmara por onde passa o fluxo de gás. (Hardware: esquerda; fluxo de gás: direita).
+
+\section{Os sensores}
+
+O protótipo do monitor móvel possui um conjunto de 4 sensores SPEC Sensor que contemplam a medição de: monóxido de carbono (CO); dióxido de nitrogênio (NO2); dióxido de enxofre (SO2) e ozônio (O3)
+Componentes e controladores
+O operador de monitoramento, armazenamento e envio de dados é baseado na plataforma Arduino Mega 2560, que utiliza um microcontrolador ATMega2560 da Microchip. Para operar com sucesso, o sistema inclui: módulo Wi-Fi, módulo de cartão SD, módulo GPS e indicadores LED operacionais.
+Montagem de equipamentos
+A montagem possui diversos componentes comerciais e necessita de serviço de corte lazer em chapa acrílica, trabalhos manuais em algumas medidas, cortes e furos. Esta página traz uma sugestão de método de trabalho cronológico que detalha cada uma dessas necessidades específicas, tornando-a mais fácil de organizar e menos complexa de trabalhar.
+A montagem do equipamento parece um pouco complexa à primeira vista, porém, os pesquisadores envolvidos nos projetos o desenvolveram estrategicamente com componentes acessíveis na literatura e no mercado, com o melhor custo-benefício possível.
+A equipe de desenvolvimento continua trabalhando para adaptar o projeto para uma versão ainda mais acessível e eficiente. Futuras melhorias ainda estão sendo desenvolvidas para reduzir o trabalho duplo e as operações artesanais.
+Câmara de monitoramento
+O primeiro passo da montagem é preparar a câmara de monitoramento e depois adicionar as demais partes do sistema.
+A lista de materiais e componentes necessários para a montagem da recepção e exaustão dos gases da câmara do sensor ou caixa de monitoramento está demonstrada na Tabela 1.
+Tabela 1. Lista de componentes e materiais para montagem dos gases de recepção e exaustão da câmara do sensor.
+A câmara de monitoramento comporta todos os sensores, sistema de ventilação forçada, fonte reguladora de tensão, módulos de comunicação e armazenamento.
+Nas Figuras 6 e 7 pode-se observar a câmara com os detalhes construtivos e de localização dos componentes. Todos os componentes são fixados por espaçadores M2*10+4 direcionados fixados na folha plástica da caixa do equipamento.
+Os coolers 12V 40X40MM são instalados na tampa superior do equipamento, aparafusados com parafusos M2X15mm com porca interna. Duas folhas de plástico foram cortadas para instalar um tecido que funciona como filtro de material particulado, conforme mostra a Figura 5.
+Figura 5. Estrutura de fixação dos coolers.
+Figura 6. Vista lateral e medição fixa do equipamento, detalhando os coolers, antena GPS, indicadores LED e entrada para cartão SD.
+Figura 7 respectivas legendas dos componentes de Hardware:
+Fonte reguladora de tensão”;
+Conjunto de espaçadores para fixação do conjunto de sensores;
+Módulo SD;
+LEDs indicadores;
+Módulo GPS;
+Antena GPS;
+Arduino MEGA.
+Figura 7. Entrevista com o hardware da câmara do sensor
+Arranjo de Sensores
+O grupo de 4 sensores SPEC Sensor terá sua instalação detalhada abaixo na Tabela 2.
+Tabela 2. Lista de componentes para montagem do conjunto de sensores do Sensor SPEC.
+Fixação dos sensores do arranjo na câmara de monitoramento
+Uma folha plástica é necessária para fixar os sensores corretamente e também criar um isolamento eficiente entre a câmara de gás e o ponto de hardware, conforme mostrado na Figura 8.
+Ainda na Figura 8 é demonstrada a fixação do sensor na lâmina plástica com parafuso e porca 2,5X5mm, colocados diretamente na lâmina dos sensores.
+Figura 8. Sensores instalados em placa de acrílico.
+Consertando o arranjo do sensor do sensor SPEC
+A fixação do conjunto de sensores SPEC é feita através de placa de ensaio universal estanhada de PCB confeccionada manualmente que possui conectores tipo fêmea onde os sensores são conectados. Os transceptores MAX487 também são instalados nesta placa de ensaio universal estanhada PCB. A Breadboard Universal Estanhada PCB é fixada na folha plástica que foi confeccionada no módulo do sensor através dos espaçadores M2*10+4. A conexão elétrica e de dados entre a Breadboard Universal Estanhada PCB é feita por conectores MOLEX.
+Os detalhes da conexão do sensor SPEC Sensor com a placa dedicada são mostrados na Figura 9; a vista inferior do conjunto de sensores é apresentada na Figura 10 com detalhes de fixação dos parafusos 2,5X5mm. A Figura 11 mostra uma vista lateral da placa de ensaio universal estanhada para PCB, bem como a fixação dos espaçadores, headers, MAX487 e os conectores MOLEX utilizados.
+Os espaçadores passam diretamente pela folha plástica do sensor. Para fixá-los é necessário fazer um furo de 2mm e enfiar os espaçadores nele.
+Figura 9. Detalhes de conexão do sensor SPEC Sensor.
+Figura 10. Vista superior do conjunto de sensores do SPEC Sensor.
+Figura 11. Placa de ensaio universal estanhada PCB da vista lateral do conjunto de sensores do sensor SPEC.
+Conexões do sensor do sensor SPEC
+Para dar continuidade à montagem do protótipo é necessário fixar o conjunto de sensores com os componentes de hardware internos da câmara de medição, fazendo a conexão elétrica de comunicação e alimentação do conjunto de sensores.
+As conexões podem ser feitas com rosca de seção 0,2mm², soldando os cabeçotes na ponta, isolando-os com duto retrátil do cabeçote. A Figura 12 mostra um diagrama completo do arranjo dos sensores do sensor SPEC, apresentando as informações de comunicação e fonte de alimentação,
+Figura 12. Diagrama completo de conexão do conjunto de sensores do Sensor SPEC
+Fonte de alimentação da câmara do sensor e conexões de comunicação
+Os componentes de hardware da câmara do sensor estão listados abaixo na Tabela 3.
+Tabela 3. Lista de componentes para montagem da câmara do sensor.
+Após a montagem do conjunto de sensores e prefixação dos componentes eletrônicos da câmara de medição, será necessário fazer a conexão elétrica da fonte de alimentação e de comunicação de todos os componentes envolvidos no processo. Para isso, utiliza-se rosca de seção 0,2mm² ou superior para comunicação e 0,5mm² para conexões de alimentação.
+A Figura 13 mostra o diagrama da fonte de alimentação. Para melhorar o desempenho da fonte reguladora foi utilizado um jumper e está demonstrado no mesmo diagrama.
+A fixação dos componentes é feita por espaçadores metálicos, conforme mostrado na Figura 11, para isso é feito um furo de 2 mm no plástico e parafusados os espaçadores neste furo.
+O diagrama de conexões de comunicação é mostrado na Figura 14.
+Figura 13. Diagrama completo de alimentação da câmara de monitoramento.
+Figura 14. Diagrama completo de comunicação da câmara de monitoramento.
+A comunicação e alimentação do Wi-Fi é mostrada na Figura 15, que é instalada na película plástica do sensor conforme mostrado na Figura 10.
+Figura 15. Diagrama de conexão do módulo Wi-Fi

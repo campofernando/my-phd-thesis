@@ -1,0 +1,23 @@
+% -------------------------------------------------------------------
+\chapter{Conexão do módulo ESP-01}\label{apendix: programming-esp01}
+% -------------------------------------------------------------------
+
+O firmware do microcontrolador ESP8266 foi desenvolvido na linguagem de programação C/C++ utilizando o \textit{framework} Arduino. O código foi programado na IDE \textit{PlatformIO} para o editor de código Microsoft Visual Studio (VSCode). Uma descrição das principais características do firmware desenvolvido está disponível em The ESP8266 Firmware. Para obter mais detalhes sobre como configurar o ambiente de desenvolvimento, consulte Configurando o ambiente de desenvolvimento. Neste guia, descreveremos o procedimento de programação do firmware no microcontrolador ESP8266.
+Criando um projeto para ESP8266 usando VSCode e PlatformIO
+O processo de criação de um novo projeto para um microcontrolador ESP82266 usando VSCode e PlatformIO é bastante simples e direto. Isso é descrito apenas caso você queira iniciar seu próprio projeto do zero. O projeto do firmware que desenvolvemos já está configurado e não há necessidade de seguir estes passos. Caso você esteja usando nosso código consulte Configurando o Ambiente de Desenvolvimento se você não configurou o ambiente de desenvolvimento e vá diretamente para Carregando seu Código para o ESP.
+1. Dentro do VSCode vá para PIO Home e selecione Novo Projeto
+Figura 1. PIO HOME
+2. No Assistente de Projeto escolha um nome para o seu projeto, selecione sua placa e o framework Arduino. Caso você esteja usando um ESP8266 em uma placa ESP-01 com 512 kB de memória Flash (como em nosso projeto), seu Project Wizard deverá se parecer com a Figura 2. Em outros casos selecione sua placa adequadamente.
+Figura 2. Assistente de Projeto PIO
+3. Finalmente você deverá ter seu projeto devidamente configurado. Seus arquivos main.cpp e platformio.ini devem se parecer com as Figuras 3 e 4. Eles são gerados automaticamente pelo Wizard.
+Figura 3. O arquivo principal do projeto PIO usando Arduino Framework
+Figura 4. Arquivo platformio.ini onde são programadas as configurações do projeto.
+Enviando seu código para o ESP
+Antes de enviar seu código para o microcontrolador ESP8266, há alguns aspectos que você deve ter em mente. O ESP266 possui dois modos de boot: Flash e Normal, e o microcontrolador entra em um desses modos dependendo da tensão aplicada nos pinos GPIO0 e GPIO2, conforme descrito na Tabela 1. O modo Flash é utilizado para programação do microcontrolador, enquanto Normal significa para operação normal. A Figura 5 ilustra a pinagem da placa ESP-01.
+Figura 5. Pinagem do ESP-01
+Tabela 1. Modos de programação do ESP8266
+
+Para fazer upload do código você deve configurar um circuito para piscar o ESP8266. Você precisará de uma placa FTDI 3.3v e um cabo USB para micro-USB conforme mostrado na Figura 6. O circuito intermitente é mostrado na Figura 7. Para entrar no modo Flash, com o botão flash pressionado, clique no botão reset. Isso irá redefinir o microcontrolador para o modo Flash. Em seguida, carregue seu código do VSCode. Assim que o código for carregado, você deve entrar no modo Normal simplesmente clicando no botão reset. A Tabela 2 mostra a conexão dos pinos do ESP-01 à Placa FTDI e ao circuito de piscamento.
+Figura 6. Cabo FTDI e USB usado para atualizar o ESP8266
+Figura 7. Circuito intermitente do ESP-01
+Tabela 2. Conexão do ESP-01 ao circuito intermitente e à placa FTDI
