@@ -2,18 +2,29 @@
 \chapter{CLEAN - Collaborative Low-cost Environmental and Air-quality Network}\label{cap:clean-initiative}
 % ----------------------------------------------------------
 
-A iniciativa CLEAN consiste numa plataforma colaborativa para promover e facilitar o desenvolvimento de monitores de qualidade do ar de baixo custo e o acesso remoto a informações sobre a qualidade do ar em tempo real. Possui quatro componentes principais: i) dispositivos de hardware ii) firmware reutilizável e bibliotecas de Programação Orientada a Objetos baseadas no framework Arduino para programação dos dispositivos de monitoramento, iii) guias e documentação para reprodução do hardware e adesão à rede, iv) e a plataforma Web e API Renovar para visualização, registro e acesso remoto de dados em tempo real. Todos os guias e documentação relativos ao desenvolvimento do hardware e firmware dos dispositivos até agora concebidos, as bibliotecas implementadas e as ferramentas de desenvolvimento estão abertas e disponíveis gratuitamente na página inicial de CLEAN \cite{Campo2021}.
-
-CLEAN permite a colaboração de outros grupos e indivíduos interessados no desenvolvimento de dispositivos de monitoramento de baixo custo e dados abertos para análises ambientais. A plataforma web Renovar fornece uma API que permite que diversos dispositivos de monitoramento de baixo custo enviem seus dados para um servidor remoto para visualização e armazenamento em tempo real e geo-localizados. Além disso, a API possibilita a integração com outras aplicações Web para visualização e análise de dados. Esses dados permanecem abertamente disponíveis para posterior processamento e análise. Dada a grande versatilidade dos sensores de baixo custo, muitas aplicações poderiam ser monitoradas a partir de diversos cenários contribuindo para uma maior disponibilidade de volumes de dados. A Figura 1 ilustra os principais componentes da iniciativa CLEAN, que serão descritos a seguir.
-
-Possui quatro componentes principais: 
+A iniciativa CLEAN consiste numa plataforma colaborativa de código aberto para promover e facilitar o desenvolvimento de monitores de qualidade do ar de baixo custo e o acesso remoto a informações sobre a qualidade do ar em tempo real. Possui três componentes principais, conforme enumerado a seguir e ilustrado de forma gráfica na Figura \ref{fig:clean-structure}.
 
 \begin{enumerate}
-    \item Firmware reutilizável e bibliotecas de Programação Orientada a Objetos baseadas no framework Arduino para programação dos dispositivos de monitoramento
-    \item A aplicação web \href{http://renovar.lcqar.ufsc.br/}{Renovar} para visualização (e acesso) remoto dos dados em tempo real
-    \item Dispositivos de hardware
-    \item Guias e documentação para reprodução do hardware
+    \item API Renovar para acesso aos dados de dispositivos de monitoramento
+    \item Bibliotecas de \textit{firmware} baseadas no framework Arduino para programação dos dispositivos de monitoramento e comunicação com a \textit{api}
+    \item Aplicação \textit{web} \href{http://renovar.lcqar.ufsc.br/}{Renovar} para visualização e análise dos dados na forma de mapas, séries históricas e gráficos de \textit{box-plot}
 \end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \caption{Componentes da iniciativa CLEAN}
+    \includegraphics[width=0.80\linewidth]{chapters//2-CLEAN//Figuras/Estrutura CLEAN.png}
+    \label{fig:clean-structure}
+    \fonte{Desenvolvido pelo autor (2023)}
+\end{figure}
+
+Além disso, a iniciativa disponibiliza a documentação do \textit{hardware} e do \textit{firmware} dos monitores desenvolvidos dentro desse contexto para facilitar a sua replicação e a colaboração entre os diferentes agentes. Todos os guias e documentação relativos ao desenvolvimento do hardware e firmware dos dispositivos até agora concebidos, as bibliotecas implementadas e as ferramentas de desenvolvimento estão abertas e disponíveis gratuitamente na página inicial de CLEAN \cite{Campo2021}.
+
+A \acrshort{api} Renovar disponibiliza os recursos necessários para a comunicação remota com dispositivos de monitoramento, o registro das leituras dos dispositivos e o acesso aos dados para visualização, processamento e análise. Dentro da iniciativa CLEAN pretende-se que a \acrshort{api} seja uma forma de centralizar o registro (através de dispositivos de monitoramento) e o acesso (através de aplicações cliente) a dados da qualidade do ar de monitores de baixo custo desenvolvidos por parceiros, eximindo eles da necessidade de desenvolver soluções próprias desde zero. Assim, CLEAN pretende acelerar e facilitar a expansão de aplicações de monitoramento de baixo custo e de análise de dados. 
+
+As bibliotecas de \textit{firmware} providenciam uma interface entre o \textit{hardware} e \textit{firmware} específico para cada aplicação de monitoramento e a \acrshort{api}, facilitando também o processo de desenvolvimento, e permitindo aos parceiros focarem na aplicação em si, sem investir muito esforço na integração com a \acrshort{api}. As bibliotecas de \textit{firmware} também providenciam abstrações para os componentes de \textit{hardware}, como sensores, controladores e periféricos, contribuindo ao reaproveitamento de código. A medida que os parceiros forem incorporando novos componentes nas suas aplicações, novas abstrações podem ser adicionadas às bibliotecas, expandindo o leque de interfaces a componentes de \textit{hardware}.
+
+A aplicação \textit{web} Renovar desenvolvida dentro do contexto de CLEAN é uma aplicação \textit{front-end} consumidora da \acrshort{api}. Ela é uma alternativa para iniciar qualquer aplicação de monitoramento de baixo custo já que disponibiliza a visualização de mapas dos dispositivos, séries temporais dos dados dos sensores e gráficos de \textit{box-plots} dos dados. Pode funcionar também como modelo para outras aplicações consumidoras que venham a ser desenvolvidas.
 
 \input{chapters/2-CLEAN/Seções/fw-libraries}
 
@@ -32,6 +43,7 @@ Foram concebidos dois protótipos de baixo custo para medição de poluentes atm
     \caption{Estrutura principal dos dispositivos. a) Medidor de gases fixo, e b) medidor móvel}
     \includegraphics[width=1\linewidth]{chapters//2-CLEAN//Figuras/Estrutura geral protótipos.png}
     \label{fig:device-structure}
+    \fonte{Desenvolvido pelo autor (2023)}
 \end{figure}
 
 A versão fixa dos dispositivos de monitoramento (Figura \ref{fig:device-structure}a) utiliza seis sensores eletroquímicos do fabricante de sensores Alphasense e quatro sensores eletroquímicos do fabricante SPEC Sensors. Para alimentação de energia do dispositivo utiliza-se uma fonte de 12VCC. Este dispositivo não incorpora módulo \textit{GPS} para geolocalização. A versão móvel (Figura \ref{fig:device-structure}b), por outro lado, utiliza apenas quatro sensores eletroquímicos do fabricante SPEC Sensors. O dispositivo é alimentado por um banco de energia de 5VCC através de uma conexão USB. A Figura 3 ilustra ambos protótipos na versão fixa e móvel. Mais detalhes sobre os dispositivos podem ser encontrados no Apêndice \ref{apendix: hw-prototypes}.
@@ -41,6 +53,7 @@ A versão fixa dos dispositivos de monitoramento (Figura \ref{fig:device-structu
     \caption{Ilustrações das versões (a) fixa e (b) móvel dos dispositivos de monitoramento}
     \includegraphics[width=1\linewidth]{chapters//2-CLEAN/Figuras/Monitoring Prototypes.jpg}
     \label{fig:monitoring-prototypes}
+    \fonte{Desenvolvido pelo autor (2023)}
 \end{figure}
 
 \subsection{A placa CLEAN Arduino MEGA}
@@ -52,6 +65,7 @@ Com base nos resultados obtidos pelos protótipos e nas experiências alcançada
     \caption{A placa CLEAN Arduino Mega: (a) projeto PCB, (b) vista superior da placa, (c) vista inferior da placa.}
     \includegraphics[width=1\linewidth]{chapters//2-CLEAN/Figuras/CLEAN Arduino Mega Board.jpg}
     \label{fig:clean-arduino-mega-board}
+    \fonte{Desenvolvido pelo autor (2023)}
 \end{figure}
 
 A Tabela \ref{tab:componentes-clean} do apêndice \ref{apendix: clean-arduino-mega-board} mostra os principais componentes de hardware utilizados na placa, que requer uma tensão de alimentação de 12V, 2A através de um conector de alimentação P4. Possui entradas analógicas para 6 placas de sensores Alphasense da série ISB, barramento RS-485 para futuras expansões, três saídas digitais e conectores para alimentação de ventoinhas de 12V e 5V. A placa foi concebida para suportar conexões Wi-Fi e \textit{GPRS} à Internet. Essas conexões não podem ser utilizadas simultaneamente, o que dependerá de cada aplicação. O usuário pode configurar a placa para usar um ou outro e terá que adaptar o firmware do microcontrolador Arduino correspondentemente.

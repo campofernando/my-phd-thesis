@@ -2,9 +2,34 @@
 \section{Bibliotecas de firmware}
 % ----------------------------------------------------------
 
-O \textit{firmware} dos dispositivos foi desenvolvido no \textit{Framework Arduino}, que é uma abstração de códigos-fonte e bibliotecas comuns a diversas plataformas de \textit{\textit{hardware}}. Esta estrutura torna possível escrever programas para controlar uma ampla gama de placas microcontroladoras de Arduino e de outros fabricantes. O \textit{framework} fornece bibliotecas de código escritas em C/C++ para programação de microcontroladores e interação com dispositivos periféricos.
+O \textit{firmware} dos dispositivos foi desenvolvido no \textit{Framework Arduino}, que é uma abstração de códigos-fonte e bibliotecas comuns a diversas plataformas de \textit{\textit{hardware}}. O \textit{framework} fornece bibliotecas de código escritas em C/C++ para programação de microcontroladores e interação com dispositivos periféricos. Esta estrutura torna possível escrever programas para controlar uma ampla gama de placas microcontroladoras de Arduino e de outros fabricantes.
 
-Para programar todas as funcionalidades do \textit{firmware} CLEAN, o código foi estruturado em um conjunto de classes em C++. Esta estrutura foi concebida visando sua reutilização em outras plataformas de microcontroladores e outros componentes de \textit{hardware} suportados no Framework Arduino (como ESP8266 da Espressif) e também para facilitar a revisão e manutenção do código. As classes desenvolvidas para o projeto estão distribuídas em quatro módulos principais, conforme mostrado na Figura \ref{fig:fw-libraries-structure}: o módulo \textit{Hardware Interfaces}, o módulo \textit{System Drivers}, o módulo \textit{}{Sensors} e o módulo \textit{Data}.
+Para programar todas as funcionalidades do \textit{firmware} CLEAN, o código foi estruturado em um conjunto de classes em C++ separados em módulos ou bibliotecas. Esta estrutura foi concebida visando sua reutilização em outras plataformas de microcontroladores e outros componentes de \textit{hardware} suportados no Framework Arduino (como ESP8266 da Espressif) e também para facilitar a revisão e manutenção do código. Para melhor compreender a utilidade desta estrutura comparem-se os diagramas da Figura \ref{fig:application-structure}.
+
+\begin{figure}[t]
+    \centering
+    \caption{Estrutura de desenvolvimento de aplicação de monitoramento de baixo custo}
+    \begin{subfigure}{0.40\textwidth}
+        \includegraphics[width=\textwidth]{chapters/2-CLEAN/Figuras/Camadas aplicação genérica (PT).png}
+        \caption{Aplicação genérica}
+        \label{fig:application-structure-generic}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.40\textwidth}
+        \includegraphics[width=\textwidth]{chapters/2-CLEAN/Figuras/Camadas aplicação CLEAN (PT).png}
+        \caption{Aplicação CLEAN}
+        \label{fig:application-structure-clean}
+    \end{subfigure}
+    \hfill
+    \label{fig:application-structure}
+    \fonte{Desenvolvido pelo autor (2023)}
+\end{figure}
+
+A Figura \ref{fig:application-structure-generic} representa a estrutura de desenvolvimento de uma aplicação genérica de monitoramento. Para a criação de um monitor de qualidade do ar de baixo custo que envie dados para a \acrshort{api} requer-se de um dispositivo físico composto por uma camada de \textit{hardware}, com sensores e periféricos, e uma camada de \textit{firmware} que realiza o interfaceamento do elementos de \textit{hardware}, a aquisição dos dados e sua transmissão para a \acrshort{api}. Seguindo essa topologia, cada nova aplicação que for abordada precisaria de novas iterações pelas mesmas etapas de criação e desenvolvimento com mínimo reaproveitamento de iterações anteriores.
+
+A Figura \ref{fig:application-structure-clean} ilustra a solução proposta pela iniciativa CLEAN. O intuito é desacoplar o que é específico de cada aplicação e o que é comum para todas as aplicações que visem utilizar a \acrshort{api} Renovar para registro dos dados de monitoramento. Dessa forma, os componentes de \textit{hardware} e o \textit{firmware} para interfacear estes componentes ficariam sob responsabilidade dos desenvolvedores das aplicações, enquanto as funcionalidades relacionadas à aquisição de dados e comunicação com a \textit{api} estariam cobertas dentro do conjunto de classes e funcionalidades disponibilizadas pelas bibliotecas de CLEAN. Dessa forma maximiza-se o reaproveitamento de código minimizando o esforço para implantar novas soluções de monitoramento.
+
+As classes desenvolvidas para o projeto estão distribuídas em quatro módulos principais, conforme mostrado na Figura \ref{fig:fw-libraries-structure}: o módulo \textit{Hardware Interfaces}, o módulo \textit{System Drivers}, o módulo \textit{}{Sensors} e o módulo \textit{Data}.
 
 O módulo \textit{Hardware Interfaces} agrupa todas as classes e estruturas utilizadas para se comunicar com o \textit{hardware} periférico, como sensores, módulos de temporização, módulos de geolocalização e módulos de armazenamento. Os \textit{Drivers} implementam funcionalidades que podem ser utilizadas pelo programa principal independentemente do \textit{hardware} utilizado em cada dispositivo. O pacote \textit{Sensors} está no mesmo nível dos \textit{Drivers} e pode ser interpretado como um conjunto de \textit{drivers} especiais para os sensores, mas com a particularidade de ser específico para cada fabricante. Por fim, o pacote Dados engloba todas as funcionalidades relacionadas à preparação de dados de sensores para armazenamento e transmissão. Este pacote abstrai as informações de concentração adquiridas pelos sensores de gás a partir de detalhes específicos sobre o funcionamento e operação de seu \textit{hardware}.
 
