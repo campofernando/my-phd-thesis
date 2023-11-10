@@ -55,11 +55,3 @@ Em comparação com as redes neurais, as florestas aleatórias precisam de um vo
 % ----------------------------------------------------------
 
 O método \gls{knn} baseia-se na suposição de que coisas semelhantes se encontram próximas. O algoritmo prediz o valor de determinada amostra de uma variável a partir dos valores das k amostras conhecidas mais próximas \cite{Altman1992AnRegression}. Para predizer o valor de uma amostra desconhecida, o algoritmo seleciona, dentro do conjunto de treinamento, as k amostras que se encontram mais próximas dela, considerando as variáveis de entrada do modelo. Logo, o algoritmo calcula o novo valor como a média dos valores de saída das amostras de treinamento \cite{Kramer2013K-NearestNeighbors}. Como medida para a distância entre as amostras costuma-se utilizar a distância euclidiana ou a distância Manhattan. O número de vizinhos é determinado mediante uma grade de busca durante o treinamento do modelo para garantir baixo erro na predição de amostras desconhecidas \cite{Miller2019TheScience}. Este algoritmo consegue modelar bem sistemas não-lineares e o tempo de treinamento é curto, porém o tempo de predição é longo e para conjuntos de dados muito extensos o tempo de processamento pode ser muito demorado. Outra desvantagem deste algoritmo é que seus resultados são difíceis de interpretar pois não é possível saber qual é o peso de cada variável dentro do modelo.
-
-% ----------------------------------------------------------
-\subsection{Redes de monitoramento de baixo custo}
-% ----------------------------------------------------------
-
-% ----------------------------------------------------------
-\subsection{Lacunas científicas no monitoramento de baixo custo}
-% ----------------------------------------------------------
