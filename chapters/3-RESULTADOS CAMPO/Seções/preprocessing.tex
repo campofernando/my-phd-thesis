@@ -30,7 +30,9 @@ Utilizando as etiquetas mencionadas anteriormente, foi aplicada uma metodologia 
 
 \subsection{Preprocessamento dos dados de Monóxido de Carbono}
 
-A metodologia de pre-processamento dos dados descrita acima foi aplicada as leituras obtidas pelo sensor de \acrshort{co}. A Figura \ref{fig:data-co-raw} mostra a série temporal do sensor depois de removidos os valores fora de intervalo. Observa-se que a partir do mês de fevereiro ocorreram seguidas alterações de linha base que foram detectadas pelo algoritmo \acrshort{pelt}, conforme ilustrado na Figura \ref{fig:data-rebase-co}. Dado que as mudanças de linha base se mantiveram de forma continuada a partir desse mês, para o restante das análises apenas foram consideradas as leituras anteriores à primeira alteração da linha base do sensor. As Figuras \ref{fig:data-co-preproc-15} e \ref{fig:data-co-preproc-1HR} mostram a série de dados do sensor CO-B4 depois de aplicado o pré-processamento com períodos de 15 minutos e 1 hora respectivamente. A Tabela X mostra a contabilização dos dados para período de 15 minutos e de 1 hora.
+A metodologia de pre-processamento dos dados descrita acima foi aplicada as leituras obtidas pelo sensor de \acrshort{co}. A Figura \ref{fig:data-co-raw} mostra a série temporal do sensor depois de removidos os valores fora de intervalo. Observa-se que a partir do mês de fevereiro ocorreram seguidas alterações de linha base que foram detectadas pelo algoritmo \acrshort{pelt}, conforme ilustrado na Figura \ref{fig:data-rebase-co}. Dado que as mudanças de linha base se mantiveram de forma continuada a partir desse mês, para o restante das análises apenas foram consideradas as leituras anteriores à primeira alteração da linha base do sensor. As Figuras \ref{fig:data-co-preproc-15} e \ref{fig:data-co-preproc-1HR} mostram a série de dados do sensor CO-B4 depois de aplicado o pré-processamento com períodos de 15 minutos e 1 hora respectivamente. 
+
+A Tabela \ref{tab:data-contab-co} mostra a contabilização dos dados para período de 15 minutos e de 1 hora. Observa-se que dos 17647 pontos de dados, que representavam as amostras adquiridas com um período de 15 minutos no intervalo de 20/11/2022 até 23/05/2023, 4270 foram aproveitados como dados válidos, o que representa um 24 \% aproximadamente dos dados originais. Ao re-amostrar esses 4270 pontos em dados horários obtiveram-se 1048 amostras horárias de concentração válidas (aproximadamente 64 \% dos dados) para realizar a calibração.
 
 \begin{figure}[h]
     \centering
@@ -70,7 +72,6 @@ A metodologia de pre-processamento dos dados descrita acima foi aplicada as leit
     \fonte{Desenvolvido pelo autor (2023)}
 \end{figure}
 
-
 \begin{table}[t]
     \caption{Contabilização dos dados por etiquetas das leituras do sensor CO-B4}
     \centering
@@ -83,31 +84,42 @@ A metodologia de pre-processamento dos dados descrita acima foi aplicada as leit
          >{\raggedright\hsize=.5\hsize\arraybackslash}X }
         \multicolumn{3}{c}{Série temporal T = 15 mins} & \multicolumn{3}{c}{Série temporal T = 1 hr} \\
         \hline
-        Etiquetas & No. amostras & \% amostras & Etiquetas & No. amostras & \% amostras \\
+        Etiquetas & No. amostras & \% amostras & Etiquetas & No. amostras & \% amostras \\ [0.5ex]
         \hline
-        \textit{MISSING} & 1194 & 6.77 \% & \textit{LOWSAMPLES} & 603 & 36.52 \% \\
-        \hline
-        \textit{LTLL} & 1020 & 5.78 \% & \textit{VALID} & 1048 & 63.48 \% \\
-        \hline
-        \textit{GTUL} & 0 & 0.0 \% & & & \\
-        \hline
-        \textit{STABILIZING} & 649 & 3.68 \% & & & \\
-        \hline
-        \textit{BADSPIKE} & 4351 & 24.66 \% & & & \\
-        \hline
-        \textit{LTQTLE01} & 63 & 0.36 \% & & & \\
-        \hline
-        \textit{GTQTLE99} & 58 & 0.34 \% & & & \\
-        \hline
-        \textit{REBASE} & 6042 & 34.24 \% & & & \\
-        \hline
-        \textit{VALID} & 4270 & 24.20 \% & & & \\
+        \textit{MISSING} & 1194 & 6.77 \% & \textit{LOWSAMPLES} & 603 & 36.52 \% \\ [0.5ex]
+        
+        \textit{LTLL} & 1020 & 5.78 \% & \textit{VALID} & 1048 & 63.48 \% \\ [0.5ex]
+        
+        \textit{GTUL} & 0 & 0.0 \% & & & \\ [0.5ex]
+        
+        \textit{STABILIZING} & 649 & 3.68 \% & & & \\ [0.5ex]
+        
+        \textit{BADSPIKE} & 4351 & 24.66 \% & & & \\ [0.5ex]
+        
+        \textit{LTQTLE01} & 63 & 0.36 \% & & & \\ [0.5ex]
+        
+        \textit{GTQTLE99} & 58 & 0.34 \% & & & \\ [0.5ex]
+        
+        \textit{REBASE} & 6042 & 34.24 \% & & & \\ [0.5ex]
+        
+        \textit{VALID} & 4270 & 24.20 \% & & & \\ [0.5ex]
         \hline
         TOTAL & 17647 & & TOTAL & 1651 & \\
-        \hline
     \end{tabularx}
     \label{tab:data-contab-co}
     \fonte{Desenvolvido pelo autor}
 \end{table}
 
+\subsubsection{Dependência com a temperatura}
 
+Investigou-se a existência de correlação entre as leituras do sensor de \textit{co} e as variações de temperatura medida no interior da câmara de medição. Para tal, foram empregados os testes estatísticos de correlação de Spearman e Kendall, por serem métodos não paramétricos que exploram a relação monotônica entre variáveis. Os resultados desses testes revelaram coeficientes de correlação significativos. O coeficiente de Spearman calculado foi de 0.521, com um valor de p inferior a 0.05, indicando uma correlação estatisticamente significativa entre as leituras do sensor e a temperatura. De maneira semelhante, o coeficiente de Kendall foi de 0.379, também com p < 0.05, reforçando a presença de uma associação significativa. Ao avaliar a hipótese nula de ausência de correlação, os resultados forneceram evidências robustas para sua rejeição, sugerindo que há uma correlação entre as leituras do sensor de \acrshort{co} e as variações de temperatura. A Figura X mostra um gráfico de dispersão entre os dados do sensor e a temperatura, ilustrando os resultados de correlação obtidos.
+
+\begin{figure}[h]
+    \centering
+    \caption{Relação entre as leituras do sensor CO-B4 e a temperatura}
+    \includegraphics[width=\textwidth]{chapters/3-RESULTADOS CAMPO/Figuras/temperature-co-b4.png}
+    \label{fig:data-temp-co-corr}
+    \fonte{Desenvolvido pelo autor (2023)}
+\end{figure}
+
+\subsection{Preprocessamento dos dados de Dióxido de Nitrogênio}
