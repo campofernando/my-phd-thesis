@@ -118,7 +118,7 @@ Nas Figuras \ref{fig:data-o3-reference-time-series}, \ref{fig:data-o3-1-referenc
 Na Tabela \ref{tab:data-o3-b4-calib-results} resumem-se os melhores modelos encontrados pela busca em \textit{grid} para calibrar as leituras do sensor OX-B431. A Figura \ref{fig:data-o3-b4-models-performance} apresenta o desempenho dos modelos e as variáveis de entrada considerando os valores de r2, RMSE e MAE.
 
 \begin{table}[h]
-    \caption{Resultados da calibração dos sensores OX-B431}
+    \caption{Resultados da calibração do sensor 1 OX-B431}
     \centering
     \begin{tabularx}{0.95\textwidth}[h]{
          >{\raggedright\hsize=.08\hsize\arraybackslash}X
@@ -129,40 +129,138 @@ Na Tabela \ref{tab:data-o3-b4-calib-results} resumem-se os melhores modelos enco
         \hline
         Var. & Modelo & R2 & RMSE & MAE\\ [0.5ex]
         \hline
-        O3 & \textbf{MLP}: & -0.64 ± 0.49 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
-           & alpha = 0.01 &  & & \\ [0.5ex]
-           & hidden layers = (200, 10) & & & \\ [0.5ex]
+        \acrshort{o3} (1) & \textbf{MLP}: & -0.38 ± 0.42 & -17.38 ± 3.49 & -13.72 ± 2.55 \\ [0.5ex]
+           & alpha = 0.0001 &  & & \\ [0.5ex]
+           & hidden layers = (100,) & & & \\ [0.5ex]
            & & & & \\ [0.5ex]
-           & \textbf{MLR} & -0.61 ± 0.47 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
+           & \textbf{MLR} & -0.35 ± 0.38 & -17.26 ± 3.57 & -13.63 ± 2.58 \\ [0.5ex]
            & & & & \\ [0.5ex]
-           & \textbf{KNN:} & -0.47 ± 0.29 & -0.06 ± 0.01 & -0.05 \\ [0.5ex]
-           & n\_neighbors = 17 & & & \\ [0.5ex]
+           & \textbf{KNN:} & -0.27 ± 0.31 & -17.24 ± 5.05 & -12.91 ± 3.92 \\ [0.5ex]
+           & n\_neighbors = 13 & & & \\ [0.5ex]
            & weights = uniform & & & \\ [0.5ex]
            & & & & \\ [0.5ex]
-           & \textbf{RF:} & -0.60 ± 0.34 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
-           & max\_depth = 30 & & & \\ [0.5ex]
+           & \textbf{RF:} & -0.68 ± 0.73 & -18.65 ± 3.27 & -14.87 ± 2.54 \\ [0.5ex]
+           & max\_depth = 20 & & & \\ [0.5ex]
            & min\_samples\_leaf = 4 & & & \\ [0.5ex]
            & min\_samples\_split = 10 & & & \\ [0.5ex]
-           & n\_estimators = 150 & & & \\ [0.5ex]
+           & n\_estimators = 50 & & & \\ [0.5ex]
         \hline
-        O3, T & \textbf{MLP:} & -0.59 ± 0.42 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
-              & alpha = 0.1 & & & \\ [0.5ex]
-              & hidden layer = (200, 50) & & & \\ [0.5ex]
-              & & & & \\ [0.5ex]
-              & \textbf{MLR:} & -0.65 ± 0.45 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
-              & & & & \\ [0.5ex]
-              & \textbf{KNN:} & -0.61 ± 0.46 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
-              & n\_neighbors = 15 & & & \\ [0.5ex]
-              & weights = uniform & & & \\ [0.5ex]
-              & & & & \\ [0.5ex]
-              & \textbf{RF:} & -0.72 +/- 0.50 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
-              & max\_depth = None & & & \\ [0.5ex]
-              & min\_samples\_leaf = 4 & & & \\ [0.5ex]
-              & min\_samples\_split = 2 & & & \\ [0.5ex]
-              & n\_estimators = 100 & & & \\ [0.5ex]
+        \acrshort{o3} (1), T & \textbf{MLP:} & 0.42 ± 0.15 & -11.24 ± 1.13 & -8.62 ± 1.07 \\ [0.5ex]
+            & alpha = 0.0001 & & & \\ [0.5ex]
+            & hidden layer = (200, 10) & & & \\ [0.5ex]
+            & & & & \\ [0.5ex]
+            & \textbf{MLR:} & 0.36 ± 0.18 & -11.73 ± 1.23 & -9.12 ± 1.12 \\ [0.5ex]
+            & & & & \\ [0.5ex]
+            & \textbf{KNN:} & 0.21 ± 0.20 & -13.16 ± 1.93 & -9.96 ± 1.76 \\ [0.5ex]
+            & n\_neighbors = 7 & & & \\ [0.5ex]
+            & weights = uniform & & & \\ [0.5ex]
+            & & & & \\ [0.5ex]
+            & \textbf{RF:} & 0.33 ± 0.19 & -11.99 ± 1.23 & -9.24 ± 1.12 \\ [0.5ex]
+            & max\_depth = 10 & & & \\ [0.5ex]
+            & min\_samples\_leaf = 4 & & & \\ [0.5ex]
+            & min\_samples\_split = 10 & & & \\ [0.5ex]
+            & n\_estimators = 100 & & & \\ [0.5ex]
+        \hline
+    \end{tabularx}
+    \label{tab:data-o3-1-b4-calib-results}
+    \fonte{Desenvolvido pelo autor}
+\end{table}
+
+\begin{table}[h]
+    \caption{Resultados da calibração do sensor 2 OX-B431}
+    \centering
+    \begin{tabularx}{0.95\textwidth}[h]{
+         >{\raggedright\hsize=.08\hsize\arraybackslash}X
+         >{\raggedright\hsize=.8\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.5\hsize\arraybackslash}X
+         >{\raggedright\hsize=.5\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.5\hsize\arraybackslash}X }
+        \hline
+        Var. & Modelo & R2 & RMSE & MAE\\ [0.5ex]
+        \hline
+        \acrshort{o3} (2) & \textbf{MLP}: & 0.16 ± 0.13 & -13.72 ± 2.11 & -10.87 ± 1.66 \\ [0.5ex]
+           & alpha = 1 &  & & \\ [0.5ex]
+           & hidden layers = (50, 50) & & & \\ [0.5ex]
+           & & & & \\ [0.5ex]
+           & \textbf{MLR} & 0.09 ± 0.14 & -14.34 ± 2.50 & -11.35 ± 2.13 \\ [0.5ex]
+           & & & & \\ [0.5ex]
+           & \textbf{KNN:} & 0.03 ± 0.35 & -14.27 +/- 1.49 & -11.27 ± 1.39 \\ [0.5ex]
+           & n\_neighbors = 20 & & & \\ [0.5ex]
+           & weights = uniform & & & \\ [0.5ex]
+           & & & & \\ [0.5ex]
+           & \textbf{RF:} & -0.03 ± 0.37 & -14.76 ± 1.47 & -11.55 ± 1.34 \\ [0.5ex]
+           & max\_depth = 10 & & & \\ [0.5ex]
+           & min\_samples\_leaf = 4 & & & \\ [0.5ex]
+           & min\_samples\_split = 10 & & & \\ [0.5ex]
+           & n\_estimators = 50 & & & \\ [0.5ex]
+        \hline
+        \acrshort{o3} (2), T & \textbf{MLP:} & 0.23 ± 0.17 & -13.16 ± 2.94 & -10.14 ± 2.62 \\ [0.5ex]
+            & alpha = 10 & & & \\ [0.5ex]
+            & hidden layer = (10, 10) & & & \\ [0.5ex]
+            & & & & \\ [0.5ex]
+            & \textbf{MLR:} & 0.38 ± 0.22 & -11.44 ± 0.72 & -8.86 ± 0.86 \\ [0.5ex]
+            & & & & \\ [0.5ex]
+            & \textbf{KNN:} & 0.19 ± 0.34 & -12.91 ± 0.81 & -9.89 ± 0.92 \\ [0.5ex]
+            & n\_neighbors = 2 & & & \\ [0.5ex]
+            & weights = uniform & & & \\ [0.5ex]
+            & & & & \\ [0.5ex]
+            & \textbf{RF:} & 0.28 ± 0.22 & -12.44 ± 1.11 & -9.54 ± 1.08 \\ [0.5ex]
+            & max\_depth = 10 & & & \\ [0.5ex]
+            & min\_samples\_leaf = 4 & & & \\ [0.5ex]
+            & min\_samples\_split = 10 & & & \\ [0.5ex]
+            & n\_estimators = 150 & & & \\ [0.5ex]
         \hline
     \end{tabularx}
     \label{tab:data-o3-b4-calib-results}
+    \fonte{Desenvolvido pelo autor}
+\end{table}
+
+\begin{table}[h]
+    \caption{Resultados da calibração das leituras de \acrshort{o3} utilizando os sensores 1 e 2 OX-B431}
+    \centering
+    \begin{tabularx}{0.95\textwidth}[h]{
+         >{\raggedright\hsize=.08\hsize\arraybackslash}X
+         >{\raggedright\hsize=.8\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.5\hsize\arraybackslash}X
+         >{\raggedright\hsize=.5\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.5\hsize\arraybackslash}X }
+        \hline
+        Var. & Modelo & R2 & RMSE & MAE\\ [0.5ex]
+        \hline
+        \acrshort{o3} (1), \acrshort{o3} (2) & \textbf{MLP}: & 0.24 ± 0.15 & -13.01 ± 1.82 & -10.02 ± 1.55 \\ [0.5ex]
+           & alpha = 1 &  & & \\ [0.5ex]
+           & hidden layers = (200, 4) & & & \\ [0.5ex]
+           & & & & \\ [0.5ex]
+           & \textbf{MLR} & 0.14 ± 0.16 & -13.85 ± 2.26 & -10.81 ± 2.02 \\ [0.5ex]
+           & & & & \\ [0.5ex]
+           & \textbf{KNN:} & 0.12 ± 0.24 & -13.90 ± 1.86 & -10.86 ± 1.72 \\ [0.5ex]
+           & n\_neighbors = 20 & & & \\ [0.5ex]
+           & weights = uniform & & & \\ [0.5ex]
+           & & & & \\ [0.5ex]
+           & \textbf{RF:} & 0.13 ± 0.24 & -13.70 ± 1.54 & -10.64 ± 1.43 \\ [0.5ex]
+           & max\_depth = 10 & & & \\ [0.5ex]
+           & min\_samples\_leaf = 2 & & & \\ [0.5ex]
+           & min\_samples\_split = 10 & & & \\ [0.5ex]
+           & n\_estimators = 100 & & & \\ [0.5ex]
+        \hline
+        \acrshort{o3} (1), \acrshort{o3} (2), T & \textbf{MLP:} & 0.29 ± 0.21 & -12.37 ± 1.59 & -8.89 ± 0.82 \\ [0.5ex]
+            & alpha = 0.001 & & & \\ [0.5ex]
+            & hidden layer = (200,) & & & \\ [0.5ex]
+            & & & & \\ [0.5ex]
+            & \textbf{MLR:} & 0.39 ± 0.21 & -11.37 ± 0.82 & -8.82 ± 0.88 \\ [0.5ex]
+            & & & & \\ [0.5ex]
+            & \textbf{KNN:} & 0.19 ± 0.34 & -12.97 ± 1.18 & -9.92 ± 1.37 \\ [0.5ex]
+            & n\_neighbors = 13 & & & \\ [0.5ex]
+            & weights = distance & & & \\ [0.5ex]
+            & & & & \\ [0.5ex]
+            & \textbf{RF:} & 0.30 ± 0.19 & -12.34 ± 1.61 & -9.57 ± 1.58 \\ [0.5ex]
+            & max\_depth = 10 & & & \\ [0.5ex]
+            & min\_samples\_leaf = 1 & & & \\ [0.5ex]
+            & min\_samples\_split = 10 & & & \\ [0.5ex]
+            & n\_estimators = 150 & & & \\ [0.5ex]
+        \hline
+    \end{tabularx}
+    \label{tab:data-o3-1-2-b4-calib-results}
     \fonte{Desenvolvido pelo autor}
 \end{table}
 
@@ -203,7 +301,7 @@ Na Tabela \ref{tab:data-pm10-calib-results} resumem-se os melhores modelos encon
     \caption{Resultados da calibração das leituras de \acrshort{mp10} do sensor OPC-N3}
     \centering
     \begin{tabularx}{0.95\textwidth}[h]{
-         >{\raggedright\hsize=.08\hsize\arraybackslash}X
+         >{\raggedright\hsize=.15\hsize\arraybackslash}X
          >{\raggedright\hsize=.8\hsize\arraybackslash}X 
          >{\raggedright\hsize=.5\hsize\arraybackslash}X
          >{\raggedright\hsize=.5\hsize\arraybackslash}X 
@@ -211,37 +309,37 @@ Na Tabela \ref{tab:data-pm10-calib-results} resumem-se os melhores modelos encon
         \hline
         Var. & Modelo & R2 & RMSE & MAE\\ [0.5ex]
         \hline
-        CO & \textbf{MLP}: & -0.64 ± 0.49 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
-           & alpha = 0.01 &  & & \\ [0.5ex]
-           & hidden layers = (200, 10) & & & \\ [0.5ex]
+        \acrshort{mp10} & \textbf{MLP}: & -0.05 ± 0.036 & -9.77 ± 0.75 & -7.41 ± 0.49 \\ [0.5ex]
+           & alpha = 10 &  & & \\ [0.5ex]
+           & hidden layers = (10, 10) & & & \\ [0.5ex]
            & & & & \\ [0.5ex]
-           & \textbf{MLR} & -0.61 ± 0.47 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
+           & \textbf{MLR} & -0.01 ± 0.03 & -9.57 ± 0.98 & -7.26 ± 0.62 \\ [0.5ex]
            & & & & \\ [0.5ex]
-           & \textbf{KNN:} & -0.47 ± 0.29 & -0.06 ± 0.01 & -0.05 \\ [0.5ex]
-           & n\_neighbors = 17 & & & \\ [0.5ex]
+           & \textbf{KNN:} & -0.14 ± 0.07 & -10.18 ± 0.62 & -7.71 ± 0.45 \\ [0.5ex]
+           & n\_neighbors = 20 & & & \\ [0.5ex]
            & weights = uniform & & & \\ [0.5ex]
            & & & & \\ [0.5ex]
-           & \textbf{RF:} & -0.60 ± 0.34 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
-           & max\_depth = 30 & & & \\ [0.5ex]
-           & min\_samples\_leaf = 4 & & & \\ [0.5ex]
+           & \textbf{RF:} & -0.19 ± 0.11 & -10.33 ± 0.52 & -7.80 ± 0.40 \\ [0.5ex]
+           & max\_depth = 10 & & & \\ [0.5ex]
+           & min\_samples\_leaf = 2 & & & \\ [0.5ex]
            & min\_samples\_split = 10 & & & \\ [0.5ex]
-           & n\_estimators = 150 & & & \\ [0.5ex]
+           & n\_estimators = 100 & & & \\ [0.5ex]
         \hline
-        CO, T & \textbf{MLP:} & -0.59 ± 0.42 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
-              & alpha = 0.1 & & & \\ [0.5ex]
-              & hidden layer = (200, 50) & & & \\ [0.5ex]
+        \acrshort{mp10}, T & \textbf{MLP:} & -0.29 ± 0.27 & -10.68 ± 0.96 & -8.33 ± 0.78 \\ [0.5ex]
+              & alpha = 1 & & & \\ [0.5ex]
+              & hidden layer = (4, 50) & & & \\ [0.5ex]
               & & & & \\ [0.5ex]
-              & \textbf{MLR:} & -0.65 ± 0.45 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
+              & \textbf{MLR:} & 0.10 ± 0.08 & -9.04 ± 1.12 & -6.73 ± 0.69 \\ [0.5ex]
               & & & & \\ [0.5ex]
-              & \textbf{KNN:} & -0.61 ± 0.46 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
-              & n\_neighbors = 15 & & & \\ [0.5ex]
+              & \textbf{KNN:} & -0.02 ± 0.09 & -9.57 ± 0.46 & -7.29 ± 0.27 \\ [0.5ex]
+              & n\_neighbors = 20 & & & \\ [0.5ex]
               & weights = uniform & & & \\ [0.5ex]
               & & & & \\ [0.5ex]
-              & \textbf{RF:} & -0.72 +/- 0.50 & -0.07 ± 0.01 & -0.05 \\ [0.5ex]
-              & max\_depth = None & & & \\ [0.5ex]
+              & \textbf{RF:} & -0.17 ± 0.27 & -10.12 ± 0.32 & -7.89 ± 0.28 \\ [0.5ex]
+              & max\_depth = 10 & & & \\ [0.5ex]
               & min\_samples\_leaf = 4 & & & \\ [0.5ex]
-              & min\_samples\_split = 2 & & & \\ [0.5ex]
-              & n\_estimators = 100 & & & \\ [0.5ex]
+              & min\_samples\_split = 10 & & & \\ [0.5ex]
+              & n\_estimators = 150 & & & \\ [0.5ex]
         \hline
     \end{tabularx}
     \label{tab:data-pm10-calib-results}
