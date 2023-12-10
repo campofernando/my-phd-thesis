@@ -133,11 +133,11 @@ Investigou-se a existência de correlação entre as leituras do sensor de \text
 
 \subsection{Preprocessamento dos dados de Ozônio}
 
-Para a medição de \acrshort{o3} foram utilizados dois sensores do modelo OX-B4. As Figuras \ref{fig:data-o3-1-raw} e \ref{fig:data-o3-2-raw} mostram as séries temporais dos sensores depois de removidos os valores fora de intervalo. Observa-se que o sensor 1 sofreu alterações no valor de linha base nos meses de dezembro, fevereiro, março e abril que foram detectadas pelo algoritmo \acrshort{pelt}, conforme ilustrado na Figura \ref{fig:data-rebase-o3-1}. As amostras dentro dos intervalos que apresentaram variações na linha base no sensor 1 foram etiquetados correspondentemente para sua remoção.
+Para a medição de \acrshort{o3} foram utilizados dois sensores do modelo OX-B431. As Figuras \ref{fig:data-o3-1-raw} e \ref{fig:data-o3-2-raw} mostram as séries temporais dos sensores depois de removidos os valores fora de intervalo. Observa-se que o sensor 1 sofreu alterações no valor de linha base nos meses de dezembro, fevereiro, março e abril que foram detectadas pelo algoritmo \acrshort{pelt}, conforme ilustrado na Figura \ref{fig:data-rebase-o3-1}. As amostras dentro dos intervalos que apresentaram variações na linha base no sensor 1 foram etiquetados correspondentemente para sua remoção.
 
 \begin{figure}[h]
     \centering
-    \caption{Série temporal dos sensores de \acrshort{o3} modelo OX-B4}
+    \caption{Série temporal dos sensores de \acrshort{o3} modelo OX-B431}
     \begin{subfigure}{0.495\textwidth}
         \includegraphics[width=\textwidth]{chapters/3-RESULTADOS CAMPO/Figuras/raw-o3-b4-1.png}
         \caption{Série temporal do sensor 1 depois de remover valores fora de intervalo}
@@ -159,11 +159,11 @@ Para a medição de \acrshort{o3} foram utilizados dois sensores do modelo OX-B4
     \fonte{Desenvolvido pelo autor (2023)}
 \end{figure}
 
-Depois de pré-processadas as leituras dos sensores de ozônio obtiveram-se os resultados ilustrados nas Figuras \ref{fig:data-o3-1-preproc-15} e \ref{fig:data-o3-2-preproc-15}, que ilustram a série dos dados pré-processados dos dois sensores OX-B4 juntamente com o comportamento diário dos dados ao longo do período sob análise agrupados por hora do dia. As Figuras \ref{fig:data-o3-1-preproc-hist} e \ref{fig:data-o3-2-preproc-hist} mostram os histogramas das leituras dos sensores. As séries re-amostradas em períodos de 1 hora são mostradas nas Figuras \ref{fig:data-o3-1-preproc-1HR} e \ref{fig:data-o3-2-preproc-1HR}.
+Depois de pré-processadas as leituras dos sensores de ozônio obtiveram-se os resultados ilustrados nas Figuras \ref{fig:data-o3-1-preproc-15} e \ref{fig:data-o3-2-preproc-15}, que ilustram a série dos dados pré-processados dos dois sensores OX-B431 juntamente com o comportamento diário dos dados ao longo do período sob análise agrupados por hora do dia. As Figuras \ref{fig:data-o3-1-preproc-hist} e \ref{fig:data-o3-2-preproc-hist} mostram os histogramas das leituras dos sensores. As séries re-amostradas em períodos de 1 hora são mostradas nas Figuras \ref{fig:data-o3-1-preproc-1HR} e \ref{fig:data-o3-2-preproc-1HR}.
 
 \begin{figure}[h]
     \centering
-    \caption{Séries temporais dos sensores OX-B4 pré-processadas}
+    \caption{Séries temporais dos sensores OX-B431 pré-processadas}
     \begin{subfigure}{0.95\textwidth}
         \includegraphics[width=\textwidth]{chapters/3-RESULTADOS CAMPO/Figuras/preproc-ox-b4-1.png}
         \caption{Série temporal do sensor 1 pré-processada (T = 15 mins) e seu comportamento diário}
@@ -180,10 +180,10 @@ Depois de pré-processadas as leituras dos sensores de ozônio obtiveram-se os r
 
 \begin{figure}[h]
     \centering
-    \caption{Histogramas e séries temporais horárias das leituras dos sensores OX-B4}
+    \caption{Histogramas e séries temporais horárias das leituras dos sensores OX-B431}
     \begin{subfigure}{0.495\textwidth}
         \includegraphics[width=\textwidth]{chapters/3-RESULTADOS CAMPO/Figuras/preproc-hist-ox-b4-1.png}
-        \caption{Histrograma das leituras do sensor 1 OX-B4}
+        \caption{Histrograma das leituras do sensor 1 OX-B431}
         \label{fig:data-o3-1-preproc-hist}
     \end{subfigure}
     \hfill
@@ -194,7 +194,7 @@ Depois de pré-processadas as leituras dos sensores de ozônio obtiveram-se os r
     \end{subfigure}
     \begin{subfigure}{0.495\textwidth}
         \includegraphics[width=\textwidth]{chapters/3-RESULTADOS CAMPO/Figuras/preproc-hist-ox-b4-2.png}
-        \caption{Histrograma das leituras do sensor 2 OX-B4}
+        \caption{Histrograma das leituras do sensor 2 OX-B431}
         \label{fig:data-o3-2-preproc-hist}
     \end{subfigure}
     \hfill
@@ -209,7 +209,7 @@ Depois de pré-processadas as leituras dos sensores de ozônio obtiveram-se os r
 Nas Tabelas \ref{tab:data-contab-o3-1} e \ref{tab:data-contab-o3-2} contabilizam-se os dados dos sensores de \acrshort{o3} para períodos de 15 minutos e de 1 hora. Observa-se que no sensor 1, dos 14625 pontos de dados, que representavam as amostras adquiridas com um período de 15 minutos no intervalo de 20/11/2022 até 21/04/2023, 4413 foram aproveitados como dados válidos, o que representa um 30 \% aproximadamente dos dados originais. Ao re-amostrar esses 4413 pontos em dados horários obtiveram-se 1056 amostras horárias de concentração válidas (aproximadamente 34 \% dos dados) para realizar a calibração. Já no sensor 2, dos 14542 pontos de dados, que representavam as amostras adquiridas no intervalo de 21/11/2022 até 21/04/2023, 10814 foram aproveitados como dados válidos, o que representa um 74 \% aproximadamente dos dados originais. Ao re-amostrar esses 10814 pontos válidos em dados horários obtiveram-se 2685 amostras horárias de concentração válidas (aproximadamente 77 \% dos dados) para realizar a calibração.
 
 \begin{table}[h]
-    \caption{Contabilização dos dados por etiquetas das leituras do sensor 1 OX-B4}
+    \caption{Contabilização dos dados por etiquetas das leituras do sensor 1 OX-B431}
     \centering
     \begin{tabularx}{0.95\textwidth}[h]{
          >{\raggedright\hsize=.45\hsize\arraybackslash}X
@@ -247,7 +247,7 @@ Nas Tabelas \ref{tab:data-contab-o3-1} e \ref{tab:data-contab-o3-2} contabilizam
 \end{table}
 
 \begin{table}[h]
-    \caption{Contabilização dos dados por etiquetas das leituras do sensor 2 OX-B4}
+    \caption{Contabilização dos dados por etiquetas das leituras do sensor 2 OX-B431}
     \centering
     \begin{tabularx}{0.95\textwidth}[h]{
          >{\raggedright\hsize=.45\hsize\arraybackslash}X
@@ -286,19 +286,111 @@ Nas Tabelas \ref{tab:data-contab-o3-1} e \ref{tab:data-contab-o3-2} contabilizam
 
 \subsubsection{Dependência com a temperatura}
 
-Investigou-se a existência de correlação entre as leituras dos sensores de \textit{o3} e as variações de temperatura medida no interior da câmara de medição. Os resultados dos testes estatísticos de Spearman e Kendall revelaram coeficientes de correlação significativos, conforme se ilustra nas Figuras \ref{fig:data-temp-o3-1-corr} e \ref{fig:data-temp-o3-2-corr}. Os coeficientes de Spearman calculados foram de 0.37 e 0.85 para os sensores 1 e 2 respectivamente, com valores de p inferiores a 0.05, indicando uma correlação estatisticamente significativa entre as leituras dos sensores e a temperatura. De maneira semelhante, os coeficiente de Kendall foram de 0.27 e 0.70 respectivamente, também com p < 0.05, reforçando a presença de uma associação significativa. Ao avaliar a hipótese nula de ausência de correlação, os resultados forneceram evidências para sua rejeição, sugerindo a existência de uma correlação entre as leituras dos sensores de \acrshort{o3} e as variações de temperatura.
+Investigou-se a existência de correlação entre as leituras dos sensores de \textit{o3} e as variações de temperatura medida no interior da câmara de medição. Os resultados dos testes estatísticos de Spearman e Kendall revelaram coeficientes de correlação significativos, conforme se ilustra nas Figuras \ref{fig:data-temp-o3-1-corr} e \ref{fig:data-temp-o3-2-corr}. Os coeficientes de Spearman calculados foram de 0.37 e 0.85 para os sensores 1 e 2 respectivamente, com valores de p inferiores a 0.05, indicando uma correlação estatisticamente significativa entre as leituras dos sensores e a temperatura. De maneira semelhante, os coeficientes de Kendall foram de 0.27 e 0.70 respectivamente, também com p < 0.05, reforçando a presença de uma associação significativa. Ao avaliar a hipótese nula de ausência de correlação, os resultados forneceram evidências para sua rejeição, sugerindo a existência de uma correlação entre as leituras dos sensores de \acrshort{o3} e as variações de temperatura.
 
 \begin{figure}[h]
     \centering
     \caption{Relação entre as leituras dos sensores de \acrshort{o3} e a temperatura}
     \begin{subfigure}{0.495\textwidth}
         \includegraphics[width=\textwidth]{chapters/3-RESULTADOS CAMPO/Figuras/temperature-o3-b4-1.png}
+        \caption{Relação entre as leituras do sensor 1 de \acrshort{o3} e a temperatura}
         \label{fig:data-temp-o3-1-corr}    
     \end{subfigure}
     \hfil
     \begin{subfigure}{0.495\textwidth}
         \includegraphics[width=\textwidth]{chapters/3-RESULTADOS CAMPO/Figuras/temperature-o3-b4-2.png}
+        \caption{Relação entre as leituras do sensor 2 de \acrshort{o3} e a temperatura}
         \label{fig:data-temp-o3-2-corr}    
+    \end{subfigure}
+    \label{fig:data-temp-o3-corr}  
+    \fonte{Desenvolvido pelo autor (2023)}
+\end{figure}
+
+\subsection{Preprocessamento dos dados de Material Particulado (MP-10)}
+
+A Figura \ref{fig:data-pm10-raw} mostra a série temporal do sensor de \acrshort{mp10} depois de removidos os valores fora de intervalo. Os resultados do pré-processamento das leituras do sensor são ilustrados nas Figuras \ref{fig:data-pm10-preproc-hist} e \ref{fig:data-pm10-preproc-15} que apresentam, respectivamente, o histograma dos dados e a série pré-processada do sensor OPC-N3 juntamente com o comportamento diário das medições ao longo do período sob análise agrupados por hora do dia. Os dados foram re-amostrados para um período de 1 hora para serem calibrados com as leituras de referência, a Figura \ref{fig:data-pm10-preproc-1HR} mostra a série temporal resultante da re-amostragem.
+
+\begin{figure}[h]
+    \centering
+    \caption{Série temporal das leituras do sensor OPC-N3}
+    \begin{subfigure}{0.495\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-RESULTADOS CAMPO/Figuras/raw-pm10.png}
+        \caption{Série temporal do sensor depois de remover valores fora de intervalo}
+        \label{fig:data-pm10-raw}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.495\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-RESULTADOS CAMPO/Figuras/preproc-hist-pm10.png}
+        \caption{Histograma das leituras pré-processadas do sensor OPC-N3}
+        \label{fig:data-pm10-preproc-hist}
+    \end{subfigure}
+    \begin{subfigure}{0.99\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-RESULTADOS CAMPO/Figuras/preproc-pm10.png}
+        \caption{Série temporal do sensor pré-processada (T = 15 mins) e seu comportamento diário}
+        \label{fig:data-pm10-preproc-15}
+    \end{subfigure}
+    \hfill
+    \label{fig:data-pm10-15}
+    \fonte{Desenvolvido pelo autor (2023)}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \caption{Série temporal horária das leituras do sensor OPC-N3 e sua relação com a temperatura}
+    \begin{subfigure}{0.495\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-RESULTADOS CAMPO/Figuras/preproc-1HR-pm10.png}
+        \caption{Série temporal com T = 1 hr}
+        \label{fig:data-pm10-preproc-1HR}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.495\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-RESULTADOS CAMPO/Figuras/temperature-pm10.png}
+        \caption{Relação entre as leituras do sensor OPC-N3 e a temperatura}
+        \label{fig:data-temp-pm10-corr}
     \end{subfigure}
     \fonte{Desenvolvido pelo autor (2023)}
 \end{figure}
+
+Na Tabela \ref{tab:data-contab-pm10} contabilizam-se os dados para período de 15 minutos e de 1 hora. Observa-se que dos 14541 pontos de dados, que representavam as amostras adquiridas com um período de 15 minutos no intervalo de 21/11/2022 até 21/04/2023, 5668 foram aproveitados como dados válidos, o que representa um 39 \% aproximadamente dos dados originais. Ao re-amostrar esses 5668 pontos em dados horários obtiveram-se 1291 amostras horárias de concentração válidas (aproximadamente 36 \% dos dados) para realizar a calibração. Vale salientar que nos dados de \acrshort{mp10} não foram encontradas alterações na linha base nem dados de estabilização já que esse sensor não precisa desse intervalo prévio as medições.
+
+\begin{table}[h]
+    \caption{Contabilização dos dados por etiquetas das leituras do sensor OPC-N3}
+    \centering
+    \begin{tabularx}{0.95\textwidth}[h]{
+         >{\raggedright\hsize=.45\hsize\arraybackslash}X
+         >{\raggedright\hsize=.20\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.5\hsize\arraybackslash}X
+         >{\raggedright\hsize=.50\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.20\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.5\hsize\arraybackslash}X }
+        \multicolumn{3}{c}{Série temporal T = 15 mins} & \multicolumn{3}{c}{Série temporal T = 1 hr} \\
+        \hline
+        Etiquetas & No. amostras & \% amostras & Etiquetas & No. amostras & \% amostras \\ [0.5ex]
+        \hline
+        \textit{MISSING} & 6053 & 41.63 \% & \textit{LOWSAMPLES} & 2291 & 63.96 \% \\ [0.5ex]
+        
+        \textit{LTLL} & 1297 & 8.92 \% & \textit{VALID} & 1291 & 36.04 \% \\ [0.5ex]
+        
+        \textit{GTUL} & 0 & 0.0 \% & & & \\ [0.5ex]
+        
+        \textit{STABILIZING} & 0 & 0.0 \% & & & \\ [0.5ex]
+        
+        \textit{BADSPIKE} & 1332 & 9.16 \% & & & \\ [0.5ex]
+        
+        \textit{LTQTLE01} & 117 & 0.80 \% & & & \\ [0.5ex]
+        
+        \textit{GTQTLE99} & 74 & 0.51 \% & & & \\ [0.5ex]
+        
+        \textit{REBASE} & 0 & 0.0 \% & & & \\ [0.5ex]
+        
+        \textit{VALID} & 5668 & 38.98 \% & & & \\ [0.5ex]
+        \hline
+        TOTAL & 14541 & & TOTAL & 3582 & \\
+    \end{tabularx}
+    \label{tab:data-contab-pm10}
+    \fonte{Desenvolvido pelo autor}
+\end{table}
+
+\subsubsection{Dependência com a temperatura}
+
+Investigou-se a existência de correlação entre as leituras do sensor de \textit{mp10} e as variações de temperatura medida no interior da câmara de medição. Os resultados dos testes estatísticos de Spearman e Kendall revelaram coeficientes de correlação estatisticamente significativos, conforme se ilustra na Figura \ref{fig:data-temp-pm10-corr}. O coeficiente de Spearman resultou em 0.29 com um valor de p inferior a 0.05, indicando uma correlação estatisticamente significativa entre as leituras dos sensores e a temperatura. De maneira semelhante, o coeficiente de Kendall foi de 0.20, também com p < 0.05, reforçando a presença de uma associação significativa. Ao avaliar a hipótese nula de ausência de correlação, os resultados forneceram evidências para sua rejeição, sugerindo a existência de uma correlação entre as leituras dos sensores de \acrshort{mp10} e as variações de temperatura.
