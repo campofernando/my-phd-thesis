@@ -3,7 +3,7 @@ This repository contains the latex files for my PHD Thesis at LCQAr UFSC
 
 ## TO-DO:
 1. Adicionar gráficos de leituras dos sensores vs. referência incluindo fator de 2 e densidade de Kernel
-    - Estudar sobre o que essas métricas representam, densidade de Kernal indica frequência de ocorrência
+    - Estudar sobre o que essas métricas representam, densidade de Kernel indica frequência de ocorrência
 2. Dividir melhor as tabelas de contabilização dos dados (adicionar linha vertical entre dados 15 mins e dados horários)
 3. Incluir tratamento de NO2 e SO2
 4. Scatter plots
