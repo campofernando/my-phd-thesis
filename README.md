@@ -31,3 +31,4 @@ This repository contains the latex files for my PHD Thesis at LCQAr UFSC
 15. Adicionar rascunho do segundo paper nos Anexos (Opcional)
     - No paper ir direto para a multivariada
 16. Explicar no resumo que estamos propondo metodologia de correção com equipamento, mesmo não sendo boa
+17. Incluir apêndice sobre sensor de MP
