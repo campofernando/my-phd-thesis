@@ -1,6 +1,8 @@
-\subsection{Preprocessamento dos dados de Ozônio}
+% ----------------------------------------------------------
+\section{Análise dos dados de Ozônio}
+% ----------------------------------------------------------
 
-Para a medição de \acrshort{o3} foram utilizados dois sensores do modelo OX-B431. As Figuras \ref{fig:data-o3-1-raw} e \ref{fig:data-o3-2-raw} mostram as séries temporais dos sensores depois de removidos os valores fora de intervalo. Observa-se que o sensor 1 sofreu alterações no valor de linha base nos meses de dezembro, fevereiro, março e abril que foram detectadas pelo algoritmo \acrshort{pelt}, conforme ilustrado na Figura \ref{fig:data-rebase-o3-1}. As amostras dentro dos intervalos que apresentaram variações na linha base no sensor 1 foram etiquetados correspondentemente para sua remoção.
+Para a medição de \acrshort{o3} foram utilizados dois sensores do modelo OX-B431. As Figuras \ref{fig:data-o3-1-raw} e \ref{fig:data-o3-2-raw} mostram as séries temporais dos sensores depois de removidos os valores fora de intervalo. Observa-se que o sensor 1 sofreu alterações no valor de linha base nos meses de dezembro, fevereiro, março e abril, que foram detectadas pelo algoritmo \acrshort{pelt}, conforme ilustrado na Figura \ref{fig:data-rebase-o3-1}. As amostras dentro dos intervalos que apresentaram variações na linha base no sensor 1 foram etiquetados correspondentemente para sua remoção. As leituras do sensor 2 não apresentaram alterações na linha base.
 
 \begin{figure}[h]
     \centering
@@ -26,7 +28,7 @@ Para a medição de \acrshort{o3} foram utilizados dois sensores do modelo OX-B4
     \fonte{Desenvolvido pelo autor (2023)}
 \end{figure}
 
-Depois de pré-processadas as leituras dos sensores de ozônio obtiveram-se os resultados ilustrados nas Figuras \ref{fig:data-o3-1-preproc-15} e \ref{fig:data-o3-2-preproc-15}, que ilustram a série dos dados pré-processados dos dois sensores OX-B431 juntamente com o comportamento diário dos dados ao longo do período sob análise agrupados por hora do dia. As Figuras \ref{fig:data-o3-1-preproc-hist} e \ref{fig:data-o3-2-preproc-hist} mostram os histogramas das leituras dos sensores. As séries re-amostradas em períodos de 1 hora são mostradas nas Figuras \ref{fig:data-o3-1-preproc-1HR} e \ref{fig:data-o3-2-preproc-1HR}.
+Depois de pré-processadas as leituras dos sensores de ozônio obtiveram-se os resultados ilustrados nas Figuras \ref{fig:data-o3-1-preproc-15} e \ref{fig:data-o3-2-preproc-15}. Os gráficos mostram as séries dos dados pré-processados dos dois sensores OX-B431 juntamente com o comportamento diário das medições ao longo do período, agrupados por hora do dia. Na Figura \ref{fig:data-o3-reference} observa-se uma clara componente diária nas leituras de concentração, que coincide com o comportamento apresentado pelas medições de referência (Figura \ref{fig:data-o3-reference}). Esse comportamento é esperado nas medições de \acrshort{o3} já que a variável é influenciada pela luz solar.
 
 \begin{figure}[h]
     \centering
@@ -42,27 +44,35 @@ Depois de pré-processadas as leituras dos sensores de ozônio obtiveram-se os r
         \label{fig:data-o3-2-preproc-15}
     \end{subfigure}
     \label{fig:data-o3-preproc-15}
-    \fonte{Desenvolvido pelo autor (2023)}
+    \begin{subfigure}{0.95\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/o3-reference-series-and-box.png}
+        \caption{Série temporal das leituras de concentração de referência (T = 1 H) e seu comportamento diário}
+        \label{fig:data-o3-reference}
+    \end{subfigure}
+    \label{fig:data-o3-preproc-15}
 \end{figure}
+
+Histogramas das leituras dos sensores OX-B431 são mostrados nas Figuras \ref{fig:data-o3-1-preproc-hist} e \ref{fig:data-o3-2-preproc-hist}. Os dados adquiridos pelo sensor 1 apresentaram um comportamento log-normal. Já o sensor 2 produziu leituras com uma componente log-normal e uma outra componente de menor frequência nos valores de concentração acima 30 ppb. Esta última representa a componente com sazonalidade diária mencionada acima. As séries re-amostradas em períodos de 1 hora são mostradas nas Figuras \ref{fig:data-o3-1-preproc-1HR} e \ref{fig:data-o3-2-preproc-1HR}.
 
 \begin{figure}[h]
     \centering
     \caption{Histogramas e séries temporais horárias das leituras dos sensores OX-B431}
     \begin{subfigure}{0.495\textwidth}
         \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/preproc-hist-ox-b4-1.png}
-        \caption{Histrograma das leituras do sensor 1 OX-B431}
+        \caption{Histograma das leituras do sensor 1 OX-B431}
         \label{fig:data-o3-1-preproc-hist}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.495\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/preproc-hist-ox-b4-2.png}
+        \caption{Histograma das leituras do sensor 2 OX-B431}
+        \label{fig:data-o3-2-preproc-hist}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.495\textwidth}
         \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/preproc-1HR-ox-b4-1.png}
         \caption{Série temporal do sensor 2 com T = 1 hr}
         \label{fig:data-o3-1-preproc-1HR}
-    \end{subfigure}
-    \begin{subfigure}{0.495\textwidth}
-        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/preproc-hist-ox-b4-2.png}
-        \caption{Histrograma das leituras do sensor 2 OX-B431}
-        \label{fig:data-o3-2-preproc-hist}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.495\textwidth}
@@ -79,13 +89,13 @@ Nas Tabelas \ref{tab:data-contab-o3-1} e \ref{tab:data-contab-o3-2} contabilizam
     \caption{Contabilização dos dados por etiquetas das leituras do sensor 1 OX-B431}
     \centering
     \begin{tabularx}{0.95\textwidth}[h]{
-         >{\raggedright\hsize=.45\hsize\arraybackslash}X
+         >{\raggedright\hsize=.475\hsize\arraybackslash}X
          >{\raggedright\hsize=.20\hsize\arraybackslash}X 
          >{\raggedright\hsize=.5\hsize\arraybackslash}X
-         >{\raggedright\hsize=.50\hsize\arraybackslash}X 
+        | >{\raggedright\hsize=.50\hsize\arraybackslash}X 
          >{\raggedright\hsize=.20\hsize\arraybackslash}X 
          >{\raggedright\hsize=.5\hsize\arraybackslash}X }
-        \multicolumn{3}{c}{Série temporal T = 15 mins} & \multicolumn{3}{c}{Série temporal T = 1 hr} \\
+        \multicolumn{3}{c|}{Série temporal T = 15 mins} & \multicolumn{3}{c}{Série temporal T = 1 hr} \\
         \hline
         Etiquetas & No. amostras & \% amostras & Etiquetas & No. amostras & \% amostras \\ [0.5ex]
         \hline
@@ -117,13 +127,13 @@ Nas Tabelas \ref{tab:data-contab-o3-1} e \ref{tab:data-contab-o3-2} contabilizam
     \caption{Contabilização dos dados por etiquetas das leituras do sensor 2 OX-B431}
     \centering
     \begin{tabularx}{0.95\textwidth}[h]{
-         >{\raggedright\hsize=.45\hsize\arraybackslash}X
+         >{\raggedright\hsize=.475\hsize\arraybackslash}X
          >{\raggedright\hsize=.20\hsize\arraybackslash}X 
          >{\raggedright\hsize=.5\hsize\arraybackslash}X
-         >{\raggedright\hsize=.50\hsize\arraybackslash}X 
+        | >{\raggedright\hsize=.50\hsize\arraybackslash}X 
          >{\raggedright\hsize=.20\hsize\arraybackslash}X 
          >{\raggedright\hsize=.5\hsize\arraybackslash}X }
-        \multicolumn{3}{c}{Série temporal T = 15 mins} & \multicolumn{3}{c}{Série temporal T = 1 hr} \\
+        \multicolumn{3}{c|}{Série temporal T = 15 mins} & \multicolumn{3}{c}{Série temporal T = 1 hr} \\
         \hline
         Etiquetas & No. amostras & \% amostras & Etiquetas & No. amostras & \% amostras \\ [0.5ex]
         \hline
@@ -151,9 +161,9 @@ Nas Tabelas \ref{tab:data-contab-o3-1} e \ref{tab:data-contab-o3-2} contabilizam
     \fonte{Desenvolvido pelo autor}
 \end{table}
 
-\subsubsection{Dependência com a temperatura}
+\subsection{Dependência com a temperatura}
 
-Investigou-se a existência de correlação entre as leituras dos sensores de \textit{o3} e as variações de temperatura medida no interior da câmara de medição. Os resultados dos testes estatísticos de Spearman e Kendall revelaram coeficientes de correlação significativos, conforme se ilustra nas Figuras \ref{fig:data-temp-o3-1-corr} e \ref{fig:data-temp-o3-2-corr}. Os coeficientes de Spearman calculados foram de 0.37 e 0.85 para os sensores 1 e 2 respectivamente, com valores de p inferiores a 0.05, indicando uma correlação estatisticamente significativa entre as leituras dos sensores e a temperatura. De maneira semelhante, os coeficientes de Kendall foram de 0.27 e 0.70 respectivamente, também com p < 0.05, reforçando a presença de uma associação significativa. Ao avaliar a hipótese nula de ausência de correlação, os resultados forneceram evidências para sua rejeição, sugerindo a existência de uma correlação entre as leituras dos sensores de \acrshort{o3} e as variações de temperatura.
+Investigou-se a existência de correlação entre as leituras dos sensores de \acrshort{o3} e as variações de temperatura medida no interior da câmara de medição. Os resultados dos testes estatísticos de Spearman e Kendall revelaram coeficientes de correlação significativos, conforme se ilustra nas Figuras \ref{fig:data-temp-o3-1-corr} e \ref{fig:data-temp-o3-2-corr}. Os coeficientes de Spearman calculados foram de 0.37 e 0.85 para os sensores 1 e 2 respectivamente, com valores de p inferiores a 0.05, indicando uma correlação estatisticamente significativa entre as leituras dos sensores e a temperatura. De maneira semelhante, os coeficientes de Kendall foram de 0.27 e 0.70 respectivamente, também com p < 0.05, reforçando a presença de uma associação significativa. Ao avaliar a hipótese nula de ausência de correlação, os resultados forneceram evidências para sua rejeição, sugerindo a existência de uma correlação entre as leituras dos sensores de \acrshort{o3} e as variações de temperatura.
 
 \begin{figure}[h]
     \centering
@@ -163,12 +173,219 @@ Investigou-se a existência de correlação entre as leituras dos sensores de \t
         \caption{Relação entre as leituras do sensor 1 de \acrshort{o3} e a temperatura}
         \label{fig:data-temp-o3-1-corr}    
     \end{subfigure}
-    \hfil
+    \hfill
     \begin{subfigure}{0.495\textwidth}
         \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/temperature-o3-b4-2.png}
         \caption{Relação entre as leituras do sensor 2 de \acrshort{o3} e a temperatura}
         \label{fig:data-temp-o3-2-corr}    
     \end{subfigure}
-    \label{fig:data-temp-o3-corr}  
-    \fonte{Desenvolvido pelo autor (2023)}
+    \hfill
+    \begin{subfigure}{0.495\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/temperature-o3-reference.png}
+        \caption{Relação entre os valores de concentração de referência e a temperatura}
+        \label{fig:data-temp-o3-ref-corr}    
+    \end{subfigure}
+    \label{fig:data-temp-o3-corr}
 \end{figure}
+
+Os resultados obtidos nos testes estatísticos podem ser corroborados nos gráficos de dispersão entre as variáveis nas Figuras \ref{fig:data-temp-o3-1-corr} e \ref{fig:data-temp-o3-2-corr}. Delas comprova-se uma maior correlação com a temperatura no sensor 2, que coincide com o comportamento sazonal diário observado anteriormente. As leituras de referência também apresentaram uma relação linear com a temperatura, com coeficientes de Spearman e Kendall de 0.69 e 0.51 respectivamente, conforme se ilustra na Figura \ref{fig:data-temp-o3-ref-corr}.
+
+\subsection{Calibração das leituras dos sensores OX-B431 com as medições de referência}
+
+Nas Figuras \ref{fig:data-o3-reference-time-series}, \ref{fig:data-o3-1-reference-corr} e \ref{fig:data-o3-2-reference-corr} apresentam-se as leituras de \acrshort{o3} obtidas pelos sensores OX-B431 de Alphasense e a estação de referência. Observa-se que as leituras do sensor 1 superestimaram os valores de concentração de referência. Os testes de Spearman e Kendall revelaram a existência de correlação entre as medições com o sensor 1 e a referência com coeficientes de 0.38 e 0.27 respectivamente, e de 0.59 e 0.42 respectivamente para o sensor 2.
+
+\begin{figure}[h]
+    \centering
+    \caption{Séries temporais e gráficos de dispersão das medições de \acrshort{o3}}
+    \begin{subfigure}{0.4\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/o3-b4-reference-time-series.png}
+        \caption{Séries temporais das leituras dos sensores OX-B431 e a estação de referência}
+        \label{fig:data-o3-reference-time-series}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/o3-b4-1-reference-correlation.png}
+        \caption{Gráfico de dispersão das leituras do sensor 1 OX-B431 e a estação de referência}
+        \label{fig:data-o3-1-reference-corr}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/o3-b4-2-reference-correlation.png}
+        \caption{Gráfico de dispersão das leituras do sensor 2 OX-B431 e a estação de referência}
+        \label{fig:data-o3-2-reference-corr}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \caption{Resultados dos modelos de calibração aplicados às leituras dos sensores OX-B431}
+    \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/o3-b4-models-performance.png}
+    \label{fig:data-o3-b4-models-performance}
+\end{figure}
+
+A partir dos dados de referência e das leituras de concentração e temperatura adquiridas pelo monitor em questão, foi realizada uma busca em grid para encontrar as melhores combinações de parâmetros e variáveis de entrada a modelos de regressão. As variáveis que foram testadas como entrada foram as leituras de concentração de \acrshort{o3} dos dois sensores OX-B431 e a temperatura no interior da câmara de medição. Como modelos de regressão foram testados: o Perceptron Multicamadas (MLP), a Regressão Linear Multivariada (MLR), os K Vizinhos mais Próximos (KNN) e as Florestas Aleatórias (RF). Nas Tabelas \ref{tab:data-o3-1-b4-calib-results} - \ref{tab:data-o3-1-2-b4-calib-results} resumem-se os melhores modelos encontrados pela busca em \textit{grid} para calibrar as leituras dos sensores OX-B431. A Tabela \ref{tab:data-o3-1-b4-calib-results} apresenta os modelos obtidos considerando o sensor 1 e a temperatura. A Tabela \ref{tab:data-o3-2-b4-calib-results} compila os mesmos parâmetros para o sensor 2 e a temperatura. Já a Tabela \ref{tab:data-o3-1-2-b4-calib-results} resume os modelos obtidos ao considerar como variáveis independentes ambos sensores e a temperatura. Os mesmos resultados são ilustrados graficamente na Figura \ref{fig:data-o3-b4-models-performance} que apresenta o desempenho dos modelos e as variáveis de entrada considerando os valores de r2, RMSE e MAE.
+
+\begin{figure}[h!]
+    \centering
+    \caption{Gráfico de dispersão das leituras dos sensores de \acrshort{o3} OX-B431 e a estação de referência após aplicar modelos de regressão considerando a temperatura}
+    \begin{subfigure}{0.49\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/o3-b4-1-T-MLP-Regression.png}
+        \caption{Utilizando uma rede neural Perceptron Multicamadas obtiverem-se os melhores resultados de R2, RMSE e MAE considerando as leituras do sensor 1 e a temperatura}
+        \label{fig:data-o3-1-T-reference-corr-MLP}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/o3-b4-1-2-T-Multilinear-Regression.png}
+        \caption{Utilizando uma regressão linear considerando as leituras dos sensores e a temperatura obtiveram-se resultados semelhantes}
+        \label{fig:data-o3-1-2-T-reference-corr-MLR}
+    \end{subfigure}
+\end{figure}
+
+De modo geral observa-se que os modelos que consideraram a temperatura como variável de entrada produziram os melhores resultados de r2, erro e correlação. Ao considerar os sensores de ozônio de forma independente, os resultados dos modelos não foram bons, com o sensor 2 gerando melhores resultados do que o sensor 1 (correlação e r2 maiores). Quando consideradas as leituras de ambos sensores, os modelos geraram melhores resultados, embora inferiores a quando considerada a temperatura. As Figuras \ref{fig:data-o3-1-T-reference-corr-MLP} e \ref{fig:data-o3-1-2-T-reference-corr-MLR} apresentam gráficos de dispersão com as leituras de referência e as inferidas pelos dois melhores modelos em termos de R2, RMSE e MAE.
+
+\begin{table}[h]
+    \caption{Resultados da calibração do sensor 1 OX-B431}
+    \centering
+    \begin{tabularx}{0.95\textwidth}[h!]{
+        >{\raggedright\hsize=.2\hsize\arraybackslash}X
+        >{\raggedright\hsize=.7\hsize\arraybackslash}X 
+        >{\raggedright\hsize=.4\hsize\arraybackslash}X
+        >{\raggedright\hsize=.4\hsize\arraybackslash}X 
+        >{\raggedright\hsize=.3\hsize\arraybackslash}X 
+        >{\raggedright\hsize=.3\hsize\arraybackslash}X }
+       \hline
+       Var. & Modelo & R2 & RMSE & MAE & $\rho$\\ [0.5ex]
+        \hline
+        \acrshort{o3} (1) & \textbf{MLP}: & -0.38 ± 0.42 & -17.38 ± 3.49 & -13.72 ± 2.55 & 0.21 \\ [0.5ex]
+           & alpha = 0.0001 &  & & & \\ [0.5ex]
+           & hidden layers = (100,) & & & & \\ [0.5ex]
+           & & & & & \\ [0.5ex]
+           & \textbf{MLR} & -0.35 ± 0.38 & -17.26 ± 3.57 & -13.63 ± 2.58 & 0.22 \\ [0.5ex]
+           & & & & & \\ [0.5ex]
+           & \textbf{KNN:} & -0.27 ± 0.31 & -17.24 ± 5.05 & -12.91 ± 3.92 & 0.21 \\ [0.5ex]
+           & n\_neighbors = 13 & & & & \\ [0.5ex]
+           & weights = uniform & & & & \\ [0.5ex]
+           & & & & & \\ [0.5ex]
+           & \textbf{RF:} & -0.68 ± 0.73 & -18.65 ± 3.27 & -14.87 ± 2.54 & 0.17 \\ [0.5ex]
+           & max\_depth = 20 & & & & \\ [0.5ex]
+           & min\_samples\_leaf = 4 & & & & \\ [0.5ex]
+           & min\_samples\_split = 10 & & & & \\ [0.5ex]
+           & n\_estimators = 50 & & & & \\ [0.5ex]
+        \hline
+        \acrshort{o3} (1), T & \textbf{MLP:} & 0.42 ± 0.15 & -11.24 ± 1.13 & -8.62 ± 1.07 & 0.69 \\ [0.5ex]
+            & alpha = 0.0001 & & & & \\ [0.5ex]
+            & hidden layer = (200, 10) & & & & \\ [0.5ex]
+            & & & & & \\ [0.5ex]
+            & \textbf{MLR:} & 0.36 ± 0.18 & -11.73 ± 1.23 & -9.12 ± 1.12 & 0.67 \\ [0.5ex]
+            & & & & & \\ [0.5ex]
+            & \textbf{KNN:} & 0.21 ± 0.20 & -13.16 ± 1.93 & -9.96 ± 1.76 & 0.66 \\ [0.5ex]
+            & n\_neighbors = 7 & & & & \\ [0.5ex]
+            & weights = uniform & & & & \\ [0.5ex]
+            & & & & & \\ [0.5ex]
+            & \textbf{RF:} & 0.33 ± 0.19 & -11.99 ± 1.23 & -9.24 ± 1.12 & 0.62 \\ [0.5ex]
+            & max\_depth = 10 & & & & \\ [0.5ex]
+            & min\_samples\_leaf = 4 & & & & \\ [0.5ex]
+            & min\_samples\_split = 10 & & & & \\ [0.5ex]
+            & n\_estimators = 100 & & & & \\ [0.5ex]
+        \hline
+    \end{tabularx}
+    \label{tab:data-o3-1-b4-calib-results}
+\end{table}
+
+\begin{table}[h]
+    \caption{Resultados da calibração do sensor 2 OX-B431}
+    \centering
+    \begin{tabularx}{0.95\textwidth}[h!]{
+        >{\raggedright\hsize=.2\hsize\arraybackslash}X
+        >{\raggedright\hsize=.7\hsize\arraybackslash}X 
+        >{\raggedright\hsize=.4\hsize\arraybackslash}X
+        >{\raggedright\hsize=.4\hsize\arraybackslash}X 
+        >{\raggedright\hsize=.3\hsize\arraybackslash}X 
+        >{\raggedright\hsize=.3\hsize\arraybackslash}X }
+       \hline
+       Var. & Modelo & R2 & RMSE & MAE & $\rho$\\ [0.5ex]
+        \hline
+        \acrshort{o3} (2) & \textbf{MLP}: & 0.16 ± 0.13 & -13.72 ± 2.11 & -10.87 ± 1.66 & 0.54 \\ [0.5ex]
+           & alpha = 1 &  & & & \\ [0.5ex]
+           & hidden layers = (50, 50) & & & & \\ [0.5ex]
+           & & & & & \\ [0.5ex]
+           & \textbf{MLR} & 0.09 ± 0.14 & -14.34 ± 2.50 & -11.35 ± 2.13 & 0.56 \\ [0.5ex]
+           & & & & & \\ [0.5ex]
+           & \textbf{KNN:} & 0.03 ± 0.35 & -14.27 +/- 1.49 & -11.27 ± 1.39 & 0.54 \\ [0.5ex]
+           & n\_neighbors = 20 & & & & \\ [0.5ex]
+           & weights = uniform & & & & \\ [0.5ex]
+           & & & & & \\ [0.5ex]
+           & \textbf{RF:} & -0.03 ± 0.37 & -14.76 ± 1.47 & -11.55 ± 1.34 & 0.52 \\ [0.5ex]
+           & max\_depth = 10 & & & & \\ [0.5ex]
+           & min\_samples\_leaf = 4 & & & & \\ [0.5ex]
+           & min\_samples\_split = 10 & & & & \\ [0.5ex]
+           & n\_estimators = 50 & & & & \\ [0.5ex]
+        \hline
+        \acrshort{o3} (2), T & \textbf{MLP:} & 0.23 ± 0.17 & -13.16 ± 2.94 & -10.14 ± 2.62 & 0.67 \\ [0.5ex]
+            & alpha = 10 & & & & \\ [0.5ex]
+            & hidden layer = (10, 10) & & & & \\ [0.5ex]
+            & & & & & \\ [0.5ex]
+            & \textbf{MLR:} & 0.38 ± 0.22 & -11.44 ± 0.72 & -8.86 ± 0.86 & 0.69 \\ [0.5ex]
+            & & & & & \\ [0.5ex]
+            & \textbf{KNN:} & 0.19 ± 0.34 & -12.91 ± 0.81 & -9.89 ± 0.92 & 0.70 \\ [0.5ex]
+            & n\_neighbors = 2 & & & & \\ [0.5ex]
+            & weights = uniform & & & & \\ [0.5ex]
+            & & & & \\ [0.5ex]
+            & \textbf{RF:} & 0.28 ± 0.22 & -12.44 ± 1.11 & -9.54 ± 1.08 & 0.67 \\ [0.5ex]
+            & max\_depth = 10 & & & & \\ [0.5ex]
+            & min\_samples\_leaf = 4 & & & & \\ [0.5ex]
+            & min\_samples\_split = 10 & & & & \\ [0.5ex]
+            & n\_estimators = 150 & & & & \\ [0.5ex]
+        \hline
+    \end{tabularx}
+    \label{tab:data-o3-2-b4-calib-results}
+\end{table}
+
+\begin{table}[h]
+    \caption{Resultados da calibração das leituras de \acrshort{o3} utilizando os sensores 1 e 2 OX-B431}
+    \centering
+    \begin{tabularx}{0.95\textwidth}[h!]{
+        >{\raggedright\hsize=.2\hsize\arraybackslash}X
+        >{\raggedright\hsize=.7\hsize\arraybackslash}X 
+        >{\raggedright\hsize=.4\hsize\arraybackslash}X
+        >{\raggedright\hsize=.4\hsize\arraybackslash}X 
+        >{\raggedright\hsize=.3\hsize\arraybackslash}X 
+        >{\raggedright\hsize=.3\hsize\arraybackslash}X }
+       \hline
+       Var. & Modelo & R2 & RMSE & MAE & $\rho$\\ [0.5ex]
+        \hline
+        \acrshort{o3} (1), \acrshort{o3} (2) & \textbf{MLP}: & 0.24 ± 0.15 & -13.01 ± 1.82 & -10.02 ± 1.55 & 0.60 \\ [0.5ex]
+           & alpha = 1 &  & & & \\ [0.5ex]
+           & hidden layers = (200, 4) & & & & \\ [0.5ex]
+           & & & & & \\ [0.5ex]
+           & \textbf{MLR} & 0.14 ± 0.16 & -13.85 ± 2.26 & -10.81 ± 2.02 & 0.58 \\ [0.5ex]
+           & & & & & \\ [0.5ex]
+           & \textbf{KNN:} & 0.12 ± 0.24 & -13.90 ± 1.86 & -10.86 ± 1.72 & 0.58 \\ [0.5ex]
+           & n\_neighbors = 20 & & & & \\ [0.5ex]
+           & weights = uniform & & & & \\ [0.5ex]
+           & & & & & \\ [0.5ex]
+           & \textbf{RF:} & 0.13 ± 0.24 & -13.70 ± 1.54 & -10.64 ± 1.43 & 0.57 \\ [0.5ex]
+           & max\_depth = 10 & & & & \\ [0.5ex]
+           & min\_samples\_leaf = 2 & & & & \\ [0.5ex]
+           & min\_samples\_split = 10 & & & & \\ [0.5ex]
+           & n\_estimators = 100 & & & & \\ [0.5ex]
+        \hline
+        \acrshort{o3} (1), \acrshort{o3} (2), T & \textbf{MLP:} & 0.29 ± 0.21 & -12.37 ± 1.59 & -8.89 ± 0.82 & 0.71 \\ [0.5ex]
+            & alpha = 0.001 & & & & \\ [0.5ex]
+            & hidden layer = (200,) & & & & \\ [0.5ex]
+            & & & & & \\ [0.5ex]
+            & \textbf{MLR:} & 0.39 ± 0.21 & -11.37 ± 0.82 & -8.82 ± 0.88 & 0.69 \\ [0.5ex]
+            & & & & & \\ [0.5ex]
+            & \textbf{KNN:} & 0.19 ± 0.34 & -12.97 ± 1.18 & -9.92 ± 1.37 & 0.72 \\ [0.5ex]
+            & n\_neighbors = 13 & & & & \\ [0.5ex]
+            & weights = distance & & & & \\ [0.5ex]
+            & & & & & \\ [0.5ex]
+            & \textbf{RF:} & 0.30 ± 0.19 & -12.34 ± 1.61 & -9.57 ± 1.58 & 0.68 \\ [0.5ex]
+            & max\_depth = 10 & & & & \\ [0.5ex]
+            & min\_samples\_leaf = 1 & & & & \\ [0.5ex]
+            & min\_samples\_split = 10 & & & & \\ [0.5ex]
+            & n\_estimators = 150 & & & & \\ [0.5ex]
+        \hline
+    \end{tabularx}
+    \label{tab:data-o3-1-2-b4-calib-results}
+\end{table}
