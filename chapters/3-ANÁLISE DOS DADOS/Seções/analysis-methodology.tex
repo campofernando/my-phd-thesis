@@ -32,25 +32,6 @@ Utilizando as etiquetas mencionadas anteriormente, foi aplicada uma metodologia 
     \item Remoção de médias com amostras insuficientes: Por fim, foram excluídas as médias de cada hora que não atingiram mais de 75\% de amostras válidas, equivalente a pelo menos 3 amostras por hora. Essa medida visa garantir a robustez estatística das médias horárias, excluindo intervalos com dados insuficientes para uma análise significativa.
 \end{enumerate}
 
-\begin{figure}[h]
-    \centering
-    \caption{Série temporal do sensor CO-B4}
-    \begin{subfigure}{0.495\textwidth}
-        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/raw-co-b4.png}
-        \caption{Série temporal do sensor depois de remover valores fora de intervalo}
-        \label{fig:data-co-raw}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.495\textwidth}
-        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/rebase-co-b4.png}
-        \caption{Pontos de alteração da linha base detectados pelo algoritmo \acrshort{pelt}}
-        \label{fig:data-rebase-co}
-    \end{subfigure}
-    \hfill
-    \label{fig:data-co-raw-and-pelt}
-    \fonte{Desenvolvido pelo autor (2023)}
-\end{figure}
-
 Uma vez pré-processados os dados dos sensores procedeu-se a realizar a calibração das leituras de \acrshort{co}, \acrshort{o3} e \acrshort{mp}, utilizando como referência os dados provenientes de uma estação de monitoramento de qualidade do ar. Foram explorados diferentes modelos multivariados para a calibração, i.e.: o Perceptron Multicamadas (MLP), Regressão Linear Multivariada (MLR), K Vizinhos mais Próximos (KNN) e as Florestas Aleatórias (RF). A escolha desses modelos baseou-se na capacidade de lidar com múltiplas variáveis simultaneamente, proporcionando uma adaptação mais eficaz às complexidades das relações entre os dados dos sensores e as condições ambientais de temperatura.
 
 A calibração foi realizada em duas fases. Inicialmente, considerou-se apenas os dados do sensor em questão e a temperatura como variáveis de entrada. Para encontrar o modelo que melhor explicasse os dados foi realizada uma busca em \textit{grid} que combina diferentes parâmetros e variáveis de entrada e avalia cada modelo utilizando validações cruzadas com k = 3 Posteriormente, expandiu-se o escopo para incluir os dados de outros sensores disponíveis. Essa abordagem permitiu avaliar o impacto da inclusão de mais variáveis na precisão da calibração. A avaliação comparativa dos modelos de calibração foi realizada mediante métricas essenciais, incluindo o coeficiente de determinação (r2), o erro médio quadrático (RMSE) e o erro absoluto médio (MAE). A utilização de validações cruzadas proporciona uma análise mais robusta e imparcial do desempenho dos modelos.

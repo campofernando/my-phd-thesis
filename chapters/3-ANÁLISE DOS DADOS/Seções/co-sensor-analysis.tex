@@ -2,6 +2,24 @@
 \section{Análise dos dados de Monóxido de Carbono}
 % ----------------------------------------------------------
 
+\begin{figure}[h]
+    \centering
+    \caption{Série temporal do sensor CO-B4}
+    \begin{subfigure}{0.495\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/raw-co-b4.png}
+        \caption{Série temporal do sensor depois de remover valores fora de intervalo}
+        \label{fig:data-co-raw}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.495\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/rebase-co-b4.png}
+        \caption{Pontos de alteração da linha base detectados pelo algoritmo \acrshort{pelt}}
+        \label{fig:data-rebase-co}
+    \end{subfigure}
+    \hfill
+    \label{fig:data-co-raw-and-pelt}
+\end{figure}
+
 A metodologia de pre-processamento dos dados descrita acima foi aplicada as leituras obtidas pelo sensor de \acrshort{co}. A Figura \ref{fig:data-co-raw} mostra a série temporal do sensor depois de removidos os valores fora de intervalo. Observa-se que a partir do mês de fevereiro ocorreram seguidas alterações de linha base, detectadas pelo algoritmo \acrshort{pelt}, conforme se ilustra na Figura \ref{fig:data-rebase-co}. No histograma das leituras do sensor em questão (Figura \ref{fig:data-co-raw-hist}) observa-se que as mudanças de linha base alteraram também a distribuição dos dados nesse período. Dado que as mudanças de linha base se mantiveram de forma continuada a partir desse mês, para o restante das análises apenas foram consideradas as leituras anteriores à primeira alteração da linha base do sensor. A Figura \ref{fig:data-co-preproc-hist} mostra o histograma dos dados das leituras prévias às alterações de linha base.
 
 \begin{figure}[h]
