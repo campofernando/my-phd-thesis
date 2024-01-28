@@ -1,0 +1,34 @@
+% ----------------------------------------------------------
+\section{Calibração por co-localização}
+% ----------------------------------------------------------
+
+A calibração por co-localização consiste em instalar os sensores de baixo custo junto a uma estação de monitoramento de referência para fins de calibração. Para cobrir as diversas condições atmosféricas, a sazonalidade, e a gama de valores de concentração dos gases de interesse e dos gases interferentes, a literatura recomenda uma duração de três a seis meses para a execução das rotinas de calibração e dos testes de validação \cite{Spinelle2013ProtocolPollution}.
+
+Na aplicação apresentada neste trabalho, o instrumento de baixo custo desenvolvido foi instalado por cinco meses junto a uma estação de referência localizada em Vila Moema, no município de Tubarão - SC. A estação é uma das três que fazem parte atualmente da rede de monitoramento do estado de Santa Catarina, operadas pela Diamante Geração de Energia Ltda. \cite{IMASC24}. O município de Tubarão é vizinho Capivari de Baixo, onde se encontra o complexo termelétrico Jorge Lacerda, operado também pela Diamante Geração de Energia Ltda. A Figura \ref{fig:stations-map} ilustra a localização geográfica das estações de monitoramento na região de Capivari de Baixo, e Tubarão. Na Tabela relacionam-se os equipamentos presentes na estação Vila Moema onde foi instalado o instrumento de baixo custo desenvolvido.
+
+\begin{figure}[h]
+    \centering
+    \caption{Mapa das estações de monitoramento em Tubarão e Capivari de Baixo}
+    \includegraphics[width=0.9\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/mapa-de-estações.png}
+    \label{fig:stations-map}
+    \fonte{\cite{IMASC24}}
+\end{figure}
+
+\begin{table}[!ht]
+    \centering
+    \caption{Relação de equipamentos presentes na estação de monitoramento de referência no município de Tubarão - SC}
+    \begin{tabular}{l|l|l|l}
+        \textbf{Equipamento} & \textbf{Poluentes} & \textbf{Princípio de operação} & \textbf{Fabricante} \\
+        \hline
+        Monitor APNA-370 & NO, NO2 e NOx & Quimioluminescência & Horiba \\
+        Monitor APOA 370 & O3 & Adsorção ultravioleta & Horiba \\
+        Monitor APSA 370 & SO2 & Fluorescência ultravioleta & Horiba \\
+        Monitor APMA 370 & CO & Modulação cruzada & Horiba \\
+         & & infravermelha sem dispersão & \\
+        Monitor BAM 1020 & MP2.5, MP10 & Atenuação de raios beta & Met One \\
+        \hline
+    \end{tabular}
+    \label{tab:reference-equipments}
+\end{table}
+
+Os dados registrados pelos equipamentos de referência são compilados em relatórios diários onde as leituras de concentração são registradas como médias horárias. Para a calibração do monitor de baixo custo, o Instituto do Meio Ambiente de Santa Catarina disponibilizou os relatórios de concentrações de poluentes no período e questão. O instrumento de baixo custo desenvolvido registra as leituras dos sensores com um período de amostragem de 15 minutos. Os dados adquiridos foram filtrados, pré-processados e re-amostrados em médias horárias para efetuar a calibração com a estação de referência.

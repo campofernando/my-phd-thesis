@@ -2,7 +2,20 @@
 \chapter{Análise dos dados e calibração dos sensores de baixo custo}\label{cap:field-monit-results}
 % ----------------------------------------------------------
 
-\section{Calibração por co-localização}
+Utilizando uma das placas CLEAN Arduino Mega descritas nos Capítulos anteriores, foi desenvolvido um monitor de baixo custo para monitoramento dos poluentes \acrshort{co}, \acrshort{no2}, \acrshort{so2}, \acrshort{o3} e \acrshort{mp10}. Para medição desses poluentes o instrumento conta com a seguinte relação de sensores:
+
+\begin{itemize}
+    \item Um sensor eletroquímico do fabricante Alphasense modelo CO-B4 para medição da concentração de \acrshort{co}
+    \item Dois sensores eletroquímicos do fabricante Alphasense modelo SO2-B4 para medição da concentração de \acrshort{so2}
+    \item Um sensor eletroquímico do fabricante Alphasense modelo NO2-B43F para medição da concentração de \acrshort{no2}
+    \item Dois sensores eletroquímicos do fabricante Alphasense modelo OX-B431 para medição da concentração de \acrshort{o3}
+    \item Um sensor ótico do fabricante Alphasense modelo OPC-N3 para medição da concentração de \acrshort{mp10} e \acrshort{mp25}
+    \item Um sensor de temperatura para medição da temperatura dentro da câmara de medição dos gases.
+\end{itemize}
+
+O instrumento foi instalado junto a uma estação de referência no município de Tubarão por um período de 5 meses, desde 21/11/2022 até 21/04/2023. O objetivo da instalação foi para testar o dispositivo em campo, numa aplicação real e para adquirir leituras de concentração dos sensores para posteriormente de calibrar o instrumento com os dados da estação de referência.
+
+\input{chapters/3-ANÁLISE DOS DADOS/Seções/co-location-calibration.tex}
 
 \input{chapters/3-ANÁLISE DOS DADOS/Seções/analysis-methodology.tex}
 
