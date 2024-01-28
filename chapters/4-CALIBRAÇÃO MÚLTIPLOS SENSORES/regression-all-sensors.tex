@@ -1,0 +1,16 @@
+
+% ----------------------------------------------------------
+\chapter{Metodologia de calibração utilizando as leituras de todos os sensores}\label{cap:calib-methodology}
+% ----------------------------------------------------------
+
+No Capítulo \ref{cap:field-monit-results} foram apresentados os resultados de aplicar modelos de regressão nas leituras dos sensores de gases para inferir a concentração real de cada poluente. Neles foram consideradas como variáveis de entrada de cada modelo a temperatura e as leituras do(s) sensor(es) especificados para cada composto gasoso. Assim, foram utilizados um sensor CO-B4 e a temperatura para medir \acrshort{co}; dois sensores OX-B431 e a temperatura para medir \acrshort{o3}; e um sensor NO2-B43F para medir \acrshort{no2}. No presente capítulo, serão aplicada uma metodologia de calibração similar ã do capítulo \ref{cap:field-monit-results}, mas dessa vez serão consideradas as leituras de todos os sensores para inferir a concentração de cada gás. Serão aplicadas buscas em grid para avaliar as combinações de variáveis de entrada e de parâmetros que produzam os melhores resultados de R2 e erro. Como a complexidade dos modelos aumenta com o incremento das variáveis independentes, também serão considerados as métricas de \acrshort{aic} e \acrshort{bic} na avaliação dos modelos de regressão.
+
+\input{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Seções/co-regression-all-sensors.tex}
+
+\input{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Seções/o3-regression-all-sensors.tex}
+
+\input{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Seções/no2-regression-all-sensors.tex}
+
+\input{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Seções/mp-regression-all-sensors.tex}
+
+\section{Discussão}
