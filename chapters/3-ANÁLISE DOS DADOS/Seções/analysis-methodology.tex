@@ -32,8 +32,11 @@ Utilizando as etiquetas mencionadas anteriormente, foi aplicada uma metodologia 
     \item Remoção de médias com amostras insuficientes: Por fim, foram excluídas as médias de cada hora que não atingiram mais de 75\% de amostras válidas, equivalente a pelo menos 3 amostras por hora. Essa medida visa garantir a robustez estatística das médias horárias, excluindo intervalos com dados insuficientes para uma análise significativa.
 \end{enumerate}
 
-Uma vez pré-processados os dados dos sensores procedeu-se a realizar a calibração das leituras de \acrshort{co}, \acrshort{o3} e \acrshort{mp}, utilizando como referência os dados provenientes de uma estação de monitoramento de qualidade do ar. Foram explorados diferentes modelos multivariados para a calibração, i.e.: o Perceptron Multicamadas (MLP), Regressão Linear Multivariada (MLR), K Vizinhos mais Próximos (KNN) e as Florestas Aleatórias (RF). A escolha desses modelos baseou-se na capacidade de lidar com múltiplas variáveis simultaneamente, proporcionando uma adaptação mais eficaz às complexidades das relações entre os dados dos sensores e as condições ambientais de temperatura.
+\begin{figure}[h!]
+    \centering
+    \caption{Fluxograma das etapas de pré-processamento e as etiquetas de saída em cada uma delas}
+    \includegraphics[width=0.75\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/Fluxograma pré-processamento.png}
+    \label{fig:preprocessing-flow}
+\end{figure}
 
-A calibração foi realizada em duas fases. Inicialmente, considerou-se apenas os dados do sensor em questão e a temperatura como variáveis de entrada. Para encontrar o modelo que melhor explicasse os dados foi realizada uma busca em \textit{grid} que combina diferentes parâmetros e variáveis de entrada e avalia cada modelo utilizando validações cruzadas com k = 3 Posteriormente, expandiu-se o escopo para incluir os dados de outros sensores disponíveis. Essa abordagem permitiu avaliar o impacto da inclusão de mais variáveis na precisão da calibração. A avaliação comparativa dos modelos de calibração foi realizada mediante métricas essenciais, incluindo o coeficiente de determinação (r2), o erro médio quadrático (RMSE) e o erro absoluto médio (MAE). A utilização de validações cruzadas proporciona uma análise mais robusta e imparcial do desempenho dos modelos.
-
-A expectativa é que a implementação desses modelos de calibração aprimore significativamente a qualidade dos dados, fornecendo uma base sólida para análises subsequentes relacionadas à qualidade do ar. Os resultados desta pesquisa têm o potencial não apenas de beneficiar a precisão dos dados locais, mas também de contribuir para o desenvolvimento de metodologias aprimoradas de calibração em ambientes de monitoramento ambiental.
+A Figura \ref{fig:preprocessing-flow} sumariza graficamente o fluxo de etapas do pré-processamento aplicado aos dados dos sensores. Posterior a isto, procedeu-se a realizar a calibração das leituras de \acrshort{co}, \acrshort{o3} e \acrshort{mp}, utilizando como referência os dados provenientes de uma estação de monitoramento de qualidade do ar. Nas próximas seções são descritos os resultados dessas calibrações.

@@ -21,9 +21,9 @@ Na aplicação apresentada neste trabalho, o instrumento de baixo custo desenvol
         \textbf{Equipamento} & \textbf{Poluentes} & \textbf{Princípio de operação} & \textbf{Fabricante} \\
         \hline
         Monitor APNA-370 & NO, NO2 e NOx & Quimioluminescência & Horiba \\
-        Monitor APOA 370 & O3 & Adsorção ultravioleta & Horiba \\
-        Monitor APSA 370 & SO2 & Fluorescência ultravioleta & Horiba \\
-        Monitor APMA 370 & CO & Modulação cruzada & Horiba \\
+        Monitor APOA-370 & O3 & Adsorção ultravioleta & Horiba \\
+        Monitor APSA-370 & SO2 & Fluorescência ultravioleta & Horiba \\
+        Monitor APMA-370 & CO & Modulação cruzada & Horiba \\
          & & infravermelha sem dispersão & \\
         Monitor BAM 1020 & MP2.5, MP10 & Atenuação de raios beta & Met One \\
         \hline
@@ -32,3 +32,22 @@ Na aplicação apresentada neste trabalho, o instrumento de baixo custo desenvol
 \end{table}
 
 Os dados registrados pelos equipamentos de referência são compilados em relatórios diários onde as leituras de concentração são registradas como médias horárias. Para a calibração do monitor de baixo custo, o Instituto do Meio Ambiente de Santa Catarina disponibilizou os relatórios de concentrações de poluentes no período e questão. O instrumento de baixo custo desenvolvido registra as leituras dos sensores com um período de amostragem de 15 minutos. Os dados adquiridos foram filtrados, pré-processados e re-amostrados em médias horárias para efetuar a calibração com a estação de referência.
+
+\begin{figure}[h]
+    \centering
+    \caption{Fluxos de calibração dos sensores de baixo custo}
+    \begin{subfigure}{0.9\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/Processo de calibração unisensor.png}
+        \caption{Fluxo de calibração dos sensores individualmente}
+        \label{fig:calibration-unisensor}
+    \end{subfigure}
+    \begin{subfigure}{0.9\textwidth}
+        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/Processo de calibração multisensor.png}
+        \caption{Fluxo de calibração das leituras do equipamento de baixo custo como um todo}
+        \label{fig:calibration-multisensor}
+    \end{subfigure}
+\end{figure}
+
+As Figuras \ref{fig:calibration-unisensor} e \ref{fig:calibration-multisensor} ilustram o processo de preparação, pré-processamento e calibração dos dados dos sensores. As leituras dos sensores de baixo custo e dos instrumentos de referência foram disponibilizadas em arquivos \textit{csv}, que foram utilizados como entradas na etapa de pré-processamento. Para a calibração das leituras do equipamento de baixo custo foram desenvolvidas duas metodologias de calibração. A primeira delas (Figura \ref{fig:calibration-unisensor}) considerou como variáveis de entrada apenas os dados dos sensores específicos para cada poluente e a temperatura. Já a segunda metodologia (Figura \ref{fig:calibration-multisensor}) considerou as leituras de todos os sensores no equipamento para inferir o valor da concentração real de cada poluente.
+
+Para a calibração dos sensores foram explorados diferentes modelos de regressão multivariados, i.e.: o Perceptron Multicamadas (MLP), Regressão Linear Multivariada (MLR), K Vizinhos mais Próximos (KNN) e as Florestas Aleatórias (RF). A escolha desses modelos baseou-se na capacidade de lidar com múltiplas variáveis simultaneamente, proporcionando uma adaptação mais eficaz às complexidades das relações entre os dados dos sensores e as condições ambientais de temperatura. Para encontrar o modelo que melhor explicasse os dados foram realizadas buscas em \textit{grid} que combinaram diferentes parâmetros e variáveis de entrada. Os modelos são avaliados utilizando validações cruzadas com k = 3 considerando métricas essenciais, i.e.: o coeficiente de determinação (r2), o erro médio quadrático (RMSE) e o erro absoluto médio (MAE). Também foram avaliados os modelos segundo suas complexidades utilizando os coeficientes \acrshort{aic} e \acrshort{bic}.
