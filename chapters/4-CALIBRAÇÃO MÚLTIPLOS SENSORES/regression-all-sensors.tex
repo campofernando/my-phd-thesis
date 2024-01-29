@@ -14,3 +14,37 @@ No Capítulo \ref{cap:field-monit-results} foram apresentados os resultados de a
 \input{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Seções/mp-regression-all-sensors.tex}
 
 \section{Discussão}
+
+Na Tabela \ref{tab:summary-calib-results-all-sensors} resumem-se os resultados dos melhores modelos para cada poluente. Observa-se que de modo geral os parâmetros utilizados para medir o desempenho dos modelos melhorou com relação aos mostrados no Capítulo \ref{cap:field-monit-results}. Os valores de R2, embora ainda pequenos, passaram a ser positivos com exceção do \acrshort{co}, que no entanto mostrou valores de R2 máximo de aproximadamente 0.1. Os valores de erro quadrático e erro absoluto se mantiveram na mesma faixa de valores. Os modelos escolhidos apresentaram menores valores de coeficientes de correlação de Spearman devido a que o parâmetro escolhido para a otimização dos modelos foi o coeficiente de determinação R2.
+
+\begin{table}[h!]
+    \caption{Resultados dos melhores modelos por poluente considerando as leituras de todos os sensores nos modelos}
+    \centering
+    \begin{tabularx}{0.95\textwidth}[h!]{
+         >{\raggedright\hsize=.4\hsize\arraybackslash}X
+         >{\raggedright\hsize=.2\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.4\hsize\arraybackslash}X
+         >{\raggedright\hsize=.4\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.4\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.3\hsize\arraybackslash}X }
+        \hline
+        Poluente & Modelo & R2 & RMSE & MAE & $\rho$\\ [0.5ex]
+        \hline
+        \acrshort{co} & MLP & -0.25 ± 0.28 & -0.06 ± 0.01 & -0.05 & 0.44 \\ [0.5ex]
+        \acrshort{o3} & MLR & 0.42 ± 0.11 & -11.00 ± 1.92 & -8.67 ± 1.55 & 0.72 \\ [0.5ex]
+        \acrshort{no2} & MLR & 0.10 ± 0.04 & -8.43 ± 2.41 & -6.51 ± 1.92 & 0.27 \\ [0.5ex]
+        \acrshort{mp10} & MLR & 0.07 ± 0.12 & -9.90 ± 1.69 & -7.41 ± 1.49 & 0.34 \\ [0.5ex]
+        \hline
+    \end{tabularx}
+    \label{tab:summary-calib-results-all-sensors}
+\end{table}
+
+Ao comparar os resultados obtidos neste trabalho com os compilados por \cite{Kang2022PerformanceReview} observa-se que os resultados obtidos pelo instrumento desenvolvido são inferiores à maioria dos trabalhos reportados com sensores de baixo custo. Por exemplo, entre os resultados reportados para a medição de \acrshort{mp10}, nenhum obteve valores de R2 inferiores a 0.2, sendo que a mediana dos valores reportados em medições em área externa é de 0.71, e dentre esses, a mediana dos que utilizam sensores Alphasense é de 0.68.
+
+Se considerados os resultados para \acrshort{co}, observa-se que valores de R2 inferiores a 0.1 representam menos de 10 \% do total de trabalhos realizados em área externa, nenhum deles utilizando sensores Alphasense. A mediana de R2 obtida em área externa é de 0.68. As medições de \acrshort{no2} encontram-se num patamar similar; menos de 10 \% dos trabalhos em área externa em total, e menos de 10 \% dos realizados em área externa com sensores Alphasense obtiveram valores de R2 de 0.1. As medianas de R2 para cada caso são de 0.57 e 0.68 respectivamente.
+
+Como era de esperar os melhores resultados obtiveram-se nas medições de \acrshort{o3}, onde o valor de 0.42 de R2 obtido localiza o presente trabalho entre 20 e 25 \% do total de trabalhos em área externa e entre entre 20 e 25 \% do total de trabalhos em área externa com sensores Alphasense. As medianas para esses dois grupos foram de 0.78 e 0.42 respectivamente.
+
+Apesar de que os resultados em comparação com outros trabalhos foram inferiores, ao considerar a evolução das leituras desde os dados brutos até os modelos multivariados considerando todos os sensores percebe-se uma melhoria considerável na qualidade das leituras do instrumento desenvolvido. Assim, a metodologia de calibração proposta apresenta-se como mais uma alternativa para calibração de outros monitores de baixo custo. Essa metodologia, contudo, tem a ressalva de aumentar a complexidade dos modelos de calibração.
+
+Cabe destacar que a temperatura ganhou menor destaque nesses modelos de regressão, já que apenas os modelos de \acrshort{o3} incluíram a temperatura como variável independente. Por outro lado, todos os poluentes a exceção do \acrshort{no2} consideraram as leituras de pelo menos um dos sensores OX-B431. Dada a forte relação desses sensores com a temperatura, é possível que a sua inclusão tenha substituído a relação com a temperatura. A ausência de temperatura no modelo de \acrshort{no2} faz sentido dada a relação mostrada entre as variáveis.
