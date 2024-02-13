@@ -2,7 +2,27 @@
 \section{Pré-processamento dos dados}
 % ----------------------------------------------------------
 
-Prévio ao processo de calibração foi realizado um processo de Pré-processamento dos dados para reduzir ruído e quantidade de \textit{outliers}. Para isso os dados foram etiquetados seguindo alguns pontos dos procedimentos descritos por \textit{AQMesh}, Ottosen e Kumar \cite{Ottosen2019OutlierMeasurements} e o Guia para monitoramento da qualidade do ar o IMA \cite{INSTITUTODEENERGIAEMEIOAMBIENTE2019QualidadeAr}. O pré-processamento foi realizado utilizando a linguagem de programação Python e \textit{Jupyter Notebooks}. A continuação detalham-se as etiquetas utilizadas, entre parênteses é colocado o nome da etiqueta utilizada dentro do código. Os Anexos XXX a XXX contêm o código desenvolvido em \textit{Jupyter Notebooks} para o processo de filtragem dos dados dos sensores.
+A primeira etapa no tratamento das leituras dos sensores de gases foi o pré-processamento dos dados para reduzir ruído, identificar falhas e valores atípicos. Para isso os dados foram etiquetados seguindo alguns pontos dos procedimentos descritos por \textit{AQMesh}, Ottosen e Kumar \cite{Ottosen2019OutlierMeasurements} e o Guia para monitoramento da qualidade do ar o IMA \cite{INSTITUTODEENERGIAEMEIOAMBIENTE2019QualidadeAr}. O pré-processamento foi realizado utilizando a linguagem de programação Python e \textit{Jupyter Notebooks}. A continuação descrevem-se cada uma das fases de pré-processamento aplicadas aos dados dos sensores, sumarizadas graficamente na Figura \ref{fig:preprocessing-flow}.
+
+\begin{figure}[h!]
+    \centering
+    \caption{Fluxograma das etapas de pré-processamento e as etiquetas de saída em cada uma delas}
+    \includegraphics[width=0.75\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/Fluxograma pré-processamento.png}
+    \label{fig:preprocessing-flow}
+\end{figure}
+
+\begin{enumerate}
+    \item Suavização das curvas de dados com uma janela temporal de 1 hora: Primeiramente foi realizada a suavização das séries originais buscando reduzir o impacto de flutuações de curto prazo e realçar padrões de longo prazo, dado que os dados de referência encontram-se em períodos horários.
+    \item Remoção do Período de Estabilização: Os primeiros 7 dias da série temporal foram desconsiderados. Essa decisão fundamenta-se na consideração de que nesse período inicial após a instalação o sensor encontra-se num estado de estabilização propenso a flutuações e ajustes. A remoção desses dados iniciais visa mitigar possíveis distorções na análise decorrentes desse período transitório.
+    \item Remoção de valores fora de intervalo de medição: Em seguida, foram removidos os valores abaixo da resolução do sensor e acima do valor máximo do sensor. Tal procedimento tem por objetivo eliminar possíveis ruídos, registros muito extremos e falhas no sistema de medição que poderiam comprometer a integridade da série temporal.
+    \item Remoção de valores com alterações na linha base: Para a detecção dos pontos em que a linha base das leituras sofreu alterações aplicou-se algoritmo \acrshort{pelt} (veja o Apêndice \ref{apendix: pelt-algorithm}). Este método foi aplicado por Ottosen e Kumar \cite{Ottosen2019OutlierMeasurements} para detectar mudanças abruptas na média e/ou na variância das séries temporais de sensores de gases. As leituras que apresentaram alterações na linha base foram desconsiderados já que nesses intervalos a distribuição dos dados mudou, dificultando a análise.
+    \item Remoção de outliers por quartis: Consistiu na remoção dos quartis 1\% e 99\% dos dados agrupados por hora. Esse processo foi conduzido após a divisão dos dados em 24 grupos, representando cada hora do dia. Os quartis foram calculados individualmente dentro desses grupos, resultando em uma eliminação robusta de extremos estatísticos que poderiam introduzir viés na análise.
+    \item Identificação e remoção de picos e outliers na derivada dos dados: Este passo envolveu a identificação e eliminação de picos na primeira derivada dos dados que excediam o valor máximo encontrado na derivada da série de dados de referência. Essa estratégia visa mitigar efeitos de variações abruptas, frequentemente associadas a falhas no sensor ou interferências externas.
+    \item Re-amostragem para período de 1 hora: Este passo consistiu na re-amostragem dos dados para um período de 1 hora. Essa prática foi adotada para comparar e calibrar com os dados de referência que estão em períodos de uma hora.
+    \item Remoção de médias com amostras insuficientes: Por fim, foram excluídas as médias de cada hora que não atingiram mais de 75\% de amostras válidas, equivalente a pelo menos 3 amostras por hora. Essa medida visa garantir a robustez estatística das médias horárias, excluindo intervalos com dados insuficientes para uma análise significativa.
+\end{enumerate}
+
+Em cada estágio do pré-processamento, os dados eram etiquetados para diferenciar as leituras válidas das que apresentaram algum tipo de anomalia que inviabilizasse seu uso. A seguir são listadas as etiquetas utilizadas para identificar cada amostra; entre parênteses colocasse o nome da etiqueta utilizada dentro do código. Os Anexos XXX a XXX contêm o código desenvolvido em \textit{Jupyter Notebooks} para executar esta etapa da análise dos dados.
 
 \begin{itemize}
     \item Dados faltantes (\textit{MISSING}): Esta etiqueta representa amostras faltantes na amostragem dos dados.
@@ -16,27 +36,3 @@ Prévio ao processo de calibração foi realizado um processo de Pré-processame
     \item Transições abruptas nos dados (\textit{BADSPIKE}): Transições muito abruptas na série de dados também foram identificados. Para isso foram calculadas as derivadas das séries temporais e os valores comparados com o valor máximo das derivadas das séries temporais de referência. Valores de derivadas na série de dados acima desse valor máximo foram identificados como transições muito abruptas e etiquetados para remoção.
     \item Dados inválidos de temperatura \textit{INVALID\_ENV}: Aos dados de temperatura também foram aplicadas as etiquetas descritas anteriormente, com exceção de \textit{STABILIZ} e \textit{BADSPIKE}. Os valores de concentração de gás adquiridos no mesmo instante de algum dado inválido de temperatura foram marcados como \textit{INVALID\_ENV} para remoção.    
 \end{itemize}
-
-\subsection{Metodologia de preprocessamento das séries temporais}
-
-Utilizando as etiquetas mencionadas anteriormente, foi aplicada uma metodologia de pré-processamento para remoção de ruído e outliers, conforme descrito a continuação.
-
-\begin{enumerate}
-    \item Suavização das curvas de dados com uma janela temporal de 1 hora: Primeiramente foi realizada a suavização das séries originais buscando reduzir o impacto de flutuações de curto prazo e realçar padrões de longo prazo, dado que os dados de referência encontram-se em períodos horários.
-    \item Remoção do Período de Estabilização: Os primeiros 7 dias da série temporal foram desconsiderados. Essa decisão fundamenta-se na consideração de que nesse período inicial após a instalação o sensor encontra-se num estado de estabilização propenso a flutuações e ajustes. A remoção desses dados iniciais visa mitigar possíveis distorções na análise decorrentes desse período transitório.
-    \item Remoção de valores fora de intervalo de medição: Em seguida, foram removidos os valores abaixo da resolução do sensor e acima do valor máximo do sensor. Tal procedimento tem por objetivo eliminar possíveis ruídos, registros muito extremos e falhas no sistema de medição que poderiam comprometer a integridade da série temporal.
-    \item Remoção de valores com alterações na linha base: Para a detecção dos pontos em que a linha base das leituras sofreu alterações aplicou-se algoritmo \acrshort{pelt} \cite{Killick2012OptimalCost}. Este método foi aplicado por Ottosen e Kumar \cite{Ottosen2019OutlierMeasurements} para detectar mudanças abruptas na média e/ou na variância das séries temporais de sensores de gases. As leituras que apresentaram alterações na linha base foram desconsiderados já que nesses intervalos a distribuição dos dados também mudava e não apenas a linha base.
-    \item Remoção de outliers por quartis: Consistiu na remoção dos quartis 1\% e 99\% dos dados agrupados por hora. Esse processo foi conduzido após a divisão dos dados em 24 grupos, representando cada hora do dia. Os quartis foram calculados individualmente dentro desses grupos, resultando em uma eliminação robusta de extremos estatísticos que poderiam introduzir viés na análise.
-    \item Identificação e remoção de picos e outliers na derivada dos dados: Este passo envolveu a identificação e eliminação de picos na primeira derivada dos dados que excediam o valor máximo encontrado na derivada da série de dados de referência. Essa estratégia visa mitigar efeitos de variações abruptas, frequentemente associadas a falhas no sensor ou interferências externas.
-    \item Re-amostragem para período de 1 hora: Este passo consistiu na re-amostragem dos dados para um período de 1 hora. Essa prática foi adotada para comparar e calibrar com os dados de referência que estão em períodos de uma hora.
-    \item Remoção de médias com amostras insuficientes: Por fim, foram excluídas as médias de cada hora que não atingiram mais de 75\% de amostras válidas, equivalente a pelo menos 3 amostras por hora. Essa medida visa garantir a robustez estatística das médias horárias, excluindo intervalos com dados insuficientes para uma análise significativa.
-\end{enumerate}
-
-\begin{figure}[h!]
-    \centering
-    \caption{Fluxograma das etapas de pré-processamento e as etiquetas de saída em cada uma delas}
-    \includegraphics[width=0.75\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/Fluxograma pré-processamento.png}
-    \label{fig:preprocessing-flow}
-\end{figure}
-
-A Figura \ref{fig:preprocessing-flow} sumariza graficamente o fluxo de etapas do pré-processamento aplicado aos dados dos sensores. Posterior a isto, procedeu-se a realizar a calibração das leituras de \acrshort{co}, \acrshort{o3} e \acrshort{mp}, utilizando como referência os dados provenientes de uma estação de monitoramento de qualidade do ar. Nas próximas seções são descritos os resultados dessas calibrações.

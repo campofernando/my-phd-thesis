@@ -1,3 +1,60 @@
+% ----------------------------------------------------------
+\section{Correção das leituras do sensor CO-B4 com as medições de referência}
+% ----------------------------------------------------------
+
+A partir dos dados de referência e das leituras de concentração e temperatura adquiridas pelo monitor em questão, foi realizada uma busca em grid para encontrar as melhores combinações de parâmetros e variáveis de entrada a modelos de regressão. As variáveis que foram testadas como entrada foram as leituras de concentração do sensor CO-B4 e a temperatura no interior da câmara de medição. Como modelos de regressão foram testados: o Perceptron Multicamadas (MLP), a Regressão Linear Multivariada (MLR), os K Vizinhos mais Próximos (KNN) e as Florestas Aleatórias (RF). Na Tabela \ref{tab:data-co-br-calib-results} resumem-se os melhores modelos encontrados pela busca em \textit{grid} para calibrar as leituras do sensor CO-B4. Os mesmos resultados são ilustrados graficamente na Figura \ref{fig:data-co-b4-models-performance} que apresenta o desempenho dos modelos e as variáveis de entrada considerando os valores de r2, RMSE e MAE.
+
+\begin{table}[h!]
+    \caption{Resultados da calibração do sensor CO-B4}
+    \centering
+    \begin{tabularx}{0.95\textwidth}[h!]{
+         >{\raggedright\hsize=.2\hsize\arraybackslash}X
+         >{\raggedright\hsize=.7\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.4\hsize\arraybackslash}X
+         >{\raggedright\hsize=.4\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.3\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.3\hsize\arraybackslash}X }
+        \hline
+        Var. & Modelo & R2 & RMSE & MAE & $\rho$\\ [0.5ex]
+        \hline
+        CO & \textbf{MLP}: & -0.64 ± 0.49 & -0.07 ± 0.01 & -0.05 & 0.41 \\ [0.5ex]
+           & \textbf{MLR} & -0.61 ± 0.47 & -0.07 ± 0.01 & -0.05 & 0.31 \\ [0.5ex]
+           & \textbf{KNN:} & -0.47 ± 0.29 & -0.06 ± 0.01 & -0.05 & 0.37 \\ [0.5ex]
+           & \textbf{RF:} & -0.60 ± 0.34 & -0.07 ± 0.01 & -0.05 & 0.30 \\ [0.5ex]
+        \hline
+        CO, T & \textbf{MLP:} & -0.59 ± 0.42 & -0.07 ± 0.01 & -0.05 & 0.46 \\ [0.5ex]
+              & \textbf{MLR:} & -0.65 ± 0.45 & -0.07 ± 0.01 & -0.05 & 0.25 \\ [0.5ex]
+              & \textbf{KNN:} & -0.68 ± 0.42 & -0.07 ± 0.01 & -0.05 & 0.51 \\ [0.5ex]
+              & \textbf{RF:} & -0.70 ± 0.47 & -0.07 ± 0.01 & -0.05 & 0.48 \\ [0.5ex]
+        \hline
+    \end{tabularx}
+    \label{tab:data-co-br-calib-results}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \caption{Resultados dos modelos de regressão aplicados as leituras do sensor CO-B4}
+    \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/co-b4-models-performance.png}
+    \label{fig:data-co-b4-models-performance}
+\end{figure}
+
+Como se observa todas as variantes de modelos e variáveis de entrada apresentaram valores de R2 negativos, indicando que nenhum dos modelos foi capaz de explicar a variância na variável dependente, i.e. a concentração real. Contudo, os modelos não lineares que incluíram a temperatura como variável de entrada, apresentaram melhorias na correlação entre a concentração real e a medida pelo sensor, com coeficientes de correlação de até 0.51. As Figuras \ref{fig:data-co-T-reference-corr-KNN} e \ref{fig:data-co-T-reference-corr-RF} apresentam os resultados ao aplicar os modelos de k Vizinhos mais Próximos e Florestas Aleatórias.
+
+\begin{figure}[h]
+    \centering
+    \caption{Gráfico de dispersão das leituras do sensor CO-B4 e a estação de referência após aplicar modelos de regressão considerando a temperatura}
+    \begin{subfigure}{0.49\textwidth}
+        \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/co-b4-T-KNN-Regression.png}
+        \caption{Utilizando regressão pelos k Vizinhos mais Próximos}
+        \label{fig:data-co-T-reference-corr-KNN}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/co-b4-T-RF-Regression.png}
+        \caption{Utilizando regressão pelas Florestas Aleatórias}
+        \label{fig:data-co-T-reference-corr-RF}
+    \end{subfigure}
+\end{figure}
 
 \begin{figure}[h!]
     \centering
@@ -16,10 +73,12 @@
 \end{figure}
 
 % ----------------------------------------------------------
-\section{Calibração das leituras de Monóxido de Carbono}
+\section{Cálculo da concentração de Monóxido de Carbono a partir das leituras do arranjo de sensores de gases}
 % ----------------------------------------------------------
 
 A Figura \ref{fig:data-co-all-models-performance} apresenta os valores de R2 dos 10 melhores modelos de calibração calculados para as leituras de \acrshort{co}. Observa-se que apesar do valor médio de R2 obtido nas validações cruzadas continuar sendo negativo, obtiveram-se máximos de até aproximadamente 0.1 para alguns conjuntos de dados de teste nas validações cruzadas. Em geral os modelos que produziram os melhores resultados foram baseados em regressões pelos k vizinhos mais próximos e redes neurais Perceptron Multicamadas. Com relação as variáveis de entrada dos modelos, todos os que produziram melhores resultados consideraram as leituras do sensor 1 de \acrshort{o3}. Outros que obtiveram valores positivos de R2 tiveram como variáveis de entrada o \acrshort{mp10} e \acrshort{no2}.
+
+Ao comparar os modelos em termos de sua complexidade, observa-se uma sobreposição entre os que desempenharam melhor em termos de representação dos dados originais (maiores valores de R2) e os que desempenharam melhor em termos de complexidade (menores valores de AIC e BIC). A Figura \ref{fig:data-co-all-models-complexity} compara os valores de \acrshort{aic}, \acrshort{bic} e \acrshort{mse} dos 10 modelos que obtiveram menores valores de AIC. Por último as Figuras \ref{fig:data-co-o31-reference-corr-MLP} e \ref{fig:data-co-o31-mp10-reference-corr-KNN} mostram gráficos de dispersão entre os valores de saída dos modelos de calibração e os dados de referência de \acrshort{co}. Os gráficos mostram os resultados dos modelos com melhores valores de R2.
 
 \begin{figure}[h]
     \centering
@@ -36,5 +95,3 @@ A Figura \ref{fig:data-co-all-models-performance} apresenta os valores de R2 dos
         \label{fig:data-co-o31-mp10-reference-corr-KNN}
     \end{subfigure}
 \end{figure}
-
-Ao comparar os modelos em termos de sua complexidade, observa-se uma sobreposição entre os que desempenharam melhor em termos de representação dos dados originais (maiores valores de R2) e os que desempenharam melhor em termos de complexidade (menores valores de AIC e BIC). A Figura \ref{fig:data-co-all-models-complexity} compara os valores de \acrshort{aic}, \acrshort{bic} e \acrshort{mse} dos 10 modelos que obtiveram menores valores de AIC. Por último as Figuras \ref{fig:data-co-o31-reference-corr-MLP} e \ref{fig:data-co-o31-mp10-reference-corr-KNN} mostram gráficos de dispersão entre os valores de saída dos modelos de calibração e os dados de referência de \acrshort{co}. Os gráficos mostram os resultados dos modelos com melhores valores de R2.

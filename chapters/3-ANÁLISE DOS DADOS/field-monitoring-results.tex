@@ -1,8 +1,8 @@
 % ----------------------------------------------------------
-\chapter{Análise dos dados e calibração dos sensores de baixo custo}\label{cap:field-monit-results}
+\chapter{Identificação de interferências e falhas no monitoramento de baixo custo}\label{cap:field-monit-results}
 % ----------------------------------------------------------
 
-Utilizando uma das placas CLEAN Arduino Mega descritas nos Capítulos anteriores, foi desenvolvido um monitor de baixo custo para monitoramento dos poluentes \acrshort{co}, \acrshort{no2}, \acrshort{so2}, \acrshort{o3} e \acrshort{mp10}. Para medição desses poluentes o instrumento conta com a seguinte relação de sensores:
+Utilizando uma das placas CLEAN Arduino Mega descritas no Capítulo \ref{cap:clean-initiative}, foi desenvolvido um equipamento de baixo custo para monitoramento dos poluentes \acrshort{co}, \acrshort{no2}, \acrshort{so2}, \acrshort{o3} e \acrshort{mp10}. Para medição desses poluentes o instrumento conta com a seguinte relação de sensores:
 
 \begin{itemize}
     \item Um sensor eletroquímico do fabricante Alphasense modelo CO-B4 para medição da concentração de \acrshort{co}
@@ -13,7 +13,7 @@ Utilizando uma das placas CLEAN Arduino Mega descritas nos Capítulos anteriores
     \item Um sensor de temperatura para medição da temperatura dentro da câmara de medição dos gases.
 \end{itemize}
 
-O instrumento foi instalado junto a uma estação de referência no município de Tubarão por um período de 5 meses, desde 21/11/2022 até 21/04/2023. O objetivo da instalação foi para testar o dispositivo em campo, numa aplicação real e para adquirir leituras de concentração dos sensores para posteriormente de calibrar o instrumento com os dados da estação de referência.
+O instrumento foi instalado junto a uma estação de referência no município de Tubarão por um período de 5 meses, desde 21/11/2022 até 21/04/2023. O objetivo da instalação foi testar o dispositivo em campo, numa aplicação real e adquirir leituras de concentração dos sensores para posteriormente de calibrar o instrumento com os dados da estação de referência.
 
 \input{chapters/3-ANÁLISE DOS DADOS/Seções/co-location-calibration.tex}
 
@@ -36,29 +36,3 @@ Os dados perdidos estão associados a falhas no equipamento como quedas de energ
 Uma vez identificados os dados válidos comprovou-se que todos apresentaram distribuições log-normais, conforme o esperado para dados de concentração. Os sensores CO-B4 e OX-B431 (2) mostraram uma pequena bimodalidade ocasionada por uma possível dependência com a temperatura, já que foi identificado um perfil sazonal ao longo do dia coincidente com o perfil de temperatura diário. Em geral, com a exceção do sensor NO2-B43F, observou-se certa correlação entre as leituras dos sensores e a temperatura, principalmente nos dados de \acrshort{o3}. Esse comportamento era esperado dada a influência da radiação na concentração de \acrshort{o3} no ambiente, e pôde ser corroborado na análise das concentrações de referência. O sensor CO-B4 também gerou leituras correlacionadas com a temperatura, que não coincidiu com o comportamento dos dados de referência. A correlação das medições de referência foi baixa ($\rho$ = 0.18) em comparação com o sensor de baixo custo ($\rho$ = 0.52). É possível que essa suposta relação com a temperatura, inclusive no sensor de referência, tenha estado associada com padrões diários de poluição, sendo que a maior atividade antropogênica acontece na luz do dia, onde as temperaturas são mais elevadas. Contudo, o coeficiente de correlação mais elevado no sensor de baixo custo pode ser indício de uma certa influência com a temperatura, conforme já tem sido reportado na literatura. Nas leituras de \acrshort{no2} e \acrshort{mp10} a relação com a temperatura foi pouco perceptível.
 
 De modo geral, a exceção dos sensores de \acrshort{o3}, o restante das leituras dos sensores de baixo custo apresentaram baixa correlação com as medições de referência, e diferenças elevadas na escala das medições. A maior correlação dos dados de ozônio pode explicar-se pelo próprio comportamento diário da variável que foi registrado pelos sensores, mas observou-se que o sensor OX-B431 (1) superestimou em quase 3 vezes as leituras originais, já o sensor 2 mostrou valores mais coerentes. A mesma diferença na ordem dos dados foi observada nas leituras do sensor NO2-B43F, com variações na escala de aproximadamente 4 vezes em relação com os dados originais.
-
-Os modelos de regressão obtidos tiveram baixo desempenho. Apenas as leituras dos sensores OX-B431 apresentaram coeficientes de determinação máximos de até 0.5 e valores médios de 0.4 aproximadamente. O restante dos sensores produziu valores negativos de R2, indicando que a variância dos dados reais de concentração não pode ser explicada pelos modelos de regressão encontrados para os dados dos sensores de baixo custo utilizados. Contudo, a relação entre os dados de saída dos modelos e as leituras originais foi maior em comparação com os dados brutos, chegando a coeficientes de Spearman entre 0.47 e 0.61 entre todos os sensores. É importante ressaltar que os modelos que geraram melhores resultados, todos eles consideraram a temperatura e saída do sensor como variáveis independentes. A Tabela \ref{tab:summary-calib-results} resume os melhores resultados obtidos para cada poluente.
-
-Por último, resulta interessante destacar a diferença de comportamento entre os dois sensores OX-B431. Mesmo sendo sensores do mesmo modelo e do mesmo lote apresentaram comportamentos muito distintos com relação as leituras de referência e a dependência com a temperatura. Isso corrobora o reportado na literatura com relação ao comportamento dos sensores de baixo custo.
-
-\begin{table}[h!]
-    \caption{Resultados dos melhores modelos considerando leituras de sensores por poluentes}
-    \centering
-    \begin{tabularx}{0.95\textwidth}[h!]{
-         >{\raggedright\hsize=.4\hsize\arraybackslash}X
-         >{\raggedright\hsize=.2\hsize\arraybackslash}X 
-         >{\raggedright\hsize=.4\hsize\arraybackslash}X
-         >{\raggedright\hsize=.4\hsize\arraybackslash}X 
-         >{\raggedright\hsize=.4\hsize\arraybackslash}X 
-         >{\raggedright\hsize=.3\hsize\arraybackslash}X }
-        \hline
-        Var. & Modelo & R2 & RMSE & MAE & $\rho$\\ [0.5ex]
-        \hline
-        \acrshort{co} + T & KNN & -0.68 ± 0.42 & -0.07 ± 0.01 & -0.05 & 0.51 \\ [0.5ex]
-        \acrshort{o3} (1) + T & MLP & 0.42 ± 0.17 & -11.15 ± 0.98 & -8.57 ± 0.90 & 0.69 \\ [0.5ex]
-        \acrshort{no2} + T & RF & -2.66 ± 4.51 & -11.93 ± 3.39 & -9.18 ± 2.03 & 0.63 \\ [0.5ex]
-        \acrshort{mp10} + T & MLP & -0.29 ± 0.27 & -10.68 ± 0.96 & -8.33 ± 0.78 & 0.47 \\ [0.5ex]
-        \hline
-    \end{tabularx}
-    \label{tab:summary-calib-results}
-\end{table}

@@ -3,7 +3,35 @@
 \chapter{Metodologia de calibração utilizando as leituras de todos os sensores}\label{cap:calib-methodology}
 % ----------------------------------------------------------
 
-No Capítulo \ref{cap:field-monit-results} foram apresentados os resultados de aplicar modelos de regressão nas leituras dos sensores de gases para inferir a concentração real de cada poluente. Neles foram consideradas como variáveis de entrada de cada modelo a temperatura e as leituras do(s) sensor(es) especificados para cada composto gasoso. Assim, foram utilizados um sensor CO-B4 e a temperatura para medir \acrshort{co}; dois sensores OX-B431 e a temperatura para medir \acrshort{o3}; e um sensor NO2-B43F para medir \acrshort{no2}. No presente capítulo, serão aplicada uma metodologia de calibração similar ã do capítulo \ref{cap:field-monit-results}, mas dessa vez serão consideradas as leituras de todos os sensores para inferir a concentração de cada gás. Serão aplicadas buscas em grid para avaliar as combinações de variáveis de entrada e de parâmetros que produzam os melhores resultados de R2 e erro. Como a complexidade dos modelos aumenta com o incremento das variáveis independentes, também serão considerados as métricas de \acrshort{aic} e \acrshort{bic} na avaliação dos modelos de regressão.
+No Capítulo \ref{cap:field-monit-results} foi apresentado o processo de co-localização do dispositivo de baixo custo com a estação de referência e foram comparadas as leituras de cada equipamento. A última etapa do processamento, que será abordada neste capítulo, consistiu em encontrar modelos de regressão que corrigissem as medições adquiridas pelo equipamento de baixo custo a partir dos dados de referência da estação certificada. 
+
+\begin{figure}[h!]
+    \centering
+    \caption{Fluxogramas do processo de correção das leituras do equipamento de baixo custo}
+    \begin{subfigure}{0.9\textwidth}
+        \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/Processo de calibração unisensor.png}
+        \caption{Etapa de correção das leituras de cada sensor}
+        \label{fig:calibration-unisensor}
+    \end{subfigure}
+    \begin{subfigure}{0.9\textwidth}
+        \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/Processo de calibração multisensor.png}
+        \caption{Etapa de correção das leituras do equipamento considerando todos seus sensores}
+        \label{fig:calibration-multisensor}
+    \end{subfigure}
+\end{figure}
+
+O processo de correção foi realizado em duas etapas. Em um primeiro momento, para encontrar o modelo de regressão de cada poluente, foram consideradas as leituras dos sensores de baixo custo específicos para esse composto juntamente com os valores de temperatura e os dados de referência. Em uma segunda iteração foram consideradas as leituras de todos os sensores de baixo custo no equipamento para encontrar os modelos de regressão que melhor corrigissem as medições de cada poluente. A Figuras \ref{fig:calibration-unisensor} e \ref{fig:calibration-multisensor} ilustram os dois estágios de correção, partindo da etapa de preparação, pré-processamento dos dados descrita no Capítulo \ref{cap:field-monit-results}.
+
+\begin{figure}[h!]
+    \centering
+    \caption{Processo de geração de combinações de variáveis, modelos e seus parâmetros}
+    \includegraphics[width=0.5\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/Fluxograma busca em Grid.png}
+    \label{fig:grid-search}
+\end{figure}
+
+As leituras dos sensores de baixo custo e dos instrumentos de referência foram disponibilizadas em arquivos \textit{csv}, que foram utilizados como entradas na etapa de pré-processamento. Para a correção das leituras adquiridas pelos sensores foram explorados diferentes modelos de regressão multivariados, i.e.: o Perceptron Multicamadas (MLP), Regressão Linear Multivariada (MLR), K Vizinhos mais Próximos (KNN) e as Florestas Aleatórias (RF). Para encontrar o modelo que melhor explicasse os dados foram realizadas buscas em \textit{grid} que combinaram diferentes parâmetros e variáveis de entrada. Os modelos foram avaliados utilizando validações cruzadas com k = 3 considerando métricas essenciais, i.e.: o coeficiente de determinação (R2), o erro médio quadrático (RMSE) e o erro absoluto médio (MAE). Como a complexidade dos modelos aumenta com o incremento das variáveis independentes, também foram consideradas as métricas de \acrshort{aic} e \acrshort{bic} na avaliação dos modelos de regressão.
+
+A Figura \ref{fig:grid-search} apresenta um fluxograma com o processo de geração das combinações de variáveis de entrada, modelos e parâmetros. O processo consiste em três laços. O mais externo itera ao longo de uma lista com as distintas combinações de variáveis de entrada. Na primeira etapa de correção cada lista era composta pelas combinações possíveis entre o(s) sensor(es) do poluente em questão e a temperatura. Para gerar as combinações de variáveis foi considerado que cada sensor poderia ser uma única entrada, e que cada combinação deveria ter pelo menos um sensor do poluente, ou seja, não poderia existir uma combinatória de um mesmo sensor replicado em várias entradas nem uma combinatória com apenas temperatura. Na segunda etapa de correção foram considerados todos os sensores e a temperatura para gerar as combinatórias. Nesta segunda etapa as restrições da primeira foram mantidas, não sendo possível utilizar uma combinação de variáveis que não possuísse pelo menos um sensor do poluente em questão, nem combinações de sensores idênticos. Uma vez gerado o conjunto de combinações de variáveis de entrada, cada subconjunto era utilizado para selecionar os parâmetros de cada modelo de regressão e para calcular os valores de R2, RMSE, MAE, AIC e BIC de cada um dos modelos. Para a escolha dos parâmetros de cada modelo utilizou-se a classe \textit{GridSearchCV} do pacote \textit{sklearn.model\_selection} da linguagem \textit{Python}. Cada modelo já parametrizado era posteriormente testado utilizando validações cruzadas com k = 3.
 
 \input{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Seções/co-regression-all-sensors.tex}
 
@@ -14,6 +42,32 @@ No Capítulo \ref{cap:field-monit-results} foram apresentados os resultados de a
 \input{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Seções/mp-regression-all-sensors.tex}
 
 \section{Discussão}
+
+Os modelos de regressão obtidos considerando apenas as leituras dos sensores específicos de cada poluente tiveram baixo desempenho. Apenas as leituras dos sensores OX-B431 apresentaram coeficientes de determinação acima de 0.2, com máximos de até 0.5 e valores médios de 0.4 aproximadamente. O restante dos sensores produziu valores negativos de R2, indicando que a variância dos dados reais de concentração não pode ser explicada pelos modelos de regressão encontrados para os dados dos sensores de baixo custo utilizados. Contudo, a relação entre os dados de saída dos modelos e as leituras originais foi maior em comparação com os dados brutos, chegando a coeficientes de Spearman entre 0.47 e 0.61 entre todos os sensores. É importante ressaltar que os modelos que geraram melhores resultados, todos eles consideraram a temperatura e saída do sensor como variáveis independentes. A Tabela \ref{tab:summary-calib-results} resume os melhores resultados obtidos para cada poluente.
+
+Resulta interessante destacar a diferença de comportamento entre os dois sensores OX-B431. Mesmo sendo sensores do mesmo modelo e do mesmo lote apresentaram comportamentos muito distintos com relação as leituras de referência e a dependência com a temperatura. Isso corrobora o reportado na literatura com relação ao comportamento dos sensores de baixo custo.
+
+\begin{table}[h!]
+    \caption{Resultados dos melhores modelos considerando leituras de sensores por poluentes}
+    \centering
+    \begin{tabularx}{0.95\textwidth}[h!]{
+         >{\raggedright\hsize=.4\hsize\arraybackslash}X
+         >{\raggedright\hsize=.2\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.4\hsize\arraybackslash}X
+         >{\raggedright\hsize=.4\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.4\hsize\arraybackslash}X 
+         >{\raggedright\hsize=.3\hsize\arraybackslash}X }
+        \hline
+        Var. & Modelo & R2 & RMSE & MAE & $\rho$\\ [0.5ex]
+        \hline
+        \acrshort{co} + T & KNN & -0.68 ± 0.42 & -0.07 ± 0.01 & -0.05 & 0.51 \\ [0.5ex]
+        \acrshort{o3} (1) + T & MLP & 0.42 ± 0.17 & -11.15 ± 0.98 & -8.57 ± 0.90 & 0.69 \\ [0.5ex]
+        \acrshort{no2} + T & RF & -2.66 ± 4.51 & -11.93 ± 3.39 & -9.18 ± 2.03 & 0.63 \\ [0.5ex]
+        \acrshort{mp10} + T & MLP & -0.29 ± 0.27 & -10.68 ± 0.96 & -8.33 ± 0.78 & 0.47 \\ [0.5ex]
+        \hline
+    \end{tabularx}
+    \label{tab:summary-calib-results}
+\end{table}
 
 Na Tabela \ref{tab:summary-calib-results-all-sensors} resumem-se os resultados dos melhores modelos para cada poluente. Observa-se que de modo geral os parâmetros utilizados para medir o desempenho dos modelos melhorou com relação aos mostrados no Capítulo \ref{cap:field-monit-results}. Os valores de R2, embora ainda pequenos, passaram a ser positivos com exceção do \acrshort{co}, que no entanto mostrou valores de R2 máximo de aproximadamente 0.1. Os valores de erro quadrático e erro absoluto se mantiveram na mesma faixa de valores. Os modelos escolhidos apresentaram menores valores de coeficientes de correlação de Spearman devido a que o parâmetro escolhido para a otimização dos modelos foi o coeficiente de determinação R2.
 

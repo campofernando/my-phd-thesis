@@ -108,7 +108,7 @@ Investigou-se a existência de correlação entre as leituras do sensor de \text
 
 Os resultados obtidos nos testes estatísticos podem ser corroborados no gráfico de dispersão entre as variáveis. Na Figura \ref{fig:data-temp-pm10-corr} observa-se que o núcleo principal dos dados de concentração, entre 0 e 2 \(\mu g/m^3\), mostrou uma tendência crescente com as variações de temperatura entre 25 a 30\textdegree C. Da mesma forma, ao analisar a relação entre as medições de concentração de referência e a temperatura, observa-se correlação, com coeficientes de Spearman e Kendall de 0.35 e 0.25 respectivamente (Figura \ref{fig:data-temp-pm10-ref-corr}).
 
-\subsection{Calibração das leituras de \acrshort{mp10} do sensor OPC-N3 com as medições de referência}
+\subsection{Comparação das leituras de \acrshort{mp10} do sensor OPC-N3 com as medições de referência}
 
 Nas Figuras \ref{fig:data-pm10-reference-time-series} e \ref{fig:data-pm10-reference-corr} apresentam-se as leituras de \acrshort{mp10} obtidas pelo sensor OPC-N3 de Alphasense e a estação de referência. Observa-se que as leituras do sensor OPC-N3 subestimaram os valores de concentração de referência com valores aproximadamente 10 vezes menores. Os testes de Spearman e Kendall revelaram a existência de correlação entre as medições com o sensor de baixo custo e a referência com coeficientes de 0.3 e 0.2 respectivamente.
 
@@ -127,56 +127,3 @@ Nas Figuras \ref{fig:data-pm10-reference-time-series} e \ref{fig:data-pm10-refer
         \label{fig:data-pm10-reference-corr}
     \end{subfigure}
 \end{figure}
-
-\begin{table}[h!]
-    \caption{Resultados da calibração das leituras de \acrshort{mp10} do sensor OPC-N3}
-    \centering
-    \begin{tabularx}{0.95\textwidth}[h!]{
-        >{\raggedright\hsize=.4\hsize\arraybackslash}X
-        >{\raggedright\hsize=.6\hsize\arraybackslash}X 
-        >{\raggedright\hsize=.6\hsize\arraybackslash}X
-        >{\raggedright\hsize=.7\hsize\arraybackslash}X 
-        >{\raggedright\hsize=.6\hsize\arraybackslash}X 
-        >{\raggedright\hsize=.3\hsize\arraybackslash}X }
-        \hline
-        Var. & Modelo & R2 & RMSE & MAE & $\rho$\\ [0.5ex]
-        \hline
-        \acrshort{mp10} & \textbf{MLP}: & -0.05 ± 0.036 & -9.77 ± 0.75 & -7.41 ± 0.49 & 0.18 \\ [0.5ex]
-           & \textbf{MLR} & -0.01 ± 0.03 & -9.57 ± 0.98 & -7.26 ± 0.62 & 0.17 \\ [0.5ex]
-           & \textbf{KNN:} & -0.14 ± 0.07 & -10.18 ± 0.62 & -7.71 ± 0.45 & 0.13 \\ [0.5ex]
-           & \textbf{RF:} & -0.19 ± 0.11 & -10.33 ± 0.52 & -7.80 ± 0.40 & 0.22\\ [0.5ex]
-        \hline
-        \acrshort{mp10}, T & \textbf{MLP:} & -0.29 ± 0.27 & -10.68 ± 0.96 & -8.33 ± 0.78 & 0.47 \\ [0.5ex]
-              & \textbf{MLR:} & 0.10 ± 0.08 & -9.04 ± 1.12 & -6.73 ± 0.69 & 0.37 \\ [0.5ex]
-              & \textbf{KNN:} & -0.02 ± 0.09 & -9.57 ± 0.46 & -7.29 ± 0.27 & 0.45 \\ [0.5ex]
-              & \textbf{RF:} & -0.17 ± 0.27 & -10.12 ± 0.32 & -7.89 ± 0.28 & 0.46 \\ [0.5ex]
-        \hline
-    \end{tabularx}
-    \label{tab:data-pm10-calib-results}
-\end{table}
-
-A partir dos dados de referência e das leituras de concentração e temperatura adquiridas pelo monitor em questão, foi realizada uma busca em grid para encontrar as melhores combinações de parâmetros e variáveis de entrada a modelos de regressão. As variáveis que foram testadas como entrada foram as leituras de concentração de \acrshort{mp10} do sensor OPC-N3 e a temperatura no interior da câmara de medição. Como modelos de regressão foram testados: o Perceptron Multicamadas (MLP), a Regressão Linear Multivariada (MLR), os K Vizinhos mais Próximos (KNN) e as Florestas Aleatórias (RF). Na Tabela \ref{tab:data-pm10-calib-results} resumem-se os melhores modelos encontrados pela busca em \textit{grid} para calibrar as leituras do sensor OPC-N3. Os mesmos resultados são ilustrados graficamente na Figura \ref{fig:data-pm10-models-performance} que apresenta o desempenho dos modelos e as variáveis de entrada considerando os valores de r2, RMSE e MAE.
-
-\begin{figure}[h!]
-    \centering
-    \caption{Resultados dos modelos de calibração aplicados as leituras de \acrshort{mp10} do sensor OPC-N3}
-    \includegraphics[width=0.95\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/pm10-models-performance.png}
-    \label{fig:data-pm10-models-performance}
-\end{figure}
-
-\begin{figure}[h!]
-    \centering
-    \caption{Gráfico de dispersão das leituras do sensor de \acrshort{mp10} do OPC-N3 e a estação de referência após aplicar modelos de regressão considerando a temperatura}
-    \begin{subfigure}{0.49\textwidth}
-        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/pm10-T-ML-Regression.png}
-        \caption{Utilizando uma regressão linear multivariada considerando a temperatura obteve-se um R2 de 0.10 e $\rho$ de 0.37}
-        \label{fig:data-pm10-T-reference-corr-MLR}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.49\textwidth}
-        \includegraphics[width=\textwidth]{chapters/3-ANÁLISE DOS DADOS/Figuras/pm10-T-MLP-Regression.png}
-        \caption{Utilizando uma rede neural Perceptron Multicamadas considerando a temperatura obtiveram-se valores de $\rho$ de 0.47 e 0.33}
-        \label{fig:data-pm10-T-reference-corr-MLP}
-    \end{subfigure}
-\end{figure}
-Como se observa, apenas o modelo de regressão linear com variáveis independentes temperatura e concentração medida pelo sensor OPC-N3 conseguiu explicar a variância na variável dependente, i.e. a concentração real. Os valores de R2 obtidos nas validações cruzadas realizadas para este modelo foram de 0.10 ± 0.08, e os coeficientes de correlação de Spearman e Kendall entre a concentração inferida na calibração e a concentração real foram de 0.37 e 0.26 respectivamente. Os erros RMSE e MAE estiveram próximos de 10 \(\mu g/m^3\), que é um valor relativamente baixo considerando a diferença elevada entre os valores de referência e as leituras do sensor (aproximadamente 10 vezes). De modo geral, os modelos não lineares que incluíram a temperatura como variável dependente, apresentaram melhorias na correlação entre a concentração real e a medida pelo sensor, com coeficientes de correlação de até 0.47. As Figuras \ref{fig:data-pm10-T-reference-corr-MLR} e \ref{fig:data-pm10-T-reference-corr-MLP} apresentam os resultados ao aplicar o modelo de regressão linear considerando leituras do sensor e temperatura e ao aplicar uma rede neural Perceptron Multicamadas considerando as mesmas variáveis de entrada.
