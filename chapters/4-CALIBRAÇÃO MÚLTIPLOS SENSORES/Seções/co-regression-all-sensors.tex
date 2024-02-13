@@ -43,13 +43,13 @@ Como se observa todas as variantes de modelos e variáveis de entrada apresentar
 \begin{figure}[h]
     \centering
     \caption{Gráfico de dispersão das leituras do sensor CO-B4 e a estação de referência após aplicar modelos de regressão considerando a temperatura}
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}{0.495\textwidth}
         \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/co-b4-T-KNN-Regression.png}
         \caption{Utilizando regressão pelos k Vizinhos mais Próximos}
         \label{fig:data-co-T-reference-corr-KNN}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}{0.495\textwidth}
         \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/co-b4-T-RF-Regression.png}
         \caption{Utilizando regressão pelas Florestas Aleatórias}
         \label{fig:data-co-T-reference-corr-RF}
@@ -83,13 +83,13 @@ Ao comparar os modelos em termos de sua complexidade, observa-se uma sobreposiç
 \begin{figure}[h]
     \centering
     \caption{Gráfico de dispersão das leituras do múltiplos sensores e a estação de referência para medição de \acrshort{co}}
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}{0.495\textwidth}
         \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/CO-co-o31-mlp-Regression.png}
         \caption{Utilizando modelo de regressão com uma rede neural Perceptron Multicamadas; variáveis independentes: leituras de sensores CO-B4 e OX-B431 (1)}
         \label{fig:data-co-o31-reference-corr-MLP}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}{0.495\textwidth}
         \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/CO-co-o31-pm10-knn-Regression.png}
         \caption{Utilizando modelo de regressão pelos k vizinhos mais próximos; variáveis independentes: leituras de sensores CO-B4, OX-B431 (1) e de \acrshort{mp10} medido pelo OPC-N3}
         \label{fig:data-co-o31-mp10-reference-corr-KNN}

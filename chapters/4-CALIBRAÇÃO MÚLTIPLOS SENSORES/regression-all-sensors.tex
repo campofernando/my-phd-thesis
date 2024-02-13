@@ -1,9 +1,9 @@
 
 % ----------------------------------------------------------
-\chapter{Metodologia de calibração utilizando as leituras de todos os sensores}\label{cap:calib-methodology}
+\chapter{Metodologia de correção de leituras provenientes de sensores de baixo custo da qualidade do ar}\label{cap:calib-methodology}
 % ----------------------------------------------------------
 
-No Capítulo \ref{cap:field-monit-results} foi apresentado o processo de co-localização do dispositivo de baixo custo com a estação de referência e foram comparadas as leituras de cada equipamento. A última etapa do processamento, que será abordada neste capítulo, consistiu em encontrar modelos de regressão que corrigissem as medições adquiridas pelo equipamento de baixo custo a partir dos dados de referência da estação certificada. 
+No Capítulo \ref{cap:field-monit-results} foi apresentado o processo de co-localização do dispositivo de baixo custo com a estação de referência e foram comparadas as leituras de cada equipamento. A última etapa do processamento, que será abordada neste capítulo, consistiu em desenvolver uma metodologia para corrigir as medições adquiridas pelo equipamento de baixo custo a partir dos dados de referência da estação certificada. 
 
 \begin{figure}[h!]
     \centering
@@ -20,7 +20,7 @@ No Capítulo \ref{cap:field-monit-results} foi apresentado o processo de co-loca
     \end{subfigure}
 \end{figure}
 
-O processo de correção foi realizado em duas etapas. Em um primeiro momento, para encontrar o modelo de regressão de cada poluente, foram consideradas as leituras dos sensores de baixo custo específicos para esse composto juntamente com os valores de temperatura e os dados de referência. Em uma segunda iteração foram consideradas as leituras de todos os sensores de baixo custo no equipamento para encontrar os modelos de regressão que melhor corrigissem as medições de cada poluente. A Figuras \ref{fig:calibration-unisensor} e \ref{fig:calibration-multisensor} ilustram os dois estágios de correção, partindo da etapa de preparação, pré-processamento dos dados descrita no Capítulo \ref{cap:field-monit-results}.
+O processo de correção foi realizado em duas etapas, ilustradas nas Figuras \ref{fig:calibration-unisensor} e \ref{fig:calibration-multisensor}. Em um primeiro momento (Figura \ref{fig:calibration-unisensor}), aplicou-se uma busca em \textit{grid} para encontrar o modelo de regressão que melhor corrigisse as leituras dos sensores de cada poluente. Nesta primeira etapa, foram consideradas como entradas ao modelo apenas as leituras dos sensores específicos para cada composto juntamente com os valores de temperatura. No segundo momento (Figura \ref{fig:calibration-multisensor}) aplicou-se também uma busca em \textit{grid} para encontrar um modelo de correção por poluente, mas dessa vez considerando as leituras de todos os sensores de baixo custo no equipamento, além da temperatura. Os dados de entrada nas etapas de correção provieram da etapa de pré-processamento dos dados descrita no Capítulo \ref{cap:field-monit-results}.
 
 \begin{figure}[h!]
     \centering
@@ -29,9 +29,51 @@ O processo de correção foi realizado em duas etapas. Em um primeiro momento, p
     \label{fig:grid-search}
 \end{figure}
 
-As leituras dos sensores de baixo custo e dos instrumentos de referência foram disponibilizadas em arquivos \textit{csv}, que foram utilizados como entradas na etapa de pré-processamento. Para a correção das leituras adquiridas pelos sensores foram explorados diferentes modelos de regressão multivariados, i.e.: o Perceptron Multicamadas (MLP), Regressão Linear Multivariada (MLR), K Vizinhos mais Próximos (KNN) e as Florestas Aleatórias (RF). Para encontrar o modelo que melhor explicasse os dados foram realizadas buscas em \textit{grid} que combinaram diferentes parâmetros e variáveis de entrada. Os modelos foram avaliados utilizando validações cruzadas com k = 3 considerando métricas essenciais, i.e.: o coeficiente de determinação (R2), o erro médio quadrático (RMSE) e o erro absoluto médio (MAE). Como a complexidade dos modelos aumenta com o incremento das variáveis independentes, também foram consideradas as métricas de \acrshort{aic} e \acrshort{bic} na avaliação dos modelos de regressão.
+Para a correção das leituras adquiridas pelos sensores foram explorados diferentes modelos de regressão multivariados, i.e.: o Perceptron Multicamadas (MLP), Regressão Linear Multivariada (MLR), K Vizinhos mais Próximos (KNN) e as Florestas Aleatórias (RF). Para encontrar o modelo que melhor explicasse os dados foram realizadas buscas em \textit{grid} que combinaram diferentes parâmetros e variáveis de entrada. Os modelos foram avaliados utilizando validações cruzadas com k = 3 considerando métricas essenciais, i.e.: o coeficiente de determinação (R2), o erro médio quadrático (RMSE) e o erro absoluto médio (MAE). Como a complexidade dos modelos aumenta com o incremento das variáveis independentes, também foram consideradas as métricas de \acrshort{aic} e \acrshort{bic} na avaliação dos modelos de regressão.
 
-A Figura \ref{fig:grid-search} apresenta um fluxograma com o processo de geração das combinações de variáveis de entrada, modelos e parâmetros. O processo consiste em três laços. O mais externo itera ao longo de uma lista com as distintas combinações de variáveis de entrada. Na primeira etapa de correção cada lista era composta pelas combinações possíveis entre o(s) sensor(es) do poluente em questão e a temperatura. Para gerar as combinações de variáveis foi considerado que cada sensor poderia ser uma única entrada, e que cada combinação deveria ter pelo menos um sensor do poluente, ou seja, não poderia existir uma combinatória de um mesmo sensor replicado em várias entradas nem uma combinatória com apenas temperatura. Na segunda etapa de correção foram considerados todos os sensores e a temperatura para gerar as combinatórias. Nesta segunda etapa as restrições da primeira foram mantidas, não sendo possível utilizar uma combinação de variáveis que não possuísse pelo menos um sensor do poluente em questão, nem combinações de sensores idênticos. Uma vez gerado o conjunto de combinações de variáveis de entrada, cada subconjunto era utilizado para selecionar os parâmetros de cada modelo de regressão e para calcular os valores de R2, RMSE, MAE, AIC e BIC de cada um dos modelos. Para a escolha dos parâmetros de cada modelo utilizou-se a classe \textit{GridSearchCV} do pacote \textit{sklearn.model\_selection} da linguagem \textit{Python}. Cada modelo já parametrizado era posteriormente testado utilizando validações cruzadas com k = 3.
+A Figura \ref{fig:grid-search} apresenta um fluxograma da metodologia aplicada nas duas etapas de correção. O processo consiste em três laços. O laço mais externo itera ao longo de uma lista com as distintas combinações de variáveis de entrada. Esta lista, dependendo da etapa de correção, pode estar composta pelas leituras de um ou dois sensores de um mesmo poluente com a temperatura, ou por todos os sensores do equipamento e a temperatura. Para gerar as combinações de variáveis foi considerado que cada sensor poderia representar apenas uma entrada, e que cada combinação deveria ter pelo menos um sensor do poluente em questão. Exemplificando, a primeira etapa de correção das leituras de \acrshort{o3} iteraria sobre a lista de combinatórias formada por: 
+
+\begin{lstlisting}[basicstyle=\tiny]
+    [[Leituras OX-B431 (1)], 
+    [Leituras OX-B431 (2)], 
+    [Leituras OX-B431 (1), Leituras OX-B431 (2)],
+    [Leituras OX-B431 (1), Leituras de temperatura],
+    [Leituras OX-B431 (2), Leituras de temperatura],
+    [Leituras OX-B431 (1), Leituras OX-B431 (2), Leituras de temperatura]] 
+\end{lstlisting}
+
+Já na segunda etapa de correção das leituras de \acrshort{o3} não poderia ser considerada, por exemplo, a seguinte combinação de variáveis de entrada, já que esta não possui nenhuma leitura de sensor de \acrshort{o3}.
+
+\begin{lstlisting}[basicstyle=\tiny]
+    [Leituras CO-B4, Leituras NO2-B43F, Leituras de OPC-N3, Leituras de Temperatura]
+\end{lstlisting}
+
+Uma vez gerado o conjunto de combinações de variáveis de entrada, o segundo e terceiro laço iteram por conjuntos de modelos de regressão e de parâmetros desses modelos. Em cada iteração do terceiro laço são selecionados os melhores parâmetros para cada modelo de regressão. Para isso utilizou-se a classe \textit{GridSearchCV} do pacote \textit{sklearn.model\_selection} de \textit{Python}. A Tabela \ref{tab:models-and-parameters} resume os parâmetros que ajustados para cada modelo. Uma vez selecionados os parâmetros, o segundo laço calcula os valores de R2, RMSE, MAE, AIC e BIC produzidos por cada modelo utilizando validações cruzadas com k = 3.
+
+\begin{table}[h!]
+    \caption{Parâmetros ajustados para cada modelo nas buscas em \textit{grid}}
+    \centering
+    \begin{tabularx}{0.95\textwidth}[h!]{
+         >{\raggedright\hsize=.2\hsize\arraybackslash}X
+         >{\raggedright\hsize=.7\hsize\arraybackslash}X }
+        \hline
+        \textbf{Modelo} & \textbf{Parâmetros} \\ [0.5ex]
+        \hline
+        MLP & No. de camadas ocultas \\ [0.5ex]
+            & Coeficiente \textit{alpha} \\ [0.5ex]
+        \hline
+        KNN & No. de vizinhos \\ [0.5ex]
+        \hline
+        RF & No. de estimadores \\ [0.5ex]
+           & Profundidade máxima \\ [0.5ex]
+           & No. de amostras para dividir um nó \\ [0.5ex]
+           & No. mínimo de amostras por folha \\ [0.5ex]
+        \hline
+        MLR & --- \\ [0.5ex]
+        \hline
+    \end{tabularx}
+    \label{tab:models-and-parameters}
+\end{table}
 
 \input{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Seções/co-regression-all-sensors.tex}
 
