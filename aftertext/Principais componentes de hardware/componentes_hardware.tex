@@ -24,20 +24,15 @@ A continuação são descritos os principais módulos que compõem a placa CLEAN
         Módulo Wi-Fi & Módulo serial Wi-Fi ESP-01 ESP8266 & ESP8266, da Expressif\\ \hline
         Sensor BMP280 & Sensor digital de temperatura e pressão BMP280 I2C & BMP280, da Bosch Sensortec\\ \hline
         Sensor SHT20 & Sensor de umidade e temperatura SHT20 I2C & SHT20, por Sensirion\\ \hline
-        MAX487 & Transceptor RS-485 MAX487 Baixa potência, taxa de variação limitada & MAX487, da Maxim Integrated\\ \hline
     \end{tabularx}
 \end{table}
 
 \section{Módulo de sensoriamento}
 \subsection{Sensores}
 
-Nos sistemas desenvolvidos foram utilizados sensores de gases eletroquímicos dos fabricantes \textit{SPEC Sensors} e \textit{Alphasense}.
+Nos sistemas desenvolvidos foram utilizados sensores do fabricante \textit{Alphasense} de princípio eletroquímico para medição de gases e contadores óticos de partículas para medição de material particulado.
 
-\subsubsection{Sensores SPEC.}
-
-Os sensores da \textit{SPEC} são sensores amperométricos, constituídos por células eletroquímicas (veja Apêndice \ref{apendix: sensores-ec}) de três eletrodos, i.e.: eletrodos de trabalho, de referência e eletrodo contador. SPEC significa \textit{Screen-Printed Electrochemical}, que é a tecnologia utilizada para a fabricação dos sensores, reduzindo seus custos e dimensões, e ainda mantendo um alto desempenho \cite{SPECSensors2016SPECConsiderations}.
-
-\subsubsection{Sensores Alphasense.}
+\subsubsection{Sensores eletroquímicos Alphasense.}
 
 \textit{Alphasense} fabrica sensores eletroquímicos amperométricos. Especificamente, os sensores da série B4 foram selecionados para os monitores desenvolvidos, já que são indicados pelo fabricante para a medição de baixas concentrações de gases. Estes sensores incorporam um quarto eletrodo, denominado eletrodo auxiliar, que compensa os efeitos da temperatura e da umidade relativa nas leituras dos sensores \cite{Baron2017AmperometricReview}. A Figura \ref{fig:alphasense-b4} ilustra um sensor Alphasense da série B4, suas dimensões e disposição dos eletrodos. Para mais informações sobre os efeitos das variáveis ambientais nas respostas dos sensores, confira a nota de aplicação AAN 110 da Alphasense. Para informações adicionais sobre os sensores da série B4 da Alphasense, como especificações elétricas, dimensões e pinagem, consulte as fichas técnicas dos modelos de sensores listados na Tabela 1.
 
@@ -60,6 +55,10 @@ Os sensores digitais para IoT fornecidos pela SPEC são compostos por um transdu
 \subsubsection{Interface de condicionamento de sensores Alphasense}
 
 A Alphasense fornece placas de sensores individuais para seus sensores de gás de 4 eletrodos da série B4 (REF). Essas placas incorporam circuitos potenciostatos equivalentes para os eletrodos de trabalho e auxiliar. As saídas de cada canal do potenciostato foram conectadas às entradas analógicas do microcontrolador Arduino MEGA, conforme mostrado na Figura A.3. Os sinais AE e WE representam os sinais correspondentes ao eletrodo auxiliar e de trabalho respectivamente. Seis sensores foram utilizados no protótipo, sendo utilizadas assim doze entradas analógicas do microcontrolador (A0 – A11). Cada módulo ISB foi alimentado com uma tensão de 5 V. Para obter mais detalhes sobre a montagem e conexão dos sensores Alphasense, consulte o Guia de montagem de sensores Alphasense.
+
+\subsubsection{Contador ótico de partículas Alphasense para medição de material particulado}
+
+O sensor da Alphasense modelo OPC-N3 é um contador ótico de partículas para medição de PM10, PM2.5, e PM1. Possui uma saída digital através de um barramento SPI, podendo ser acoplado a um microcontrolador para leitura das suas variáveis. O sensor pode enviar as informações de concentração na forma de histogramas ou em valores absolutos em \(\mu g/m^3\). Além dos valores de concentração o sensor também envia leituras de temperatura e umidade relativa.
 
 \section{O microcontrolador}
 

@@ -2,7 +2,8 @@
 \chapter{CLEAN - Collaborative Low-cost Environmental and Air-quality Network}\label{cap:clean-initiative}
 % ----------------------------------------------------------
 
-A iniciativa CLEAN consiste numa plataforma colaborativa de código aberto para promover e facilitar o desenvolvimento de monitores de qualidade do ar de baixo custo e o acesso remoto a informações sobre a qualidade do ar em tempo real. Possui três componentes principais, conforme enumerado a seguir e ilustrado de forma gráfica na Figura \ref{fig:clean-structure}.
+A iniciativa CLEAN\footnotemark[3] consiste numa plataforma colaborativa de código aberto para promover e facilitar o desenvolvimento de monitores de qualidade do ar de baixo custo e o acesso remoto a informações sobre a qualidade do ar em tempo real. Possui três componentes principais, conforme enumerado a seguir e ilustrado de forma gráfica na Figura \ref{fig:clean-structure}.
+\footnotetext[3]{O conteúdo deste capítulo foi publicado em artigo científico na revista Environmental Modelling \& Software \cite{Campo2021} e possui registro de programa de computador no Instituto Nacional de Propriedade Industrial com número BR512022001116-6}
 
 \begin{enumerate}
     \item API Renovar para acesso aos dados de dispositivos de monitoramento
@@ -25,6 +26,8 @@ A \acrshort{api} Renovar disponibiliza os recursos necessários para a comunica�
 As bibliotecas de \textit{firmware} providenciam uma interface entre o \textit{hardware} e \textit{firmware} específico para cada aplicação de monitoramento e a \acrshort{api}, facilitando também o processo de desenvolvimento, e permitindo aos parceiros focarem na aplicação em si, sem investir muito esforço na integração com a \acrshort{api}. As bibliotecas de \textit{firmware} também providenciam abstrações para os componentes de \textit{hardware}, como sensores, controladores e periféricos, contribuindo ao reaproveitamento de código. A medida que os parceiros forem incorporando novos componentes nas suas aplicações, novas abstrações podem ser adicionadas às bibliotecas, expandindo o leque de interfaces a componentes de \textit{hardware}.
 
 A aplicação \textit{web} Renovar desenvolvida dentro do contexto de CLEAN é uma aplicação \textit{front-end} consumidora da \acrshort{api}. Ela é uma alternativa para iniciar qualquer aplicação de monitoramento de baixo custo já que disponibiliza a visualização de mapas dos dispositivos, séries temporais dos dados dos sensores e gráficos de \textit{box-plots} dos dados. Pode funcionar também como modelo para outras aplicações consumidoras que venham a ser desenvolvidas.
+
+A continuação são descritas as estruturas das bibliotecas de \textit{firmware}, da \textit{API} e os dispositivos de \textit{desenvolvidos}. Nos Apêndices \ref{appendix: firmware} e \ref{apendix:esp8266-fw} descrevem-se também os códigos gravados nos microcontroladores Arduino e ESP8266 dos equipamentos CLEAN.
 
 \input{chapters/2-CLEAN/Seções/fw-libraries}
 

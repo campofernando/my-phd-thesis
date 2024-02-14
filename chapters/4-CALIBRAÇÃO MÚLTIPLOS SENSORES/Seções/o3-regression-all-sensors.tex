@@ -1,16 +1,3 @@
-\begin{figure}[h!]
-    \centering
-    \caption{Resultados dos modelos de regressão aplicados às leituras dos sensores OX-B431}
-    \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/o3-b4-models-performance.png}
-    \label{fig:data-o3-b4-models-performance}
-\end{figure}
-
-% ----------------------------------------------------------
-\section{Correção das leituras dos sensores OX-B431 com as medições de referência}
-% ----------------------------------------------------------
-
-A partir dos dados de referência e das leituras de concentração e temperatura adquiridas pelo monitor em questão, foi realizada uma busca em grid para encontrar as melhores combinações de parâmetros e variáveis de entrada a modelos de regressão. As variáveis que foram testadas como entrada foram as leituras de concentração de \acrshort{o3} dos dois sensores OX-B431 e a temperatura no interior da câmara de medição. Como modelos de regressão foram testados: o Perceptron Multicamadas (MLP), a Regressão Linear Multivariada (MLR), os K Vizinhos mais Próximos (KNN) e as Florestas Aleatórias (RF). Na Tabela \ref{tab:data-o3-b4-calib-results} resumem-se os melhores modelos encontrados pela busca em \textit{grid} para calibrar as leituras dos sensores OX-B431. São mostradas as diferentes combinações de variáveis de entrada testadas em cada iteração da busca pelos melhores modelos de regressão. Os mesmos resultados são ilustrados graficamente na Figura \ref{fig:data-o3-b4-models-performance} que apresenta o desempenho dos modelos e as variáveis de entrada considerando os valores de r2, RMSE e MAE.
-
 \begin{table}[h]
     \caption{Resultados da calibração dos sensores OX-B431}
     \centering
@@ -24,15 +11,15 @@ A partir dos dados de referência e das leituras de concentração e temperatura
        \hline
        Var. & Modelo & R2 & RMSE & MAE & $\rho$\\ [0.5ex]
         \hline
-        \acrshort{o3} (1) & \textbf{MLP}: & -0.38 ± 0.42 & -17.38 ± 3.49 & -13.72 ± 2.55 & 0.21 \\ [0.5ex]
-           & \textbf{MLR} & -0.35 ± 0.38 & -17.26 ± 3.57 & -13.63 ± 2.58 & 0.22 \\ [0.5ex]
-           & \textbf{KNN:} & -0.27 ± 0.31 & -17.24 ± 5.05 & -12.91 ± 3.92 & 0.21 \\ [0.5ex]
-           & \textbf{RF:} & -0.68 ± 0.73 & -18.65 ± 3.27 & -14.87 ± 2.54 & 0.17 \\ [0.5ex]
+        \acrshort{o3} (1) & \textbf{MLP}: & -0.62 ± 0.46 & -18.52 ± 2.88 & -14.33 ± 2.13 & 0.15 \\ [0.5ex]
+           & \textbf{MLR} & -0.41 ± 0.29 & -17.64 ± 3.78 & -13.81 ± 2.76 & 0.14 \\ [0.5ex]
+           & \textbf{KNN:} & -0.48 ± 0.32 & -18.36 ± 5.32 & -13.65 ± 4.35 & 0.13 \\ [0.5ex]
+           & \textbf{RF:} & -0.61 ± 0.63 & -18.20 ± 3.30 & -14.53 ± 2.29 & 0.12 \\ [0.5ex]
         \hline
-        \acrshort{o3} (1), T & \textbf{MLP:} & 0.42 ± 0.17 & -11.15 ± 0.98 & -8.57 ± 0.90 & 0.69 \\ [0.5ex]
-            & \textbf{MLR:} & 0.36 ± 0.18 & -11.73 ± 1.23 & -9.12 ± 1.12 & 0.67 \\ [0.5ex]
-            & \textbf{KNN:} & 0.21 ± 0.20 & -13.16 ± 1.93 & -9.96 ± 1.76 & 0.66 \\ [0.5ex]
-            & \textbf{RF:} & 0.33 ± 0.19 & -11.99 ± 1.23 & -9.24 ± 1.12 & 0.62 \\ [0.5ex]
+        \acrshort{o3} (1), T & \textbf{MLP:} & 0.40 ± 0.16 & -11.29 ± 1.55 & -8.71 ± 1.30 & 0.67 \\ [0.5ex]
+            & \textbf{MLR:} & 0.29 ± 0.21 & -12.17 ± 1.28 & -9.50 ± 1.17 & 0.64 \\ [0.5ex]
+            & \textbf{KNN:} & 0.34 ± 0.21 & -11.68 ± 1.22 & -8.92 ± 1.12 & 0.66 \\ [0.5ex]
+            & \textbf{RF:} & 0.33 ± 0.19 & -11.87 ± 1.34 & -9.10 ± 1.20 & 0.63 \\ [0.5ex]
         \hline
         \acrshort{o3} (2) & \textbf{MLP}: & 0.16 ± 0.13 & -13.72 ± 2.11 & -10.87 ± 1.66 & 0.54 \\ [0.5ex]
            & \textbf{MLR} & 0.09 ± 0.14 & -14.34 ± 2.50 & -11.35 ± 2.13 & 0.56 \\ [0.5ex]
@@ -58,6 +45,19 @@ A partir dos dados de referência e das leituras de concentração e temperatura
     \label{tab:data-o3-b4-calib-results}
 \end{table}
 
+% ----------------------------------------------------------
+\section{Correção das leituras dos sensores OX-B431 com as medições de referência}
+% ----------------------------------------------------------
+
+A partir dos dados de referência e das leituras de concentração e temperatura adquiridas pelo monitor em questão, foi realizada uma busca em grid para encontrar as melhores combinações de parâmetros e variáveis de entrada a modelos de regressão. As variáveis que foram testadas como entrada foram as leituras de concentração de \acrshort{o3} dos dois sensores OX-B431 e a temperatura no interior da câmara de medição. Na Tabela \ref{tab:data-o3-b4-calib-results} resumem-se os melhores modelos encontrados pela busca em \textit{grid} para calibrar as leituras dos sensores OX-B431. São mostradas as diferentes combinações de variáveis de entrada testadas em cada iteração da busca pelos melhores modelos de regressão. Os mesmos resultados são ilustrados graficamente na Figura \ref{fig:data-o3-b4-models-performance} que apresenta o desempenho dos modelos e as variáveis de entrada considerando os valores de R2, RMSE e MAE.
+
+\begin{figure}[h!]
+    \centering
+    \caption{Resultados dos modelos de regressão aplicados às leituras dos sensores OX-B431}
+    \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/o3-b4-models-performance.png}
+    \label{fig:data-o3-b4-models-performance}
+\end{figure}
+
 \begin{figure}[h!]
     \centering
     \caption{Gráfico de dispersão das leituras dos sensores de \acrshort{o3} OX-B431 e a estação de referência após aplicar modelos de regressão considerando a temperatura}
@@ -68,17 +68,13 @@ A partir dos dados de referência e das leituras de concentração e temperatura
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.49\textwidth}
-        \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/o3-b4-1-2-T-Multilinear-Regression.png}
-        \caption{Utilizando uma regressão linear considerando as leituras dos sensores e a temperatura obtiveram-se resultados semelhantes}
+        \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/o3-b4-1-T-KNN-Regression.png}
+        \caption{Utilizando uma regressão pelos k vizinhos mais próximos considerando as leituras do sensor 1 e a temperatura obtiveram-se resultados semelhantes}
         \label{fig:data-o3-1-2-T-reference-corr-MLR}
     \end{subfigure}
 \end{figure}
 
-De modo geral observa-se que os modelos que consideraram a temperatura como variável de entrada produziram os melhores resultados de r2, erro e correlação. Ao considerar os sensores de ozônio de forma independente, os resultados dos modelos não foram bons, com o sensor 2 gerando melhores resultados do que o sensor 1 (correlação e r2 maiores). Quando consideradas as leituras de ambos sensores, os modelos geraram melhores resultados, embora inferiores a quando considerada a temperatura. As Figuras \ref{fig:data-o3-1-T-reference-corr-MLP} e \ref{fig:data-o3-1-2-T-reference-corr-MLR} apresentam gráficos de dispersão com as leituras de referência e as inferidas pelos dois melhores modelos em termos de R2, RMSE e MAE.
-
-% ----------------------------------------------------------
-\section{Cálculo da concentração de Ozônio a partir das leituras do arranjo de sensores de gases}
-% ----------------------------------------------------------
+De modo geral observa-se que os modelos que consideraram a temperatura como variável de entrada produziram os melhores resultados de R2, erro e correlação. A dupla de variáveis sensor OX-B431 (1) e temperatura ocupou os primeiros lugares com diferentes modelos de regressão. Ao remover a temperatura, os modelos que melhor desempenharam consideraram os dois sensores de \acrshort{o3}; os sensores individualmente não produziram bons resultados. As Figuras \ref{fig:data-o3-1-T-reference-corr-MLP} e \ref{fig:data-o3-1-2-T-reference-corr-MLR} apresentam gráficos de dispersão com as leituras de referência e as inferidas pelos dois melhores modelos em termos de R2, RMSE e MAE.
 
 \begin{figure}[h!]
     \centering
@@ -96,22 +92,24 @@ De modo geral observa-se que os modelos que consideraram a temperatura como vari
     \label{fig:data-o3-all-models-performance-comlexity}
 \end{figure}
 
-A Figura \ref{fig:data-o3-all-models-performance} apresenta os valores de R2 dos 10 melhores modelos de calibração calculados para as leituras de \acrshort{co}. Observa-se que os valores de R2 desses 10 modelos oscilaram entre 0.2 e 0.6, todos incluíram o \acrshort{co} e a temperatura. Apenas dois modelos não foram regressões lineares, ocupando as posições 5 e 6 com regressões por Florestas Aleatórias. As Florestas, embora não tenham produzido os maiores valores de R2 médio, apresentaram menores valores de erro e valores de R2 máximo mais altos em comparação com os quatro modelos lineares que os antecederam. Já em termos de complexidade, observa-se que apenas o modelo de regressão por Florestas Aleatórias que considerou como variáveis de entrada as leituras de \acrshort{co}, dos dois sensores de \acrshort{o3}, de \acrshort{mp10} e temperatura, conseguiu estar entre os 10 com menores valores de \acrshort{aic}. Os modelos lineares por sua parte produziram os menores coeficientes de complexidade.
-
 \begin{figure}[h]
     \centering
     \caption{Gráfico de dispersão das leituras do múltiplos sensores e a estação de referência para medição de \acrshort{o3}}
     \begin{subfigure}{0.49\textwidth}
-        \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/O3-co-no2-o31-pm10-T-Multilinear-Regression.png}
-        \caption{Utilizando modelo de regressão linear multivariado com variáveis independentes: leituras de sensores CO-B4, NO2-B43F, OX-B431 (1), sensor de \acrshort{mp10} OPC-N3 e temperatura}
-        \label{fig:data-co-no2-o31-pm10-T-reference-O3-corr-MLR}
+        \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/O3-o31-T-MLP-Regression.png}
+        \caption{Utilizando uma rede neural perceptron multicamadas com variáveis independentes: leituras de sensor OX-B431 (1) e temperatura}
+        \label{fig:data-o31-T-reference-O3-corr-MLP}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.49\textwidth}
-        \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/O3-co-o31-o32-pm10-T-RF-Regression.png}
-        \caption{Utilizando modelo de regressão de Florestas Aleatórias com variáveis independentes: leituras de sensores CO-B4, OX-B431 (1 e 2), sensor de \acrshort{mp10} OPC-N3 e temperatura}
-        \label{fig:data-co-o31-o32-pm10-T-reference-O3-corr-RF}
+        \includegraphics[width=\textwidth]{chapters/4-CALIBRAÇÃO MÚLTIPLOS SENSORES/Figuras/O3-co-no2-o31-pm10-T-RF-Regression.png}
+        \caption{Utilizando modelo de regressão de Florestas Aleatórias com variáveis independentes: leituras de sensores CO-B4, NO2-B43F, OX-B431 (1), sensor de \acrshort{mp10} OPC-N3 e temperatura}
+        \label{fig:data-co-no2-o31-pm10-T-reference-O3-corr-RF}
     \end{subfigure}
 \end{figure}
 
-As Figuras \ref{fig:data-co-no2-o31-pm10-T-reference-O3-corr-MLR} e \ref{fig:data-co-o31-o32-pm10-T-reference-O3-corr-RF} mostram os resultados de aplicar modelos de calibração baseados numa regressão linear multivariada e em Florestas Aleatórias respectivamente. O primeiro considera como variáveis independentes as leituras dos sensores CO-B4, NO2-B43F, OX-B431 (1), sensor de \acrshort{mp10} OPC-N3 e temperatura. Já o segundo considera como variáveis de entrada as leituras dos sensores CO-B4, OX-B431 (1 e 2), sensor de \acrshort{mp10} OPC-N3 e temperatura.
+% ----------------------------------------------------------
+\section{Cálculo da concentração de Ozônio a partir das leituras do arranjo de sensores de gases}
+% ----------------------------------------------------------
+
+As Figuras \ref{fig:data-o3-all-models-performance} e \ref{fig:data-o3-all-models-comlexity} apresenta os valores de R2, RMSE, MAE, AIC e BIC dos 10 melhores modelos de calibração calculados para as leituras de \acrshort{o3}. Observa-se que os valores de R2 desses 10 modelos oscilaram entre 0.1 e 0.6, e que todos incluíram a temperatura. O Perceptron Multicamadas que considerou apenas as leituras do sensor OX-B431 (1) e a temperatura gerou o maior valor de R2 = 0.6, mas também gerou um dos menores de aproximadamente 0.1. Este modelo também apresentou a menor complexidade em termos de coeficientes AIC e BIC. O modelo que teve o maior valor de R2 médio também apresentou o maior erro médio quadrático, e os que se encontraram nas posições 5 - 8 geraram os menores valores de RMSE. A Figura \ref{fig:data-o31-T-reference-O3-corr-MLP} mostra os resultados de aplicar uma rede neural Perceptron Multicamadas com variáveis de entrada OX-B431 (1) e temperatura, que gerou o maior R2, um dos menores RMSE e menor complexidade. A Figura \ref{fig:data-co-no2-o31-pm10-T-reference-O3-corr-RF}, por usa parte, mostra os resultados obtidos com Florestas Aleatórias e variáveis de entrada CO-B4, NO2-B43F, OX-B431 (1), \acrshort{mp10} do OPC-N3 e temperatura, que foi a combinação com maior R2 médio e a segunda com menor complexidade segundo os valores de AIC e BIC.

@@ -29,7 +29,7 @@
 \section{Correção das leituras do sensor NO2-B43F com as medições de referência}
 % ----------------------------------------------------------
 
-A partir dos dados de referência e das leituras de concentração e temperatura adquiridas pelo monitor em questão, foi realizada uma busca em grid para encontrar as melhores combinações de parâmetros e variáveis de entrada a modelos de regressão. As variáveis que foram testadas como entrada foram as leituras de concentração de \acrshort{no2} do sensor NO2-B43F e a temperatura no interior da câmara de medição. Como modelos de regressão foram testados: o Perceptron Multicamadas (MLP), a Regressão Linear Multivariada (MLR), os K Vizinhos mais Próximos (KNN) e as Florestas Aleatórias (RF). Na Tabela \ref{tab:data-no2-calib-results} resumem-se os melhores modelos encontrados pela busca em \textit{grid} para calibrar as leituras do sensor de baixo custo. Os mesmos resultados são ilustrados graficamente na Figura \ref{fig:data-no2-models-performance} que apresenta o desempenho dos modelos e as variáveis de entrada considerando os valores de R2, RMSE e MAE.
+A partir dos dados de referência e das leituras de concentração e temperatura adquiridas pelo monitor em questão, foi realizada uma busca em grid para encontrar as melhores combinações de parâmetros e variáveis de entrada a modelos de regressão. As variáveis que foram testadas como entrada foram as leituras de concentração de \acrshort{no2} do sensor NO2-B43F e a temperatura no interior da câmara de medição. Na Tabela \ref{tab:data-no2-calib-results} resumem-se os melhores modelos encontrados pela busca em \textit{grid} para calibrar as leituras do sensor de baixo custo. Os mesmos resultados são ilustrados graficamente na Figura \ref{fig:data-no2-models-performance} que apresenta o desempenho dos modelos e as variáveis de entrada considerando os valores de R2, RMSE e MAE.
 
 \begin{figure}[h!]
     \centering
@@ -72,6 +72,12 @@ Como se observa todas as variantes de modelos e variáveis de entrada apresentar
     \label{fig:data-no2-all-models-performance-comlexity}
 \end{figure}
 
+% ----------------------------------------------------------
+\section{Cálculo da concentração de Dióxido de Nitrogênio a partir das leituras do arranjo de sensores de gases}
+% ----------------------------------------------------------
+
+A Figura \ref{fig:data-no2-all-models-performance} apresenta os valores de R2 dos 10 melhores modelos de calibração calculados para as leituras de \acrshort{no2}. Observa-se que os valores de R2 desses 10 modelos apresentaram valores de R2 em média positivos, com valores máximos de até aproximadamente 0.2, todos obtidos a partir de regressões lineares. Com relação as variáveis de entrada observa-se que todos os 10 modelos consideraram o \acrshort{co} com variações nos restantes das variáveis para cada modelo. Com relação à complexidade dos modelos (Figura \ref{fig:data-no2-all-models-performance-comlexity}) observa-se que o ranqueamento por \acrshort{aic} coincidiu bastante com o ranqueamento por R2. As Figuras \ref{fig:data-co-no2-reference-NO2-corr-MLR} e \ref{fig:data-co-no2-pm10-reference-NO2-corr-RF} mostram os resultados obtidos com os dois modelos com maior R2 médio, i.e.: regressões lineares com variáveis de entrada leituras de sensores CO-B4 e NO2B43F, e leituras de sensores CO-B4, NO2B43F e sensor de \acrshort{mp10} OPC-N3, respectivamente. As figuras mostram gráficos de dispersão entre os dados calibrados por esses modelos e as leituras de referência.
+
 \begin{figure}[h]
     \centering
     \caption{Gráfico de dispersão das leituras de múltiplos sensores e a estação de referência para medição de \acrshort{no2}}
@@ -87,9 +93,3 @@ Como se observa todas as variantes de modelos e variáveis de entrada apresentar
         \label{fig:data-co-no2-pm10-reference-NO2-corr-RF}
     \end{subfigure}
 \end{figure}
-
-% ----------------------------------------------------------
-\section{Cálculo da concentração de Dióxido de Nitrogênio a partir das leituras do arranjo de sensores de gases}
-% ----------------------------------------------------------
-
-A Figura \ref{fig:data-no2-all-models-performance} apresenta os valores de R2 dos 10 melhores modelos de calibração calculados para as leituras de \acrshort{no2}. Observa-se que os valores de R2 desses 10 modelos apresentaram valores de R2 em média positivos, com valores máximos de até aproximadamente 0.2, todos obtidos a partir de regressões lineares. Com relação as variáveis de entrada observa-se que todos os 10 modelos consideraram o \acrshort{co} com variações nos restantes das variáveis para cada modelo. Com relação à complexidade dos modelos (Figura \ref{fig:data-no2-all-models-performance-comlexity}) observa-se que o ranqueamento por \acrshort{aic} coincidiu bastante com o ranqueamento por R2. As Figuras \ref{fig:data-co-no2-reference-NO2-corr-MLR} e \ref{fig:data-co-no2-pm10-reference-NO2-corr-RF} mostram os resultados obtidos com os dois modelos com maior R2 médio, i.e.: regressões lineares com variáveis de entrada leituras de sensores CO-B4 e NO2B43F, e leituras de sensores CO-B4, NO2B43F e sensor de \acrshort{mp10} OPC-N3, respectivamente. As figuras mostram gráficos de dispersão entre os dados calibrados por esses modelos e as leituras de referência.
