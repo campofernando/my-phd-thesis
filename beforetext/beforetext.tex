@@ -34,7 +34,7 @@
 	\vspace*{\baselineskip}
 	%\begin{minipage}{\textwidth}
 	% ~do~\imprimirprograma~do~\imprimircentro~da~\imprimirinstituicao~para~a~obtenção~do~título~de~\imprimirformacao.
-	Este~\imprimirtipotrabalho~foi julgado adequado para obtenção do Título de “\imprimirformacao” e aprovado em sua forma final pelo~\imprimirprograma. \\
+	Esta~\imprimirtipotrabalho~foi julgada adequado para obtenção do Título de “\imprimirformacao” e aprovada em sua forma final pelo~\imprimirprograma. \\
 		\vspace*{\baselineskip}
 	\imprimirlocal, \imprimirdata. \\
 	\vspace*{2\baselineskip}
@@ -79,7 +79,7 @@
 	\vspace*{\fill}
 	\noindent
 	\begin{adjustwidth*}{}{5.5cm}     
-		À minha vó Olga, que me ensinou a escrever.
+		À minha vó Olga, quem me ensinou a escrever.
 	\end{adjustwidth*}
 \end{dedicatoria}
 % ---
@@ -88,9 +88,13 @@
 % Agradecimentos
 % ---
 \begin{agradecimentos}
-	Inserir os agradecimentos aos colaboradores à execução do trabalho. 
-	
-	Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx. 
+	Primeiramente agradeço a Deus por me conceder a inspiração, energia e o sustento para concluir este trabalho. Agradeço especialmente aos professores Henrique de Melo Lisboa, Alejandro Durán Carrillo de Albornoz e Alejandro García Ramírez que depositaram sua confiança em 2014 me concedendo a oportunidade que me conduziu até este estágio da minha carreira profissional, exatamente 10 anos depois. Minha profunda gratidão ao professor Leonardo Hoinaski que me ofereceu o desafio de assumir a empreitada deste projeto, juntamente com seu total apoio em todas as áreas, lutando lado a lado, suportando nos momentos difíceis e corrigindo nos momentos de vacilo. Meus agradecimentos vão também para o professor Davide Franco por me acolher e conduzir nos primeiros anos de doutorado. 
+
+	Agradeço a minha esposa por suportar pacientemente os sacrifícios advindos de uma tese de doutorado, por perdoar minhas ausências e por encorajar nos momentos de desânimo. Aos meus sogros que me acolheram como um filho. À minha mãe por ser minha principal fã, por seus conselhos e seu sólido suporte. Ao meu caro irmão Andy Blanco por preparar o caminho para minha entrada no LCQAr e por seu apoio incondicional nos primeiros anos. Aos amigos que ganhei e que anseiam minha volta à vida social. Aos meus colegas de laboratório Camilo, Robson, Thiago e Otávio pela parceria e a amizade na ciência brasileira, a Gabriel Ratão e a Jean, que foram verdadeiros companheiros de luta e fizeram possível que este trabalho acontecesse. Ao PPGEA da UFSC que me abriu suas portas ao programa num momento de grandes incertezas e instabilidades.
+
+	Agradeço à empresa Dynamox e seu CEO Guillaume Barrault por me oferecer emprego quando a bolsa de doutorado não foi suficiente para o sustento, e por me possibilitar concluir a pesquisa concedendo todo o suporte e flexibilidade possíveis. Ao coordenador João Pedro dos Reis que tem se tornado um amigo e uma importante fonte de encorajamento. Por todo o conhecimento adquirido através dos meus colegas que possibilitou refinar muitas etapas da pesquisa, em especial ao próprio João e ao Daniel Schröder. Ao Marcos Barp por oferecer seu tempo e conhecimento para resolver "pepinos" de séries temporais.
+
+	À Mãe gentil brasileira, que em berço esplêndido me acolheu, enquanto Saturno devorava os seus filhos.
 \end{agradecimentos}
 % ---
 
@@ -161,8 +165,9 @@
 	% ---
 	% \imprimirlistadesimbolos
 	% ---
-	\printglossary[title=Lista de Siglas, toctitle=Lista de siglas]
-    % \printglossary[type=\acronymtype,title=Lista de Símbolos, toctitle=Lista de símbolos]
+	\pdfbookmark[0]{Lista de siglas}{los}
+	\printnoidxglossary[type=acronym, sort=use, title=Lista de siglas, toctitle=Lista de siglas]
+	\cleardoublepage
 
 	% ---
 	% inserir o sumario
